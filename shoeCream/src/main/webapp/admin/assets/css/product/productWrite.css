@@ -1,0 +1,19 @@
+/* 이미지 업로드 파일 css */
+#imageUpload{
+	height: 38.8px;
+	border: 1px solid #DDDDDD; 
+	border-radius: 4px; 
+	padding: 10px;
+	color: #66615b;
+	font-size: 14px;
+	text-align: center;
+	line-height: 18px;
+}
+	
+form input::file-selector-button { 
+	display: none;
+}
+
+.col-md-7{
+	margin: auto;
+}
