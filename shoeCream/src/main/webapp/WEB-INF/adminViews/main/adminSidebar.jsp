@@ -44,13 +44,13 @@
   </a>
 </li>
 <li>
-  <a href="javascript:;">
+  <a href="/shoeCream/adminViews/user/userForm">
     <i class="nc-icon nc-circle-10"></i>
     <p>회원 관리</p> <!--product -->
     </a>
   </li>
   <li>
-    <a href="javascript:;">
+    <a href="/shoeCream/adminViews/stock/stockForm">
       <i class="nc-icon nc-diamond"></i>
       <p>재고 및 검수 관리</p>
     </a>

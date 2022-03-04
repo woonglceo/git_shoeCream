@@ -19,8 +19,6 @@
   <!-- CSS Files -->
   <link href="/shoeCream/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/shoeCream/admin/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="/shoeCream/admin/assets/css/order/orderList.css">
 </head>
 
 <body class="">

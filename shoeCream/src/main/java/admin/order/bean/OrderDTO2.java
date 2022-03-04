@@ -13,61 +13,15 @@ import lombok.ToString;
 @Component
 @Getter @Setter @ToString
 public class OrderDTO2 {
-	//order
-	private int orderId;
-	private int userId;
-	private int paymentId;
-	private int productId;
-	private int deliveryId;
-	private int addressId;
+//	private int orderId;
+	private OrderDTO orderDTO;
+//	private UserDTO userDTO;
+//	private PaymentDTO paymentDTO;
+//	private ProductDTO productDTO;
+//	private DeliveryDTO deliveryDTO;
+//	private AddressDTO addressDTO;
+	private String phoneNum;
 	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
 	private Date orderDate;
-	private String orderPhoneNum;
-	//product
-	private int brandId;
-	private String productName;
-	private String modelId;
-	private int releasePrice;
-	private int productSize;
-	private String img1;
-	private String img2;
-	private String img3;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date releaseDate;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date productRegDate;
-	//payment
-	private String paymentMethod;
-	private String bank;
-	private String accountNum;
-	private String accountHolder;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date paymentDate;
-	//user
-	private String email;
-	private String username;
-	private String pwd;
-	private String nickname;
-	private int auth;
-	private String userPhoneNum;
-	private String introMsg;
-	private int reportCount;
-	private String img; // inner join SQL문에 추가 해야됌(슬랙 insert문도)
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date lastDate;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date userRegDate;
-	//delivery
-	private int deliveryStatus;
-	private String trackingNum;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date deliveryRegDate;
-	//address
-	private int addressUserId;
-	private String recipient;
-	private String addr1;
-	private String addr2;
-	private String zipcode;
-	@JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
-	private Date addressRegDate;
+	
 }

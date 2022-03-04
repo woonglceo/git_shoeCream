@@ -17,19 +17,10 @@
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/admin/**" location="/admin/" />
 	<resources mapping="/admin/assets/**" location="/admin/assets/" />
-	
-	<!-- 파일 업로드 -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5000000"/> <!-- 5MB -->
-	</beans:bean>
-	
-	<!-- JSON -->  <!-- ModelAndView 를 JSON으로 변환해준다 -->
-	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
-		<beans:property name="contentType" value="text/html;charset=UTF-8"/>
-	</beans:bean>
-	
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <beans:property name="prefix" value="/WEB-INF/" /> -->
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	

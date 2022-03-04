@@ -5,6 +5,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="admin.order.bean.OrderDTO" alias="order"/>
-		<typeAlias type="admin.deal.bean.DealDTO" alias="deal"/>
+		<typeAlias type="admin.user.bean.UserDTO" alias="user"/>
+		<typeAlias type="admin.stock.bean.StockDTO" alias="stock"/>
+		
 	</typeAliases>
 </configuration>
