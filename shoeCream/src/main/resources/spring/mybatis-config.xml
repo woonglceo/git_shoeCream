@@ -4,12 +4,12 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="admin.order.bean.OrderDTO" alias="order"/>
-		<typeAlias type="admin.deal.bean.DealDTO" alias="deal"/>
-		<typeAlias type="admin.stock.bean.StockDTO" alias="stock"/>
-		<typeAlias type="admin.content.bean.AnnounceDTO" alias="announce"/>
-		<typeAlias type="admin.content.bean.EventDTO" alias="event"/>
-		<typeAlias type="admin.product.bean.ProductDTO" alias="product"/>
+		<typeAlias type="order.bean.OrderDTO" alias="order"/>
+		<typeAlias type="deal.bean.DealDTO" alias="deal"/>
+		<typeAlias type="stock.bean.StockDTO" alias="stock"/>
+		<typeAlias type="content.bean.AnnounceDTO" alias="announce"/>
+		<typeAlias type="content.bean.EventDTO" alias="event"/>
+		<typeAlias type="product.bean.ProductDTO" alias="product"/>
 		
 		<typeAlias type="serviceCenter.bean.AnnouncementBoardDTO" alias="AnnouncementBoardDTO"/>
 		<typeAlias type="serviceCenter.bean.QnaTableDTO" alias="QnaTableDTO"/>

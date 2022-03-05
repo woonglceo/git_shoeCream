@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type: 'POST',
-		url: '/shoeCream/admin/adminViews/order/getDealList',
+		url: '/shoeCream/adminViews/order/getDealList',
 		data: 'pg=' + $('#pg').val(),	
 		//dataType: 'JSON',
 		success: function(data){
@@ -28,13 +28,13 @@ $(function(){
 				$('<tr/>')			
 					.append($('<td/>', {    // 거래번호
 						}).append($('<a/>', {
-							href: '/shoeCream/admin/adminView/deal/dealView?dealId='+items.dealId,
+							href: '/shoeCream/adminView/deal/dealView?dealId='+items.dealId,
 							text: items.dealId,
 							class: 'deal_' + items.dealId  //'subjectA subjectA_' + items.seq    
 						}))
 					).append($('<td/>', { // 상품이름
 						}).append($('<a/>', {
-							href: '/shoeCream/product/productView?productId='+items.productId,
+							href: '/shoeCream/adminViews/product/productView?productId='+items.productId,
 							text: items.productName,
 							class: 'product_' + items.productId  //'subjectA subjectA_' + items.seq    
 						}))
@@ -65,7 +65,7 @@ $(function(){
 });//end onload
 
 function dealPaging(newPg){
-	location.href = '/shoeCream/admin/adminViews/order/dealList?pg='+newPg;
+	location.href = '/shoeCream/adminViews/order/dealList?pg='+newPg;
 }
 
 $('#searchBtn').click(function(){
@@ -77,7 +77,7 @@ $('#searchBtn').click(function(){
 	} else {
 		$.ajax({
 			type: 'POST',
-			url: '/shoeCream/admin/adminViews/deal/getDealSearchList',
+			url: '/shoeCream/adminViews/deal/getDealSearchList',
 			data: {
 				searchOption: $('#dealSearchSelect').val(),
 				keyword: $('#dealSearchText').val(),

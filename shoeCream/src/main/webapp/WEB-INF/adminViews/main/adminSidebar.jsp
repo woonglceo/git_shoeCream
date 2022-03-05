@@ -20,13 +20,13 @@
   </a>
 </li>
 <li>
-  <a href="/shoeCream/admin/adminViews/stats/statsView">
+  <a href="/shoeCream/adminViews/stats/statsView">
     <i class="nc-icon nc-chart-bar-32"></i>
     <p>통계</p>
   </a>
 </li>
 <li>
-  <a href="/shoeCream/admin/adminViews/order/orderList">
+  <a href="/shoeCream/adminViews/order/orderList">
     <i class="nc-icon nc-cart-simple"></i>
     <p>주문 관리</p>
   </a>

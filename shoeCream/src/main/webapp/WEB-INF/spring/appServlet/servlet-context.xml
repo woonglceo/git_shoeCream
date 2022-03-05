@@ -24,11 +24,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="admin.*.controller"/>
+	<context:component-scan base-package="*.controller"/>
+	<!-- 
 	<context:component-scan base-package="serviceCenter.controller"/>
 	<context:component-scan base-package="style.controller"/>
 	<context:component-scan base-package="user.controller"/>
-	
+	 -->
 	
 	
 	

@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 		type: 'POST',
-		url: '/shoeCream/admin/adminViews/order/getOrderList',
+		url: '/shoeCream/adminViews/order/getOrderList',
 		data: 'pg=' + $('#pg').val(),	
 		//dataType: 'JSON',
 		success: function(data){
@@ -23,7 +23,7 @@ $(function(){
 						text: items.orderId
 					})).append($('<td/>', { // 상품이름
 						}).append($('<a/>',{
-							href: '/shoeCream/product/productView?productId='+items.productId,
+							href: '/shoeCream/adminViews/product/productView?productId='+items.productId,
 							text: items.productName,
 							class: 'productClass_' + items.productId  //'subjectA subjectA_' + items.seq    
 						}))
@@ -48,7 +48,7 @@ $(function(){
 });//end onload
 
 function orderPaging(newPg){
-	location.href = '/shoeCream/admin/adminViews/order/orderList?pg='+newPg;
+	location.href = '/shoeCream/adminViews/order/orderList?pg='+newPg;
 }
 
 $('#searchBtn').click(function(){
@@ -60,7 +60,7 @@ $('#searchBtn').click(function(){
 	} else {
 		$.ajax({
 			type: 'POST',
-			url: '/shoeCream/admin/adminViews/order/getOrderSearchList',
+			url: '/shoeCream/adminViews/order/getOrderSearchList',
 			data: {
 				searchOption: $('#orderSearchSelect').val(),
 				keyword: $('#orderSearchText').val(),

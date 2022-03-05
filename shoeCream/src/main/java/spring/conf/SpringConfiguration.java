@@ -44,11 +44,11 @@ public class SpringConfiguration {
 		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
 		sqlSessionFactoryBean.setDataSource(dataSource());
 		sqlSessionFactoryBean.setMapperLocations(
-				  new ClassPathResource("admin/stock/dao/stockMapper.xml")
-				, new ClassPathResource("admin/content/dao/contentMapper.xml")
-				, new ClassPathResource("admin/product/dao/productMapper.xml")
-				, new ClassPathResource("admin/deal/dao/dealMapper.xml")
-				, new ClassPathResource("admin/order/dao/orderMapper.xml")
+				  new ClassPathResource("stock/dao/stockMapper.xml")
+				, new ClassPathResource("content/dao/contentMapper.xml")
+				, new ClassPathResource("product/dao/productMapper.xml")
+				, new ClassPathResource("deal/dao/dealMapper.xml")
+				, new ClassPathResource("order/dao/orderMapper.xml")
 				, new ClassPathResource("serviceCenter/dao/serviceCenterMapper.xml")
 				, new ClassPathResource("style/dao/styleMapper.xml")
 				, new ClassPathResource("user/dao/userMapper.xml")

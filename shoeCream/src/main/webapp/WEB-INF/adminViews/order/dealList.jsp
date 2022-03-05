@@ -15,7 +15,7 @@
               </a>
             
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/shoeCream/admin/adminViews/order/orderList">주문 조회</a>
+                <a class="dropdown-item" href="/shoeCream/adminViews/order/orderList">주문 조회</a>
               </div>
              </div>
         
