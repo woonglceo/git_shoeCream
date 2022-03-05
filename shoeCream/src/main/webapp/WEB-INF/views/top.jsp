@@ -6,11 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Nav Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" 
+href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&family=Crete+Round&display=swap"/>
+<!-- CSS -->
 <link rel="stylesheet" href="/shoeCream/resources/css/top.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/shoeCream/resources/css/main.css" />
+
 <script src="https://kit.fontawesome.com/c32a0a7a55.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<header>
+	<!-- <header> -->
 		<div class="header">
 			<ul class="list_menu">
 				<li><a href="/shoeCream/serviceCenter/announcement">고객센터</a></li>
@@ -22,12 +29,15 @@
 			<hr>
 		
 			<nav class="navbar">
-				<div class="navbar__logo">
+				<!-- <div class="navbar__logo">
 					<a href="/shoeCream/index.jsp"><img alt="logo" src="/shoeCream/resources/images/KREAM_logo.png"></a>
-				</div>
+				</div> -->
+		        <div class="kream-header__title">
+		        	<span><a href="/shoeCream/index.jsp">Shoe-KREAM</a></span>
+		        </div>
 				
 				<ul class="navbar__menu">
-					<li><a href=#>STYLE</a></li>
+					<li><a href="/shoeCream/style/styleList">STYLE</a></li>
 					<li><a href=#>SHOP</a></li>
 					<li><a href=#>ABOUT</a></li>
 					<li><a href=#><i class="fa-solid fa-magnifying-glass fa-lg"></i></a></li>
@@ -35,6 +45,7 @@
 			</nav>
 			<hr>
 		</div>
-	</header>
+	<!-- </header> -->
+	
 </body>
 </html>

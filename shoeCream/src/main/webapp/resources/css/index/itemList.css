@@ -1,0 +1,26 @@
+.items_wrap {
+  padding: 3%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.itme_list-img {
+  cursor: pointer;
+
+  width: 220px;
+  height: 100px;
+
+  background-color: rgb(173, 173, 173);
+  border-radius: 6px;
+}
+.item_list {
+  padding: 12px;
+  text-align: center;
+  display: inline-block;
+}
+
+.item_list p {
+  text-align: center;
+  margin: 8px;
+  max-width: 210px;
+}

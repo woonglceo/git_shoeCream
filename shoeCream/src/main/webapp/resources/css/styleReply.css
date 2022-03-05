@@ -1,0 +1,126 @@
+
+body{
+    margin: 0px;
+    padding : 0px;
+}
+
+.show-reply{
+    padding : 0px 20px; 
+}
+.reply-title {
+  padding: 20px 0px;
+  display: flex;
+}
+
+.reply-title_title {
+  padding: 0px;
+  margin: 0px;
+}
+.reply-title i {
+  box-sizing: border-box;
+  padding-top: 6px;
+  padding-right: 4px;
+}
+
+
+.reply-user_box {
+  
+  display: flex;
+
+  width: 280px;
+    height: 280px;
+  font-size: 12px;
+  overflow: auto;
+}
+
+.reply-content_box {
+  display: block;
+  margin-left: 6px;
+}
+
+
+
+.reply-writer_id {
+  font-weight: 700;
+  margin-right: 3px;
+}
+
+.reply-userimg {
+  margin-right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.reply-uresimg_real {
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.reply-sub {
+  display: flex;
+  padding-top: 3px;
+  padding-bottom: 15px;
+}
+
+.reply-content {
+  display: block;
+}
+
+.reply-sub {
+  color: rgb(110, 110, 110);
+  font-size: 11px;
+}
+.dot {
+  box-sizing: border-box;
+  margin: 0px 3px;
+}
+
+
+/*add-reply*/
+.add-reply{
+
+    box-sizing: border-box;
+    max-width: 300px;
+    padding : 10px 18px;
+    display: flex;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-top: 5px solid rgb(241, 241, 241);
+}
+
+
+.add-reply_img{
+  
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+}
+.add-reply_img_box{
+
+    margin-right : 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+}
+.add-reply_div{
+
+    padding : 4px 66px 6px 8px;
+    background-color: #fafafa;
+border-radius: 18px;
+border: 1px solid #ebebeb;
+}
+
+.add-reply_input {
+   
+border: none;
+font-size : 12px;
+z-index: 9999;
+    
+}
+
+.add-reply_input::placeholder{
+    color:rgb(199, 199, 199);
+}
