@@ -28,7 +28,7 @@ $(function(){
 				$('<tr/>')			
 					.append($('<td/>', {    // 거래번호
 						}).append($('<a/>', {
-							href: '/shoeCream/adminView/deal/dealView?dealId='+items.dealId,
+							href: '/shoeCream/adminViews/order/dealView?dealId='+items.dealId,
 							text: items.dealId,
 							class: 'deal_' + items.dealId  //'subjectA subjectA_' + items.seq    
 						}))
@@ -73,7 +73,7 @@ $('#searchBtn').click(function(){
 	$('#dealSearchDiv').empty();
 	if($('#dealSearchText').val() == '') {
 		//alert('값을 입력해주세요.');
-		$('#dealSearchDiv').text('값을 입력해주세요');
+		$('#searchDivText').text('값을 입력해주세요');
 	} else {
 		$.ajax({
 			type: 'POST',

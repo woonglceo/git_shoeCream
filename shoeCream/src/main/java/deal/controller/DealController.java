@@ -42,6 +42,13 @@ public class DealController {
 		return map;
 	}
 	
+	@GetMapping(value="dealView")
+	public String dealView(@RequestParam String dealId, Model model) {
+		model.addAttribute("dealId", dealId);
+		model.addAttribute("display", "/WEB-INF/adminViews/order/dealView.jsp");
+		return "/admin/adminIndex";
+	}
+	
 	@PostMapping(value="getDeal")
 	@ResponseBody
 	public DealDTO getDeal(@RequestParam String dealId) {

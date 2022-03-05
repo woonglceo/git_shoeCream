@@ -7,39 +7,18 @@
     <div class="card">
     
       <div class="card-header">
-        <div>
-        
-        <div class="list">     
-			  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration-line: none;">
-                   <h4 class="card-title" style="color: black">주문 조회<span class="caret"></span></h4>
-              </a>
-            
-              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/shoeCream/adminViews/order/dealList">거래 조회</a>
-              </div>
-             </div>
-        
-        
-	     <div class="input-group no-border" style="margin-right:60px;">
-		   <select id="orderSearchSelect">
-		     <option value="orderId">주문번호</option>
-		     <option value="productName">상품이름</option>
-		     <option value="userId">회원아이디</option>
-		   </select>
-	          <input type="text" id="orderSearchText" value="" placeholder="Search..." 
-	           style="width:250px;float:right;">
-	          <div class="input-group-append">
-	          
-	            <div class="input-group-text">
-	              <a id="searchBtn" class="btn-rotate" style="cursor:pointer">
-	                <i class="nc-icon nc-zoom-split"></i>
-	              </a>
-	            </div>
-	            
-	          </div>
-	       </div>
-	       <div id="orderSearchDiv"></div>
+		<h2 class="card-title" style="color: black;text-align:center;">주문 조회</h2>
+		<div style="text-align:center;">
+	        <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+	        onclick="location.href='/shoeCream/adminViews/order/orderList'">주문조회</button>
+	        <!-- onclick="location.href='/shoeCream/adminViews/order/orderList'"> -->
+	        <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+	        onclick="location.href='/shoeCream/adminViews/order/dealList'">거래조회</button>
+	       
         </div>
+        
+	     
+
       </div>
       
       <div class="card-body">
@@ -64,8 +43,23 @@
             </thead>
             
           </table>
-        </div>
         <div id="orderPagingDiv" class="pagingDiv"></div>
+       
+	       <div class="input-group no-border" id="searchDiv">
+				    	<select name="searchOption" id="searchOption">
+							 <option value="orderId">주문번호</option>
+						     <option value="productName">상품이름</option>
+						     <option value="userId">회원아이디</option>
+						</select>
+							
+						<input type="text" class="form-control" placeholder="검색어 입력" 
+							   id="orderSearchText" name="orderSearchText" style="width: 80%">
+					    <div class="input-group-append">
+					           <div class="input-group-text" id="searchBtn"><i class="nc-icon nc-zoom-split"></i></div>					           					           
+              		    </div>
+			  </div><!-- searchDiv -->
+	       <div id="searchDivText"></div>
+        </div>
       </div>
       
     </div>

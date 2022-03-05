@@ -56,7 +56,7 @@ $('#searchBtn').click(function(){
 	$('#orderSearchDiv').empty();
 	if($('#orderSearchText').val() == '') {
 		//alert('값을 입력해주세요.');
-		$('#orderSearchDiv').text('값을 입력해주세요');
+		$('#searchDivText').text('값을 입력해주세요');
 	} else {
 		$.ajax({
 			type: 'POST',
