@@ -5,8 +5,17 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="admin.order.bean.OrderDTO" alias="order"/>
-		<typeAlias type="admin.user.bean.UserDTO" alias="user"/>
+		<typeAlias type="admin.deal.bean.DealDTO" alias="deal"/>
 		<typeAlias type="admin.stock.bean.StockDTO" alias="stock"/>
+		<typeAlias type="admin.content.bean.AnnounceDTO" alias="announce"/>
+		<typeAlias type="admin.content.bean.EventDTO" alias="event"/>
+		<typeAlias type="admin.product.bean.ProductDTO" alias="product"/>
 		
+		<typeAlias type="serviceCenter.bean.AnnouncementBoardDTO" alias="AnnouncementBoardDTO"/>
+		<typeAlias type="serviceCenter.bean.QnaTableDTO" alias="QnaTableDTO"/>
+		
+		<typeAlias type="style.bean.StyleBoardDTO" alias="StyleBoardDTO"/>
+		
+		<typeAlias type="user.bean.UserDTO" alias="user"/>
 	</typeAliases>
 </configuration>

@@ -75,10 +75,17 @@
     margin-left: 1000px;
 }
 
+/* 반응형 웹을 위한 div태그 위치 */
 .list{
 	float: left;
 }
 
 .write{
 	float: right;
+}
+
+/* 수정, 삭제 */
+.linkA {
+	font-size: 16px;
+	color: black;
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import admin.stock.bean.StockDTO;
 import admin.stock.service.StockService;
-import admin.user.bean.UserDTO;
 
 @Controller
 @RequestMapping(value = "/adminViews/stock")

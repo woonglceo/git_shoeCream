@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userSQL">
+	<!-- 회원가입 -->
+	<insert id="signUp" parameterType="user">
+		insert into user_table(userId, email, pwd, nickname, phoneNum, lastDate, regDate)
+						values(seq_user_table.nextval, #{email}, #{pwd}, #{nickname}, '010010010', sysdate, sysdate)
+	</insert>
+	
+	<!-- 회원정보 불러오기 -->
+	<select id="getUser" parameterType="String" resultType="user">
+		select * from user_table where email=#{email}
+	</select>
+	
+	<!-- 이메일 찾기 -->
+	<select id="findEmailOk" parameterType="String" resultType="String">
+		select email from user_table where phoneNum=#{phoneNum}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="signIn" parameterType="java.util.Map" resultType="user">
+		select * from user_table where email=#{email} and pwd=#{pwd}
+	</select>
+	
+	<!-- 전체 목록 -->
+	<select id="getUserForm" parameterType="java.util.Map" resultType="user">
+		SELECT * FROM user_table ORDER BY userId DESC
+	</select>
+	
+	<select id="getUserId" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE userId = #{userId}
+	</select>
+	
+</mapper> 

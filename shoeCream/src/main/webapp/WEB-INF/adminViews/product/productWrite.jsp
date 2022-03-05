@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <head>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/shoeCream/admin/assets/css/product/productWrite.css">
+	<link href="/shoeCream/admin/assets/css/product/productWrite.css" rel="stylesheet" />
 </head>
 
 <div class="col-md-7">
@@ -19,14 +18,14 @@
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>상품명</label>
-                        <input type="text" class="form-control" placeholder="상품명" id="">
+                        <label>상품명</label> <span id="productNameDiv"></span> 
+                        <input type="text" class="form-control" placeholder="상품명" id="productName" name="productName">                       
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>모델번호</label>
-                        <input type="text" class="form-control" placeholder="ex. SX7167_010" id="">
+                        <label>모델번호</label> <span id="modelIdDiv"></span>
+                        <input type="text" class="form-control" placeholder="ex. SX7167_010" id="modelId" name="modelId">                       
                       </div>
                     </div>
                   </div>
@@ -35,18 +34,19 @@
                   <div class="row">
                     <div class="col-md-4 pr-1">
                       <div class="form-group">
-                        <label>브랜드</label>          
-	                        <select name="brand" class="form-control" id="">
-									<option value="Adidas" >Adidas</option>
-									<option value="Balenciaga" >Balenciaga</option>
-									<option value="Dior" >Dior</option>
-									<option value="Supreme" >Supreme</option>
-									<option value="Margiela" >Margiela</option>
-									<option value="New Balance" >New Balance</option>
+                        <label>브랜드</label> <span id="brandDiv"></span>       
+	                        <select name="brandName" class="form-control" id="brandName">
+	                        		<option value="브랜드 선택" selected>브랜드 선택</option>
+									<option value="adidas" >Adidas</option>
+									<option value="balenciaga" >Balenciaga</option>
+									<option value="autry" >Autry</option>
+									<option value="supreme" >Supreme</option>
+									<option value="margiela" >Margiela</option>
+									<option value="new balance" >New Balance</option>
 									<option value="Nike" >Nike</option>
-									<option value="Off-White" >Off-White</option>
-									<option value="Reebok" >Reebok</option>
-									<option value="Vans" >Vans</option>
+									<option value="off-white" >Off-White</option>
+									<option value="reebok" >Reebok</option>
+									<option value="vans" >Vans</option>
 									<option value="yasuhiro" >yasuhiro</option>
 							</select>
                       </div>
@@ -54,7 +54,7 @@
                     <div class="col-md-8 pl-1">
                       <div class="form-group">
                         <label>collection</label>
-                        <input type="text" class="form-control" placeholder="ex. 나이키 에어포스" id="">
+                        <input type="text" class="form-control" placeholder="ex. 나이키 에어포스" id="productCollection" name="productCollection">
                       </div>
                     </div>
                   </div>
@@ -62,20 +62,21 @@
                   <div class="row">
                     <div class="col-md-4 pr-1">
                       <div class="form-group">
-                        <label>발매가</label>
-                        <input type="text" class="form-control" placeholder="발매가" id="">
+                        <label>발매가</label> <span id="relesePriceDiv"></span>
+                        <input type="text" class="form-control" placeholder="발매가" id="relesePrice" name="relesePrice">
                       </div>
                     </div>     
                     <div class="col-md-4 px-1">
                       <div class="form-group">
-                        <label>출시일</label>                                          
-	                      <input type="text" class="form-control" id="datepicker">
+                        <label>출시일</label> <span id="datepickerDiv" style="margin-left: 20px"></span>                                         
+	                      <input type="text" class="form-control" id="releseDate" name="releseDate">
                       </div>
                     </div>                
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                         <label>사이즈</label>
-                        	<select name="size" class="form-control" id="">
+                         <label>사이즈</label> <span id="sizeDiv"></span>
+                        	<select name="productSize" class="form-control" id="productSize">
+                        		<option value="사이즈 선택" selected>사이즈 선택</option>
                         		<option value="225" >225</option>
 								<option value="230" >230</option>
 								<option value="235" >235</option>
@@ -94,26 +95,29 @@
                       </div>
                     </div>
                   </div>
-                  
+                   
+                  <label>파일 업로드</label>
                   <div class="row">
-                    <div class="col-md-4 pr-1">
-                        <label>이미지 첨부(박스를 클릭해주세요)</label>
-                        <input type="file" name="image[]" id="imageUpload" multiple>
-                       </div>
-                   </div>                   
+	                   <div class="filebox clearfix">
+					    <div class="inputFile"></div> 
+					        <label for="AddImgs" class="addImgBtn">+</label>
+					        <input type="file" name="img[]" id="AddImgs" class="upload-hidden" accept=".jpg, .png, .gif" multiple style="display:none;" maxlength=3>					        
+					    </div>
+					    <ul id="Preview" class="sortable"></ul>					  
+				   </div> 
                    
 				 <br><br>
                   <div class="row">               
                     <div class="update ml-auto mr-auto">
-                      <button type="submit" class="btn btn-primary btn-round" id="writeBtn">등록</button>
-                      <button type="reset" class="btn btn-primary btn-round">다시작성</button>
+                      <input type="button" class="btn btn-primary btn-round" id="writeBtn" value="등록">
+                      <input type="reset" class="btn btn-primary btn-round" value="다시작성">
                     </div>                   
                   </div>
                   
                 </form>
               </div>
      </div>
- </div>
+</div>
  
 <!-- 달력 위젯 -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

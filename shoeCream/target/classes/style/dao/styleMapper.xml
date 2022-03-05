@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="styleSQL">
+	<!-- StyleBoardDTO List가져오기 (인기도 순) -->
+	<select id="getStyleBoardDTOList" resultType="StyleBoardDTO">
+		select * from style_board order by likecount desc
+	</select>
+	
+	<!-- 특정 게시물 댓글 갯수 -->
+	<select id="totalComment" parameterType="Integer" resultType="Integer">
+		select count(*) from style_board where styleId=#{styleId}
+	</select>
+	
+	<!-- 특정 게시물을 작성한 유저 정보 -->
+	<select id="getUserData" parameterType="Integer" resultType="java.util.Map">
+		select userName, img from user_table where userId=#{userId}
+	</select>
+	
+	<!-- 상품id로 상품명 찾기 -->
+	<select id="getProductNameByProductId" parameterType="Integer" resultType="String">
+		select productName from product_table where productId=#{productId}
+	</select>
+	
+	<!-- 상품id로 해당 상품의 최저가 찾기 -->
+	<select id="getLowestPriceByProductId" parameterType="Integer" resultType="Integer">
+		select price from (select rownum rn, total.* from (select * from sales_table where productId=#{productId} and status=0 order by price asc)total) where rn=1
+	</select>
+</mapper>

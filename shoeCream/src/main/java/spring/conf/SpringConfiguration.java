@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -43,9 +44,22 @@ public class SpringConfiguration {
 		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
 		sqlSessionFactoryBean.setDataSource(dataSource());
 		sqlSessionFactoryBean.setMapperLocations(
-				new ClassPathResource("admin/order/dao/orderMapper.xml")
-			  , new ClassPathResource("admin/user/dao/userMapper.xml")
-			  , new ClassPathResource("admin/stock/dao/stockMapper.xml")
+				  new ClassPathResource("admin/stock/dao/stockMapper.xml")
+				, new ClassPathResource("admin/content/dao/contentMapper.xml")
+				, new ClassPathResource("admin/product/dao/productMapper.xml")
+				, new ClassPathResource("admin/deal/dao/dealMapper.xml")
+				, new ClassPathResource("admin/order/dao/orderMapper.xml")
+				, new ClassPathResource("serviceCenter/dao/serviceCenterMapper.xml")
+				, new ClassPathResource("style/dao/styleMapper.xml")
+				, new ClassPathResource("user/dao/userMapper.xml")
+//				, new ClassPathResource("admin//dao/Mapper.xml")
+//				, new ClassPathResource("admin//dao/Mapper.xml")
+				
+				
+//				new PathMatchingResourcePatternResolver().getResources("classpath:**/dao/*Mapper.xml")
+//			  , new PathMatchingResourcePatternResolver().getResources("classpath:serviceCenter/dao/serviceCenterMapper.xml")
+				
+//				new ClassPathResource("admin/*/dao/*Mapper.xml")
 
 		);
 		

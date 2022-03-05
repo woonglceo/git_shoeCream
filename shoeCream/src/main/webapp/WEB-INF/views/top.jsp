@@ -13,11 +13,11 @@
 	<header>
 		<div class="header">
 			<ul class="list_menu">
-				<li><a href="/shoeCream/serviceCenter/notice">고객센터</a></li>
+				<li><a href="/shoeCream/serviceCenter/announcement">고객센터</a></li>
 				<li><a href=#>관심상품</a></li>
 				<li><a href=#>마이페이지</a></li>
 				<li><a href="/shoeCream/admin/adminIndex.jsp">관리자페이지</a></li>
-				<li><a href=#>로그인</a></li>
+				<li><a href="/shoeCream/user/login">로그인</a></li>
 			</ul>
 			<hr>
 		

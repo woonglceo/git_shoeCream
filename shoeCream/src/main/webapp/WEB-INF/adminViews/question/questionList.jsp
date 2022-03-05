@@ -12,7 +12,8 @@
                <h4 class="card-title" style="color: black">문의사항</h4>
              </div>
              <div class="write">              
-             	<input type="button" id="questionWriteBtn" name="questionWriteBtn" value="답글 작성" onclick="location.href='/shoeCream/adminViews/question/questionWrite'">   
+             	<input type="button" id="questionWriteBtn" name="questionWriteBtn" value="답글 작성" onclick="location.href='/shoeCream/adminViews/question/questionWrite'"> 
+             	<input type="button" value="개별보기 폼" onclick="location.href='/shoeCream/adminViews/question/questionView'">     
        		 </div>
          	</div>
 
@@ -23,7 +24,7 @@
                   <table class="table">
                     <thead class=" text-primary">
 		                 <th><input type="checkbox" id="all" name="all" onclick="checkAll()">글 번호</th>
-		                  <th>제목</th>
+		                  <th>제목</th> <!-- 링크타고 상세보기 -->
 		                  <th>작성자</th>
 		                  <th>등록일</th>
 		                  <th>상태</th>
@@ -34,8 +35,13 @@
                        
                       </tr>                     
                     </tbody> -->
-                  </table>                  
+                  </table>           
+                         
               <div id="questionPagingDiv"></div>
+              
+              <div id="deleteBtn">              
+              		 <input type="button" id="deleteAll" name="deleteAll" value="전체삭제"> 
+              </div>
               
               <div class="input-group no-border" id="searchDiv">
 				    	<select name="searchOption" id="searchOption">

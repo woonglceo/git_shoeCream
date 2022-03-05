@@ -3,26 +3,6 @@
 	margin: auto;
 }
 
-/* 등록버튼 */
-#questionWriteBtn{
-	height: 38.8px;
-	background-color: dimgray;
-	border: 0;
-	outline: 0;
-    border-radius: 4px;
-    color: white;
-    margin-left: 1000px;
-}
-
-/* div태그를 양쪽으로 놓기위한 방법 */
-.list{
-	float: left;
-}
-
-.write{
-	float: right;
-}
-
 /* 이미지 업로드 파일 css */
 #imageUpload{
 	height: 38.8px;
@@ -39,6 +19,7 @@ form input::file-selector-button {
 	display: none;
 }
 
+/* 내용 */
 form textarea{
 	border: none;
 	resize: none;
@@ -60,4 +41,15 @@ form textarea{
 	border: 1px;
 	outline: 0;
 	background-color: rgba(222, 222, 222, 0.3);
+}
+
+/* 전체삭제 */
+#deleteAll{
+	float: left;
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
 }

@@ -10,5 +10,16 @@
 	<context:component-scan base-package="admin.*.dao"/>
 	<context:component-scan base-package="admin.*.bean"/>
 	
+	<context:component-scan base-package="serviceCenter.bean"/>
+	<context:component-scan base-package="serviceCenter.service"/>
+	<context:component-scan base-package="serviceCenter.dao"/>
+	
+	<context:component-scan base-package="style.bean"/>
+	<context:component-scan base-package="style.service"/>
+	<context:component-scan base-package="style.dao"/>
+	
+	<context:component-scan base-package="user.dao"/>
+	<context:component-scan base-package="user.service"/>
+	
 	<context:component-scan base-package="spring.conf" />
 </beans>

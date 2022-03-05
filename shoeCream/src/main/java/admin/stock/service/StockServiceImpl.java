@@ -6,9 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import admin.stock.bean.StockDTO;
 import admin.stock.dao.StockDAO;
-import admin.user.bean.UserDTO;
 
 @Service
 public class StockServiceImpl implements StockService {

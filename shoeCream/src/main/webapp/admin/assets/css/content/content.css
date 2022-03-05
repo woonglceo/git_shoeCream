@@ -1,3 +1,34 @@
+/* 페이징처리 */
+#announcePagingDiv {
+	text-align: center;
+	font-size: 13pt;
+	margin-top: 10px;
+}
+
+#announcePagingDiv span {
+	margin:0 5px;
+}
+
+#eventPagingDiv {
+	text-align: center;
+	font-size: 13pt;
+	margin-top: 10px;
+}
+
+#eventPagingDiv span {
+	margin:0 5px;
+}
+
+#currentPaging {
+	color: red;
+	curser: pointer;
+}
+
+#paging {
+	color: black;	
+	curser: pointer;
+}
+
 /* 중앙정렬 */
 .col-md-7{
 	margin: auto;
@@ -24,7 +55,7 @@
     margin-left: 1000px;
 }
 
-/* div태그를 양쪽으로 놓기위한 방법 */
+/* div태그를 양쪽으로 놓기위한 방법  반응형 웹 */
 .list{
 	float: left;
 }
@@ -49,6 +80,7 @@ form input::file-selector-button {
 	display: none;
 }
 
+/* 내용 textarea */
 form textarea{
 	border: none;
 	resize: none;
@@ -70,4 +102,21 @@ form textarea{
 	border: 1px;
 	outline: 0;
 	background-color: rgba(222, 222, 222, 0.3);
+}
+
+/* 전체삭제 */
+#deleteAll{
+	float: left;
+	height: 38.8px;
+	background-color: dimgray;
+	border: 0;
+	outline: 0;
+    border-radius: 4px;
+    color: white;
+}
+
+/* 수정, 삭제 */
+.linkA {
+	font-size: 16px;
+	color: black;
 }

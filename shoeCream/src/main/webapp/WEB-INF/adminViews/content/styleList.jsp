@@ -35,19 +35,23 @@
                   </table>
                   
                   <div id="stylePagingDiv"></div>
-                  
-                  <div class="input-group no-border" id="searchDiv">
-				    	<select name="searchOption" id="searchOption">
-							<option value="loveCount" >관심수</option>
-							<option value="productName" >상품명</option>
-							<option value="brand" >브랜드</option>
-						</select>
-							
-						<input type="text" class="form-control" placeholder="검색어 입력" id="inputWord" style="width: 80%">
-					    <div class="input-group-append">
-					           <div class="input-group-text"><i class="nc-icon nc-zoom-split"></i></div>
-              		    </div>
-			  </div>	
+	
+				<div id="deleteBtn">
+					<input type="button" id="deleteAll" name="deleteAll" value="전체삭제">
+				</div>
+	
+				<div class="input-group no-border" id="searchDiv">
+					    	<select name="searchOption" id="searchOption">
+								<option value="" >신고수</option>
+								<option value="title" >제목</option>
+								<option value="writer" >작성자</option>
+							</select>
+								
+							<input type="text" class="form-control" placeholder="검색어 입력" id="inputWord" style="width: 80%">
+						    <div class="input-group-append">
+						           <div class="input-group-text"><i class="nc-icon nc-zoom-split"></i></div>
+	              		    </div>
+				</div>	
       </div>
     </div>
  </div>

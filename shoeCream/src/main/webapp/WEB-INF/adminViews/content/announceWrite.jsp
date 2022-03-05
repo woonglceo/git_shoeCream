@@ -11,13 +11,13 @@
             </div>
               
             <div class="card-body">
-                <form id="announceWrite">
+                <form id="announceWriteForm">
                
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>제목</label>
-                        <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title">
+                        <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title" name="title">
                       </div>
                     </div>
                   </div>
@@ -27,7 +27,7 @@
                       <div class="form-group">
                         <label>내용</label>
                         <div class="form-control">
-                        	<textarea placeholder="내용을 입력하세요" id="content"></textarea>
+                        	<textarea placeholder="내용을 입력하세요" id="contents" name="contents"></textarea>
                         </div>
                       </div>
                     </div>
@@ -44,8 +44,8 @@
                   
                   <div class="row">
                     <div class="update ml-auto mr-auto">
-                     <button type="submit" class="btn btn-primary btn-round" id="writeBtn">등록</button>
-                      <button type="reset" class="btn btn-primary btn-round">다시작성</button>
+                    	<input type="button" name="writeBtn" id="writeBtn" class="btn btn-primary btn-round" value="등록">
+	   		  		    <input type="reset" class="btn btn-primary btn-round" value="다시작성">
                       </div>
                     </div>
                   
@@ -53,4 +53,31 @@
               </div>
      </div>
  </div>
-    
+ 
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+$('#writeBtn').click(function(){
+	
+	var myForm = document.getElementById('announceWriteForm');
+	formData = new FormData(myForm);
+
+	alert(formData);
+	
+	 $.ajax({
+		 type: 'post',
+		 url: '/shoeCream/adminViews/content/writeAnnounce',
+		 encType: 'multipart/form-data',
+	     processData: false,
+	     contentType: false,
+	     data: formData,
+		 success: function(){			
+				alert('공지사항 등록 완료');
+		 },
+		 error: function(err){
+				alert(err);
+		}		 
+	 });
+});
+
+</script>

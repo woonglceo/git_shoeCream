@@ -5,8 +5,8 @@
   <link href="/shoeCream/admin/assets/css/content/content.css" rel="stylesheet" />
 </head>
   
- <div class="card">
-
+<div class="card">
+<input type="hidden" id="pg" name="pg" value="${pg}">
        
        <div class="card-header">  
        		<div class=list>     
@@ -30,32 +30,34 @@
         <div class="card-body">
             <div class="table-responsive">
             
-                  <table class="table">
-                    <thead class=" text-primary">
-		                 <th><input type="checkbox" id="all" name="all" onclick="checkAll()">글 번호</th>
-		                  <th>이미지</th>
-		                  <th>제목</th>
-		                  <th>수정</th>
-		                  <th>삭제</th>
-                    </thead>
-                    <!-- <tbody>
-                      <tr>
-                       
-                      </tr>                     
-                    </tbody> -->
-                  </table>                  
-              <div id="anouncePagingDiv"></div>
+                  <table id="announceListTable" class="table">	                   
+	                    	  <tr class=" text-primary" style="border-top:hidden">	                    	  
+	                   		  <th><input type="checkbox" id="all" name="all" onclick="checkAll()"></th>
+			                  <th>글 번호</th>
+			                  <th>이미지</th>
+			                  <th>제목</th>
+			                  <th>등록일</th>
+			                  <th>수정</th>
+			                  <th>삭제</th>
+			                  <tr>
+                  </table>        
+                            
+              <div id="announcePagingDiv"></div>
+              <br>
               
+              <div id="deleteBtn">              
+              		 <input type="button" id="deleteAll" name="deleteAll" value="전체삭제"> 
+              </div>
+              
+              <input type="hidden" id="searchPg" name="searchPg" value="1"> <!-- 검색을 위한 페이지 고정 -->
               <div class="input-group no-border" id="searchDiv">
 				    	<select name="searchOption" id="searchOption">
-							<option value="loveCount" >관심수</option>
-							<option value="productName" >상품명</option>
-							<option value="brand" >브랜드</option>
+							<option value="title" >제목</option>
 						</select>
 							
-						<input type="text" class="form-control" placeholder="검색어 입력" id="inputWord" style="width: 80%">
-					    <div class="input-group-append">
-					           <div class="input-group-text"><i class="nc-icon nc-zoom-split"></i></div>
+						<input type="text" class="form-control" placeholder="검색어 입력" id="inputWord" name="inputWord" style="width: 80%">
+					    <div class="input-group-append" >
+					           <div class="input-group-text"><i class="nc-icon nc-zoom-split"></i></div>					           					           
               		    </div>
 			  </div>	
 
@@ -63,5 +65,5 @@
     </div>
  </div>
  
- 
- 
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/shoeCream/admin/assets/js/content/announceList.js"></script>

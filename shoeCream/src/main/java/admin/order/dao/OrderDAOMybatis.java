@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import admin.order.bean.OrderDTO;
+import admin.order.bean.OrderDTO2;
 
 @Repository
 @Transactional
@@ -25,4 +26,19 @@ public class OrderDAOMybatis implements OrderDAO {
 	public OrderDTO getOrder(String orderId) {
 		return sqlSession.selectOne("orderSQL.getOrder", Integer.parseInt(orderId));
 	}
+	
+	@Override
+	public int getTotalCount() {
+		return sqlSession.selectOne("orderSQL.getTotalCount");
+	}
+	
+	@Override
+	public List<OrderDTO> getOrderSearchList(Map<String, String> map) {
+		return sqlSession.selectList("orderSQL.getOrderSearchList", map);
+	}
+	
+//	@Override
+//	public List<OrderDTO2> convertOrderDTO(OrderDTO o) {
+//		return sqlSession.selectList("orderSQL.converyOrderDTO", o);
+//	}
 }
