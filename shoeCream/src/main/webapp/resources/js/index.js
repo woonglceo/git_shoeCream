@@ -27,7 +27,7 @@ $(function(){
 			
 		},
 		error: function(err){
-			alert('이벤트 에러났습니다');
+			alert('상품 에러났습니다');
 			console.log(err);
 		}
 	});//end ajax
@@ -35,7 +35,7 @@ $(function(){
 	//getStyleList
 	$.ajax({
 		type: 'POST',
-		url: '/shoeCream/style/getStyleList',
+		url: '/shoeCream/style/getPopularList',
 		data: 'pg='+1,	
 		//dataType: 'JSON',
 		success: function(data){
@@ -43,7 +43,7 @@ $(function(){
 			
 		},
 		error: function(err){
-			alert('이벤트 에러났습니다');
+			alert('스타일 에러났습니다');
 			console.log(err);
 		}
 	});//end ajax
