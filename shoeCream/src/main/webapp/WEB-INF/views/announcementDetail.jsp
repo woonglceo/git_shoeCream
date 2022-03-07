@@ -20,7 +20,7 @@
 		   	</pre>
 		</div>
 		<div class="btn_center_div">
-			<a href=# class="btn gray_btn" id="gray_btn">목록보기</a>
+			<a href=# class="service_btn gray_btn" id="gray_btn">목록보기</a>
 		</div>
 	</div>
 	<input type="hidden" id="pg" value="${pg}">

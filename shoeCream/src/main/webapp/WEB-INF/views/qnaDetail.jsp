@@ -24,8 +24,15 @@
 			<span class="content_reply_title"></span>
 			<span class="regDate reply_regDate"></span>
 		</div>
-		<div class="btn_center_div">
-			<a href="#" class="btn gray_btn" id="gray_btn">목록보기</a>
+		
+		<div class="btn_threeBtn_div">
+			<div class="btn_left_div">
+				<a href="#" class="service_btn gray_btn" id="goList_btn">목록보기</a>
+			</div>
+			<div class="btn_right_div">
+				<a href="#" class="service_btn black_btn" id="modify_btn">수정</a>
+				<a href="#" class="service_btn gray_btn" id="delete_btn">삭제</a>
+			</div>
 		</div>
 	</div>
 	
@@ -82,10 +89,50 @@
 	        }
 		})
 		
-		//버튼 클릭
-		$('#gray_btn').click(function(){  
+		//목록보기 버튼 클릭
+		$('#goList_btn').click(function(){  
 			location.href = '/shoeCream/serviceCenter/qna?pg='+$('#pg').val();
 		});
+		
+		//수정 버튼 클릭
+		$('#modify_btn').click(function(){  
+			goQnaModify($('#pg').val(), $('#qnaId').val());
+		});
+		
+		//삭제 버튼 클릭
+		$('#delete_btn').click(function(){  
+			if(confirm('정말로 삭제하시겠습니까?')){
+				$.ajax({
+					type: 'post',
+					url: '/shoeCream/serviceCenter/qnaDelete',
+					data: {qnaId : $('#qnaId').val()},
+					success: function(data){ 
+						location.href='/shoeCream/serviceCenter/qna';
+					},
+					error: function(err){
+						console.log(err);
+					}
+				}); //ajax
+			} 
+		});
+		
+		//post 방식 수정 페이지 이동
+		function goQnaModify(pg, qnaId) { 
+			let f =  document.createElement('form');
+			
+			let obj;
+		    obj = document.createElement('input');
+		    obj.setAttribute('type', 'hidden');
+		    obj.setAttribute('name', 'qnaId');
+		    obj.setAttribute('value', qnaId);
+			f.appendChild(obj);
+			
+			f.setAttribute('method', 'post');
+			f.setAttribute('action', '/shoeCream/serviceCenter/qnaModify?pg='+pg);
+			document.body.appendChild(f);
+			f.submit();
+		}
+
 	});
  	</script>
 	

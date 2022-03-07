@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import serviceCenter.bean.QnaTableDTO;
 import serviceCenter.service.ServiceCenterService;
@@ -94,8 +95,33 @@ public class ServiceCenterController {
 	//1:1문의 등록
 	@RequestMapping(value="/qnaRegister")
 	@ResponseBody
-	public void qnaRegister(@RequestParam Map<String, Object> map) { 
+	public void qnaRegister(@RequestParam Map<String, Object> map) {
 		serviceCenterService.qnaRegister(map); // title, qnaName, contents, qnaPwd
+	}
+	
+	//1:1문의 삭제
+	@RequestMapping(value="/qnaDelete")
+	@ResponseBody
+	public void qnaDelete(@RequestParam String qnaId) { 
+		serviceCenterService.qnaDelete(qnaId); 
+	}
+	
+	//1:1문의 수정 페이지
+	@RequestMapping(value="/qnaModify")
+	public String qnaModify(@RequestParam String pg, @RequestParam String qnaId, Model model) {
+		model.addAttribute("content", serviceCenterService.getQnaDetail(qnaId));
+		model.addAttribute("qnaId", qnaId);
+		model.addAttribute("pg", pg);
+		model.addAttribute("pageName", "qna");
+		model.addAttribute("display", "/WEB-INF/views/qnaModify.jsp");
+		return "/WEB-INF/views/serviceCenter";
+	}
+	
+	//1:1문의 수정
+	@RequestMapping(value="/qnaUpdate")
+	@ResponseBody
+	public void qnaUpdate(@RequestParam Map<String, Object> map) { 
+		serviceCenterService.qnaUpdate(map); // qnaId, title, qnaName, contents, qnaPwd
 	}
 	
 }

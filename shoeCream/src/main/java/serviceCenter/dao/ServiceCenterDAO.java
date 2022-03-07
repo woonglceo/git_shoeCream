@@ -19,5 +19,7 @@ public interface ServiceCenterDAO {
 	public QnaTableDTO getQnaDetail(String qnaId);
 	public QnaTableDTO getQnaReply(String qnaId);
 	public void qnaRegister(Map<String, Object> map);
+	public void qnaDelete(String qnaId);
+	public void qnaUpdate(Map<String, Object> map);
 
 }
