@@ -18,23 +18,17 @@ $(function(){
 				} else if(items.deliveryStatus == 2) {
 					ds = '배송완료';
 				}
-				$('<tr/>')			
-					.append($('<td/>', {    // 주문번호
+				$('<tr/>').append($('<td/>', { // 주문번호
 						text: items.orderId
 					})).append($('<td/>', { // 상품이름
-						}).append($('<a/>',{
-							href: '/shoeCream/adminViews/product/productView?productId='+items.productId,
-							text: items.productName,
-							class: 'productClass_' + items.productId  //'subjectA subjectA_' + items.seq    
-						}))
-					).append($('<td/>', {	// 구매자아이디
-						text: items.username
+						text: items.productName
+					})).append($('<td/>', {	// 구매자아이디
+						text: items.email
 					})).append($('<td/>', {	// 배송상태
 						text: ds
 					})).append($('<td/>', {	// 결제일자
 						text: items.orderDate
 					})).appendTo($('#orderListTable'));	
-					
 			});//end each
 			
 			// 페이징 처리
@@ -43,6 +37,13 @@ $(function(){
 		error: function(err){
 			alert('에러났습니다');
 			console.log(err);
+		},
+		beforeSend: function(){
+			$('#orderSearchDiv').text('로딩중입니다.');				
+		},
+		complete: function(){
+			//$('#loadingDiv').hide();
+			
 		}
 	});//end ajax
 });//end onload
@@ -68,21 +69,32 @@ $('#searchBtn').click(function(){
 			},
 			success: function(data){
 				$('#orderListTable tr:gt(0)').remove(); 
-				alert('헐 성공했삼');
-				console.log(data)
+			
+				$.each(data.list, function(index, items){
+					var ds = '배송전';
+					if(items.deliveryStatus == 1) {
+						ds = '배송중';
+					} else if(items.deliveryStatus == 2) {
+						ds = '배송완료';
+					}
+					$('<tr/>').append($('<td/>', { // 주문번호
+							text: items.orderId
+						})).append($('<td/>', { // 상품이름
+							text: items.productName
+						})).append($('<td/>', {	// 구매자아이디
+							text: items.email
+						})).append($('<td/>', {	// 배송상태
+							text: ds
+						})).append($('<td/>', {	// 결제일자
+							text: items.orderDate
+						})).appendTo($('#orderListTable'));	
+				});//end each
 			},
 			error: function(err){
 				alert('오류났다아~~~');
 				console.log(err);
 			},
 			beforeSend: function(){
-				
-				$('<div/>', {
-					text: '로딩중입니다.',
-					id: 'loadingDiv'
-				}).appendTo($('#orderListTable'));	
-				
-				
 				$('#orderSearchDiv').text('로딩중입니다.');				
 			},
 			complete: function(){

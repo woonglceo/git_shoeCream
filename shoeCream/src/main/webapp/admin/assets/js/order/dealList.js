@@ -25,23 +25,18 @@ $(function(){
 					cs = '검수완료';
 				}
 				
-				$('<tr/>')			
-					.append($('<td/>', {    // 거래번호
-						}).append($('<a/>', {
+				$('<tr/>').append($('<td/>')
+						.append($('<a/>', {// 거래번호
 							href: '/shoeCream/adminViews/order/dealView?dealId='+items.dealId,
 							text: items.dealId,
 							class: 'deal_' + items.dealId  //'subjectA subjectA_' + items.seq    
 						}))
 					).append($('<td/>', { // 상품이름
-						}).append($('<a/>', {
-							href: '/shoeCream/adminViews/product/productView?productId='+items.productId,
-							text: items.productName,
-							class: 'product_' + items.productId  //'subjectA subjectA_' + items.seq    
-						}))
-					).append($('<td/>', {	// 구매자아이디
-						text: items.pusername
+						text: items.productName
+					})).append($('<td/>', {	// 구매자아이디
+						text: items.pemail
 					})).append($('<td/>', {	// 판매자아이디
-						text: items.username
+						text: items.email
 					})).append($('<td/>', {	// 검수상태
 						text: cs
 					})).append($('<td/>', {	// 배송상태
@@ -50,7 +45,7 @@ $(function(){
 						text: items.purchaseDueDate
 					})).append($('<td/>', {	// 판매마감기한
 						text: items.salesDueDate
-					})).appendTo($('#dealListTable'));	
+					})).appendTo($('#dealListTable #tableBody'));	
 
 			});//end each
 			
@@ -77,35 +72,69 @@ $('#searchBtn').click(function(){
 	} else {
 		$.ajax({
 			type: 'POST',
-			url: '/shoeCream/adminViews/deal/getDealSearchList',
+			url: '/shoeCream/adminViews/order/getDealSearchList',
 			data: {
-				searchOption: $('#dealSearchSelect').val(),
+				searchOption: $('#searchOption').val(),
 				keyword: $('#dealSearchText').val(),
 				pg: '1'
 			},
 			success: function(data){
 				$('#dealListTable tr:gt(0)').remove(); 
-				alert('헐 성공했삼');
 				console.log(data)
+
+				$.each(data.list, function(index, items){
+				var ds = '배송전';
+				if(items.deliveryStatus == 1) {
+					ds = '배송중';
+				} else if(items.deliveryStatus == 2) {
+					ds = '배송완료';
+				}
+				var cs = '검수전';
+				if(items.checkState == 1) {
+					cs = '검수중';
+				} else if(items.checkState == 2) {
+					cs = '검수완료';
+				}
+				
+				$('<tr/>').append($('<td/>')
+						.append($('<a/>', {// 거래번호
+							href: '/shoeCream/adminViews/order/dealView?dealId='+items.dealId,
+							text: items.dealId,
+							class: 'deal_' + items.dealId  //'subjectA subjectA_' + items.seq    
+						}))
+					).append($('<td/>', { // 상품이름
+						text: items.productName
+					})).append($('<td/>', {	// 구매자아이디
+						text: items.pemail
+					})).append($('<td/>', {	// 판매자아이디
+						text: items.email
+					})).append($('<td/>', {	// 검수상태
+						text: cs
+					})).append($('<td/>', {	// 배송상태
+						text: ds
+					})).append($('<td/>', {	// 입찰마감기한
+						text: items.purchaseDueDate
+					})).append($('<td/>', {	// 판매마감기한
+						text: items.salesDueDate
+					})).appendTo($('#dealListTable'));	
+
+			});//end each
 			},
 			error: function(err){
 				alert('오류났다아~~~');
 				console.log(err);
 			},
 			beforeSend: function(){
-				
-				$('<div/>', {
-					text: '로딩중입니다.',
-					id: 'loadingDiv'
-				}).appendTo($('#dealListTable'));	
-				
-				
 				$('#dealSearchDiv').text('로딩중입니다.');				
 			},
 			complete: function(){
-				//$('#loadingDiv').hide();
 				
 			}
 		});//end ajax
 	}//end if
 });//end click
+
+
+//function urlFunction(url, id){
+//	location.href='/shoeCream/adminViews/order/dealView?dealId='+id;
+// }

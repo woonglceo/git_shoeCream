@@ -15,60 +15,61 @@
       <div class="card-body">
         <div class="table-responsive">
           <table class="table" id="dealListTable">
+          
             <thead class=" text-primary">
 				<tr>
-					<th>거래번호</th>
-					<th>구매자아이디</th>
-					<th>구매자경고횟수</th>
-					<th>검수상태</th>
-					<th>구매자번호</th><!-- <th class="text-right"> -->
+					<th colspan="4" style="text-align:center">거래번호</th>
 				</tr>
 			</thead>
             <tbody>
             	<tr>
-	            	<td>1</td>
-	            	<td>2</td>
-	            	<td>3</td>
-	            	<td>4</td>
-	            	<td>5</td>
+	            	<td class="tdForView"
+	            	 colspan="4" style="text-align:center">1</td>
             	</tr>
             </tbody>
+            
             <thead class=" text-primary">
 				<tr>
-					<th>상품이름</th>
-					<th>판매자아이디</th>
-					<th>판매자경고횟수</th>
-					<th>판매가격</th>
-					<th>판매자번호</th>
+					<th>구매자아이디</th><th>구매자경고횟수</th><th>구매자번호</th><th>구매마감일</th>
 				</tr>
 			</thead>
             <tbody>
             	<tr>
-	            	<td>1</td>
-	            	<td>2</td>
-	            	<td>3</td>
-	            	<td>4</td>
-	            	<td>5</td>
+	            	<td class="tdForView">2</td>
+	            	<td class="tdForView">3</td>
+	            	<td class="tdForView">5</td>
+	            	<td class="tdForView">5</td>
             	</tr>
             </tbody>
+            
             <thead class=" text-primary">
 				<tr>
-					<th>거래번호</th>
-					<th>구매자아이디</th>
-					<th>구매자경고횟수</th>
-					<th>검수상태</th>
-					<th>구매자번호</th><!-- <th class="text-right"> -->
+					<th>판매자아이디</th><th>판매자경고횟수</th><th>판매자번호</th><th>판매마감일</th>
 				</tr>
 			</thead>
             <tbody>
             	<tr>
-	            	<td>1</td>
-	            	<td>2</td>
-	            	<td>3</td>
-	            	<td>4</td>
-	            	<td>5</td>
+	            	<td class="tdForView">2</td>
+	            	<td class="tdForView">3</td>
+	            	<td class="tdForView">4</td>
+	            	<td class="tdForView">5</td>
             	</tr>
             </tbody>
+            
+            <thead class=" text-primary">
+				<tr>
+					<th>상품이름</th><th>상품판매가격</th><th>거래상품 검수상태</th><th>거래 생성일</th>
+				</tr>
+			</thead>
+            <tbody>
+            	<tr>
+	            	<td class="tdForView">3</td>
+	            	<td class="tdForView">3</td>
+	            	<td class="tdForView">4</td>
+	            	<td class="tdForView">4</td>
+            	</tr>
+            </tbody>
+            
           </table>
         </div>
         <div id="dealPagingDiv" class="pagingDiv"></div>

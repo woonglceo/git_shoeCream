@@ -79,23 +79,38 @@
 		                pur.userId AS purchaseUserId, pur.productId AS purchaseProductId, pur.status, pur.regDate AS purchaseRegDate, pur.regDate+30 AS purchaseDueDate,
 		                s.userId AS salesUserId, s.productId AS salesProductId, s.price AS salesPrice, s.status AS salesStatus, s.regDate AS salesRegDate, s.regDate+30 AS salesDueDate,
 		                p.productName, p.modelId, p.releasePrice, p.img1, p.img2, p.img3, p.releaseDate, p.brandName, p.productSize, p.productCollection, p.regDate AS productRegDate,
-                        c.productId AS checkProductId, c.userId AS checkUserId, c.checkState, c.checkResult,
-                        d2.trackingNum, d2.regDate AS deliveryRegDate
+		                c.productId AS checkProductId, c.userId AS checkUserId, c.checkState, c.checkResult,
+		                d2.deliveryStatus, d2.trackingNum, d2.regDate AS deliveryRegDate,
+		                u.email, u.username, u.pwd, u.nickname, u.auth, u.phoneNum, u.reportCount, u.img,
+		                u2.email AS pEmail, u2.username AS pUsername, u2.pwd AS pPwd, u2.nickname AS pNickname, u2.auth AS pAuth, u2.phoneNum AS pPhoneNum, u2.reportCount AS pReportCount, u2.img AS pImg
 		        FROM deal_table d,
 		             purchase_table pur,
 		             sales_table s,
 		             product_table p,
-                     check_table c,
-		             delivery_table d2
-		             --address_table a
+		             check_table c,
+		             delivery_table d2,
+		             user_table u,
+		             user_table u2
 		        WHERE d.purchaseId = pur.purchaseId
 		              and d.salesId = s.salesId
 		              and s.productId = p.productId
 		              and d.checkId = c.checkId
 		              and d.deliveryId = d2.deliveryId
-		              --and o.addressId = a.addressId
+		              and s.userId = u.userId
+		              and pur.userId = u2.userId
 		        ORDER BY dealId desc)d
-			WHERE ${searchOption} LIKE '%' || #{keyword} || '%')
+		        
+		    <if test='searchOption == "username"'>    
+				WHERE username LIKE '%' || UPPER(#{keyword}) || '%'
+				  OR pUsername LIKE '%' || UPPER(#{keyword}) || '%')
+			</if>
+			<if test='searchOption == "productName"'>    
+				WHERE ${searchOption} LIKE '%' || UPPER(#{keyword}) || '%')
+			</if>
+			<if test='searchOption == "dealId"'>    
+				WHERE ${searchOption} =  #{keyword} )
+			</if>
+			
 		WHERE rn BETWEEN #{startNum} AND #{endNum}
 	</select>
 	

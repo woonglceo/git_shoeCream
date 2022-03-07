@@ -37,14 +37,14 @@
 					<th>판매마감기한</th>
 				</tr>
 			</thead>
-            
+            <tbody id="tableBody"></tbody>
           </table>
         <div id="dealPagingDiv" class="pagingDiv"></div>
      	       <div class="input-group no-border" id="searchDiv">
 				    	<select name="searchOption" id="searchOption">
 							 <option value="dealId">거래번호</option>
 						     <option value="productName">상품이름</option>
-						     <option value="userId">회원아이디</option>
+						     <option value="username">회원아이디</option>
 						</select>
 							
 						<input type="text" class="form-control" placeholder="검색어 입력" 
