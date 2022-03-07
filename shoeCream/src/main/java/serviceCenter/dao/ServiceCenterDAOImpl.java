@@ -59,4 +59,15 @@ public class ServiceCenterDAOImpl implements ServiceCenterDAO {
 	public void qnaRegister(Map<String, Object> map) {
 		sqlSession.insert("serviceCenterSQL.qnaRegister", map); // title, qnaName, contents, qnaPwd
 	}
+	
+	@Override
+	public void qnaDelete(String qnaId) {
+		sqlSession.delete("serviceCenterSQL.qnaDelete", qnaId);
+	}
+	
+	@Override
+	public void qnaUpdate(Map<String, Object> map) {
+		System.out.println("DAO >> " + map);
+		sqlSession.update("serviceCenterSQL.qnaUpdate", map); // qnaId, title, qnaName, contents, qnaPwd
+	}
 }

@@ -50,4 +50,14 @@
 	<insert id="qnaRegister" parameterType="java.util.Map">
 		insert into qna_table values(SEQ_QNA_TABLE.nextval, #{qnaName}, #{title}, #{contents}, #{qnaPwd}, 0, SEQ_QNA_TABLE.currval, 0, SYSDATE)
 	</insert>
+	
+	<!-- qna 글 삭제 -->
+	<delete id="qnaDelete" parameterType="String">
+		delete qna_table where qnaId=#{qnaId}
+	</delete>
+	
+	<!-- qna 글 수정 -->
+	<update id="qnaUpdate" parameterType="java.util.Map">
+		update qna_table set qnaName=#{qnaName}, title=#{title}, contents=#{contents}, qnaPwd=#{qnaPwd} where qnaId=#{qnaId}
+	</update>
 </mapper>

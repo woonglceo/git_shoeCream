@@ -26,7 +26,7 @@
 	</div>
 	<div class="pagingDiv" id="pagingDiv">${paging.pagingHTML}</div>
 	<div class="btn_right_div">
-		<a href="#" class="btn gray_btn" id="gray_btn">문의글 작성</a>
+		<a href="#" class="service_btn gray_btn" id="gray_btn">문의글 작성</a>
 	</div>
 	<input type="hidden" id="pg" value="${pg}">
 	
@@ -74,7 +74,7 @@
  		        		var maskingName = item.qnaName.replace(/(?<=.{1})./gi,"*");
  		        		
 	        			if(item.step === 1) { //답글
-	        				row += '<i class="fa-solid fa-angles-right"></i>고객님 답변드립니다.';
+	        				row += '<i class="fa-solid fa-angles-right"></i>'+item.title;
 	        			} else if(item.step === 0) { //문의글
 	        				row += item.title;
 	        			}

@@ -126,12 +126,25 @@
 	text-align: center;
 }
 
-.btn_right_div {
+.btn_threeBtn_div {
+	display: flex;
 	margin-top: 20px;
+	text-align: center;
+}
+
+.btn_left_div {
+	/* margin-top: 20px; */
+	flex-basis: 50%;
+	text-align: left;
+}
+
+.btn_right_div {
+	/* margin-top: 20px; */
+	flex-basis: 50%;
 	text-align: right;
 }
 
-.btn {
+.service_btn {
 	cursor: pointer;
 	/* height: 42px; */
 	padding: 6px 18px;
@@ -191,6 +204,7 @@ th, td {
 
 .pagingDiv span {
 	margin: 0px 10px;
+    display: inline;
 }
 
 .pagingDiv span:hover {
@@ -216,6 +230,12 @@ th, td {
     padding: 3px 0px 3px 3px;
     margin: 5px 1px 3px 0px;
     border: 1px solid rgba(255, 90, 90, 1);
+}
+
+.note-toolbar, 
+.note-editing-area, 
+.note-statusbar {
+	z-index: 1; /* 모달창은 상위에 떠야 하므로 각각 적용 */
 }
 
 @media screen and (max-width: 768px) {

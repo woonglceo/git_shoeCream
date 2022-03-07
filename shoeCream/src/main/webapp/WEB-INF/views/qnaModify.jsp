@@ -11,7 +11,9 @@
 	<div class="content_title">
 		<h3 id="title_name">1:1 문의</h3>
 	</div>	
-	<form name="qnaWriteForm" id="qnaWriteForm" method="post" action="/shoeCream/serviceCenter/qnaRegister">
+	<form name="qnaUpdateForm" id="qnaUpdateForm">
+		<input type="hidden" id="qnaId" name="qnaId" value="${qnaId}">
+		<input type="hidden" id="pg" name="pg" value="${pg}">
 		<div class="content_list">
 			<table id="qna_table">
 				<colgroup>
@@ -21,18 +23,18 @@
 				<tr>
 					<th>제목</th>
 			   		<td class="td_left">
-			   			<input type="text" name="title" id="title" class="input_box" size="60" height="5">
+			   			<input type="text" name="title" id="title" class="input_box" size="60" height="5" value="${content.title} ">
 			   		</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
 					<td class="td_left">
-						<input type="text" name="qnaName" id="qnaName" class="input_box">
+						<input type="text" name="qnaName" id="qnaName" class="input_box" value="${content.qnaName}" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-					 	<textarea id="summernote" name="contents"></textarea>
+					 	<textarea id="summernote" name="contents">${content.contents}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -46,10 +48,10 @@
 		
 	</form>	
 	<div class="btn_center_div">
-		<a href="#" class="service_btn black_btn" id="register_btn">등록</a>
+		<a href="#" class="service_btn black_btn" id="update_btn" onclick="return false;">수정</a>
 		<a href="#" class="service_btn gray_btn" id="cancel_btn">취소</a>
 	</div>		
-
+	
 </body>
 <script type="text/javascript">
 	var $j351 = jQuery.noConflict();
@@ -80,8 +82,7 @@
 		});
 		
 		//등록버튼 유효성 검사
-		$j351('#register_btn').click(function(){
-			const regex = RegExp(/^[가-힣a-zA-Z]+$/);
+		$j351('#update_btn').click(function(){
 			if ($j351('#title').val().replace(/\s|　/gi, "").length == 0){
 				alert('제목을 입력하세요.');
 				$j351('#title').addClass("input_empty");
@@ -98,26 +99,45 @@
 				$j351('#qnaPwd').addClass("input_empty");
 				$j351('#qnaPwd').focus();
 			} else {
-				//등록
+				//수정
 				$j351.ajax({
 					type: 'post',
-			        url: '/shoeCream/serviceCenter/qnaRegister',
-			        data: $('#qnaWriteForm').serialize(), // title, qnaName, contents, qnaPwd
-			        success: function(data){
+			        url: '/shoeCream/serviceCenter/qnaUpdate',
+			       	data: $('#qnaUpdateForm').serialize(), // qnaId, title, qnaName, contents, qnaPwd
+			       //data : {'id':$('#qnaId').val()}
+			       success: function(){
 			        	location.href='/shoeCream/serviceCenter/qna';
+			        	//goQnaDetail($('#pg').val(), $('#qnaId').val());
 			        },
 			        error: function(err){
 			        	console.log(err);
 			        }
-				});//ajax	
+				});//ajax
+				
 			}
 		});
 		
 		//취소 버튼
 		$j351('#cancel_btn').click(function(){
-			location.href = '/shoeCream/serviceCenter/qna';
+			goQnaDetail($('#pg').val(), $('#qnaId').val());
 		});
 		
+		//post 방식 페이지 이동
+		function goQnaDetail(pg, qnaId) { 
+			let f =  document.createElement('form');
+			
+			let obj;
+		    obj = document.createElement('input');
+		    obj.setAttribute('type', 'hidden');
+		    obj.setAttribute('name', 'qnaId');
+		    obj.setAttribute('value', qnaId);
+			f.appendChild(obj);
+			
+			f.setAttribute('method', 'post');
+			f.setAttribute('action', '/shoeCream/serviceCenter/qnaDetail?pg='+pg);
+			document.body.appendChild(f);
+			f.submit();
+		}
 	})
 </script>
 

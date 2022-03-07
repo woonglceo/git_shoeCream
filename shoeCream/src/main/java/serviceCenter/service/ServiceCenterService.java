@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.multipart.MultipartFile;
 
 import serviceCenter.bean.AnnouncementBoardDTO;
 import serviceCenter.bean.BoardPaging;
@@ -20,6 +21,7 @@ public interface ServiceCenterService {
 	public QnaTableDTO getQnaDetail(String qnaId);
 	public QnaTableDTO getQnaReply(String qnaId);
 	public void qnaRegister(Map<String, Object> map);
-
+	public void qnaDelete(String qnaId);
+	public void qnaUpdate(Map<String, Object> map);
 	
 }

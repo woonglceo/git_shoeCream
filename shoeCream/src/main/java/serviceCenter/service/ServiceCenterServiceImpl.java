@@ -1,16 +1,24 @@
 package serviceCenter.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.multipart.MultipartFile;
 
 import serviceCenter.bean.AnnouncementBoardDTO;
 import serviceCenter.bean.BoardPaging;
@@ -27,6 +35,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	private HttpServletRequest request;
 	@Autowired
 	private HttpServletResponse response;
+	@Autowired
+	private HttpSession session;
 	
 	//공지사항 글 목록
 	@Override
@@ -96,6 +106,16 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	@Override
 	public void qnaRegister(Map<String, Object> map) {
 		serviceCenterDAO.qnaRegister(map);
+	}
+	
+	@Override
+	public void qnaDelete(String qnaId) {
+		serviceCenterDAO.qnaDelete(qnaId);
+	}
+	
+	@Override
+	public void qnaUpdate(Map<String, Object> map) {
+		serviceCenterDAO.qnaUpdate(map);
 	}
 	
 	//페이징 객체 생성
