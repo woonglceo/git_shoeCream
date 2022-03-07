@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import content.bean.AnnounceDTO;
 import content.bean.ContentPaging;
-import content.bean.EventDTO;
 import content.service.ContentService;
 
 @Controller
@@ -90,49 +89,6 @@ public class ContentController {
 		return "/admin/adminIndex";
 	}
 	
-	// 이벤트 기본 폼
-	@GetMapping(value = "eventList")
-	public String eventList(Model model, @RequestParam(required = false, defaultValue = "1") String pg) {
-		model.addAttribute("pg", pg);
-		model.addAttribute("display", "/WEB-INF/adminViews/content/eventList.jsp");
-		return "/admin/adminIndex";
-	}
-	
-	// 이벤트 리스트 / 페이징 처리
-	@PostMapping(value = "getEventList")
-	@ResponseBody
-	public Map<String, Object> getEventList(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String option) {
-		Map<String, Object> map = new HashedMap<String, Object>();		
-			
-		// 리스트 뽑아오기
-		List<EventDTO> list = contentService.getEventList(pg, option);
-		System.out.println(pg +  option);
-		// 페이징 처리하기
-		ContentPaging eventPaging = contentService.eventPaging(pg, option);
-					
-		map.put("eventPaging", eventPaging);
-		map.put("list", list);
-		return map;
-	}
-	
-	// 이벤트 검색결과
-	@PostMapping(value = "searchEvent")
-	@ResponseBody
-	public Map<String, Object> searchEvent(@RequestParam Map<String, Object> map){		
-		//페이징처리
-		ContentPaging eventPaging = contentService.serachEventPaging(map);
-		// 검색 결과 리스트
-		List<EventDTO> list = contentService.searchEvent(map);
-		System.out.println("제목검색결과 목록" + list);
-			
-		// data로 보낼 결과물
-		Map<String, Object> map2 = new HashMap<String, Object>();
-		// 검색 결과 리스트
-		map2.put("list", list);
-		// 페이징처리의 결과 값
-		map2.put("eventPaging", eventPaging);
-		return map2;
-		}
 	
 	// 게시글 기본 폼
 	@GetMapping(value = "styleList")
@@ -148,12 +104,7 @@ public class ContentController {
 		return "/admin/adminIndex";
 	}
 		
-	// 이벤트 작성 기본 폼
-	@GetMapping(value = "eventWrite")
-	public String eventWrite(Model model) {
-		model.addAttribute("display", "/WEB-INF/adminViews/content/eventWrite.jsp");
-		return "/admin/adminIndex";
-	}
+	
 	
 
 }

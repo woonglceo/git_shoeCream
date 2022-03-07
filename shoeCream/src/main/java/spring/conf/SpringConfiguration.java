@@ -52,9 +52,7 @@ public class SpringConfiguration {
 				, new ClassPathResource("serviceCenter/dao/serviceCenterMapper.xml")
 				, new ClassPathResource("style/dao/styleMapper.xml")
 				, new ClassPathResource("user/dao/userMapper.xml")
-//				, new ClassPathResource("admin//dao/Mapper.xml")
-//				, new ClassPathResource("admin//dao/Mapper.xml")
-				
+				, new ClassPathResource("event/dao/eventMapper.xml")
 				
 //				new PathMatchingResourcePatternResolver().getResources("classpath:**/dao/*Mapper.xml")
 //			  , new PathMatchingResourcePatternResolver().getResources("classpath:serviceCenter/dao/serviceCenterMapper.xml")

@@ -1,6 +1,5 @@
 package order.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import order.bean.OrderDTO;
-import order.bean.OrderDTO2;
 import order.bean.OrderPaging;
 import order.dao.OrderDAO;
 

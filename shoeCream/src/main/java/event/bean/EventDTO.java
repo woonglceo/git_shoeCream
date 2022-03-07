@@ -1,4 +1,4 @@
-package content.bean;
+package event.bean;
 
 import java.util.Date;
 
@@ -6,10 +6,12 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @Component
+@Getter @Setter @ToString
 public class EventDTO {
 	private int eventId;
 	private String title;

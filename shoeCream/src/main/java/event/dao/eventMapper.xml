@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="eventSQL">
+	 <!-- 이벤트 목록 뽑기 -->
+    <select id="getEventList" parameterType="java.util.Map" resultType="event">
+	    <if test='option.equals("all")'>
+	   		<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from event_table
+			        order by eventId desc)tt
+					)where rn >= #{startNum} and rn <= #{endNum}
+			]]>
+		</if>
+		<if test='option.equals("going")'>
+	   		<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from event_table where status = 0
+			        order by eventId desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+		
+		<if test='option.equals("end")'>
+	   		<![CDATA[
+			select * from
+			(select rownum rn, tt.* from
+			(select * from event_table where status = 1
+			        order by eventId desc)tt
+					)where rn>=#{startNum} and rn<=#{endNum}
+			]]>
+		</if>
+    </select>
+    
+    <!-- 이벤트 페이징을 위한 총 글의 수 -->
+    <select id="getTotalEvent" resultType="int">
+	    <if test='option.equals("all")'>
+	   		select count(*) from event_table  
+		</if>     	
+    	<if test='option.equals("going")'>
+   			select count(*) from event_table where status = 0
+		</if>
+	
+		<if test='option.equals("end")'>
+			select count(*) from event_table where status = 1
+		</if>
+    </select>
+    
+    <!-- 이벤트 검색 목록 뽑기 -->
+    <select id="searchEvent" parameterType="java.util.Map" resultType="event">
+	   	<if test='option.equals("all")'>
+		   		<![CDATA[
+				select * from
+				(select rownum rn, tt.* from
+				(select * from event_table
+				
+				where ${searchOption} like '%' || #{inputWord} || '%' and (status = 1 or status = 0)
+				
+				        order by eventId desc)tt
+						)where rn>=#{startNum} and rn<=#{endNum}
+				]]>
+			</if>
+			<if test='option.equals("going")'>
+		   		<![CDATA[
+				select * from
+				(select rownum rn, tt.* from
+				(select * from event_table 
+				
+				where ${searchOption} like '%' || #{inputWord} || '%' and status = 0
+				
+				        order by eventId desc)tt
+						)where rn>=#{startNum} and rn<=#{endNum}
+				]]>
+			</if>
+			
+			<if test='option.equals("end")'>
+		   		<![CDATA[
+				select * from
+				(select rownum rn, tt.* from
+				(select * from event_table 
+				
+				where ${searchOption} like '%' || #{inputWord} || '%' and status = 1
+				
+				        order by eventId desc)tt
+						)where rn>=#{startNum} and rn<=#{endNum}
+				]]>
+			</if>
+    </select>	
+	
+	<!-- 이벤트 검색 글의 총개수 -->
+	<select id="searchEventPaging" parameterType="java.util.Map" resultType="int">
+		select count(*) from event_table where ${searchOption} like '%' || #{inputWord} || '%'	
+	</select>
+</mapper>

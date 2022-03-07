@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import content.bean.AnnounceDTO;
-import content.bean.EventDTO;
 
 @Repository
 public class ContentDAOMybatis implements ContentDAO {
@@ -44,32 +43,6 @@ public class ContentDAOMybatis implements ContentDAO {
 	@Override
 	public int searchTotalAnnounce(Map<String, Object> map) {
 		return sqlSession.selectOne("contentSQL.searchTotalAnnounce", map);
-	}
-	
-	// 이벤트 리스트 뽑아오기
-	@Override
-	public List<EventDTO> getEventList(Map<String, Object> map) {
-		System.out.println("option" + map);
-		return sqlSession.selectList("contentSQL.getEventList",map);
-	}
-
-	// 이벤트 페이징
-	@Override
-	public int getTotalEvent(Map<String, Object> map) {
-		return sqlSession.selectOne("contentSQL.getTotalEvent", map);
-	}
-	
-	// 이벤트 검색결과
-	@Override
-	public List<EventDTO> searchEvent(Map<String, Object> map) {
-		return sqlSession.selectList("contentSQL.searchEvent", map);
-	}
-	
-	// 이벤트 검색결과 페이징
-	@Override
-	public int serachEventPaging(Map<String, Object> map) {
-		System.out.println("map이당" + map);
-		return sqlSession.selectOne("contentSQL.serachEventPaging", map);
 	}
 
 }

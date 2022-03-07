@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import order.bean.OrderDTO;
-import order.bean.OrderDTO2;
 
 @Repository
 @Transactional

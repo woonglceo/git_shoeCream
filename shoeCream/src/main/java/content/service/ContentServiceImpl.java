@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import content.bean.AnnounceDTO;
 import content.bean.ContentPaging;
-import content.bean.EventDTO;
 import content.dao.ContentDAO;
 
 @Service
@@ -80,64 +79,6 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	
-	// 이벤트 리스트 뽑기
-	@Override
-	public List<EventDTO> getEventList(String pg, String option) {
-		int endNum = Integer.parseInt(pg) * 10;
-		int startNum = endNum - 9;
-		
-		Map<String, Object> map = new HashedMap<String, Object>();
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
-		map.put("option", option);
 	
-		return contentDAO.getEventList(map);
-	
-	}
-
-	// 이벤트 리스트 페이징처리
-	@Override
-	public ContentPaging eventPaging(String pg, String option) {
-		Map<String, Object> map = new HashedMap<String, Object>();
-		map.put("option", option);
-		
-		int total = contentDAO.getTotalEvent(map);
-
-		contentPaging.setCurrentPage(Integer.parseInt(pg));
-		contentPaging.setPageBlock(5);
-		contentPaging.setPageSize(10);
-		contentPaging.setTotalA(total);
-		contentPaging.makePagingHTML();
-		
-		return contentPaging;
-	}
-	
-	// 이벤트 검색결과
-	@Override
-	public List<EventDTO> searchEvent(Map<String, Object> map) {
-		int endNum = Integer.parseInt((String) map.get("searchPg")) * 10;
-		int startNum = endNum - 9;
-		
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
-		
-		
-		return contentDAO.searchEvent(map);
-	}
-
-	// 이벤트 검색결과 페이징처리
-	@Override
-	public ContentPaging serachEventPaging(Map<String, Object> map) {
-		
-		int total = contentDAO.serachEventPaging(map);
-		System.out.println("이벤트 검색 개수 "+ total);
-		contentPaging.setCurrentPage(Integer.parseInt((String) map.get("searchPg")));
-		contentPaging.setPageBlock(5);
-		contentPaging.setPageSize(10);
-		contentPaging.setTotalA(total);
-		contentPaging.makePagingHTML();
-		
-		return contentPaging;
-	}
 	
 }

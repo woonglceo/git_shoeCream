@@ -8,7 +8,7 @@
 		<typeAlias type="deal.bean.DealDTO" alias="deal"/>
 		<typeAlias type="stock.bean.StockDTO" alias="stock"/>
 		<typeAlias type="content.bean.AnnounceDTO" alias="announce"/>
-		<typeAlias type="content.bean.EventDTO" alias="event"/>
+		<typeAlias type="event.bean.EventDTO" alias="event"/>
 		<typeAlias type="product.bean.ProductDTO" alias="product"/>
 		
 		<typeAlias type="serviceCenter.bean.AnnouncementBoardDTO" alias="AnnouncementBoardDTO"/>

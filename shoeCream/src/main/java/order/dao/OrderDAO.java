@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import order.bean.OrderDTO;
-import order.bean.OrderDTO2;
-import order.bean.OrderPaging;
 
 public interface OrderDAO {
 
