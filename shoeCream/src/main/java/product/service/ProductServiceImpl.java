@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
 	// 상품목록
 	@Override
-	public List<ProductDTO> getproductList(String pg) {
+	public List<ProductDTO> getProductList(String pg) {
 		int endNum = Integer.parseInt(pg) * 10;
 		int startNum = endNum - 9;
 		
@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		
-		return productDAO.getproductList(map);
+		return productDAO.getProductList(map);
 	}
 
 	// 상품목록 페이징

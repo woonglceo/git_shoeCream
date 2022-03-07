@@ -13,7 +13,7 @@ public interface EventService {
 	public EventPaging searchEventPaging(Map<String, Object> map);
 
 	public List<EventDTO> getEventList(String pg, String option);
-	public List<EventDTO> getEventList(String pg);
+	public List<EventDTO> getEventList2(String pg);
 
 	public EventPaging eventPaging(String pg, String option);
 	public EventPaging eventPaging(String pg);

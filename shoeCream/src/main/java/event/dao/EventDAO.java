@@ -8,7 +8,7 @@ import event.bean.EventDTO;
 public interface EventDAO {
 
 	public List<EventDTO> getEventList(Map<String, Object> map);
-	//public List<EventDTO> getEventList(Map<String, Integer> map);
+	public List<EventDTO> getEventList2(Map<String, Object> map);
 
 	public int getTotalEvent(Map<String, Object> map);
 

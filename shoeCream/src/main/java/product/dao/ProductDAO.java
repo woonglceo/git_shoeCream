@@ -7,7 +7,7 @@ import product.bean.ProductDTO;
 
 public interface ProductDAO {
 
-	public List<ProductDTO> getproductList(Map<String, Integer> map);
+	public List<ProductDTO> getProductList(Map<String, Integer> map);
 
 	public int getTotalProduct();
 

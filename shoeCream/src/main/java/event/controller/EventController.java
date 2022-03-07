@@ -49,10 +49,11 @@ public class EventController {
 		return map;
 	}
 	
-	@PostMapping(value="getEventList")
+	@PostMapping(value="getEventList2")
 	@ResponseBody
-	public Map<String, Object> getEventList(@RequestParam(required=false, defaultValue="1") String pg) {
-		List<EventDTO> list = eventService.getEventList(pg);
+	public Map<String, Object> getEventList2(@RequestParam(required=false, defaultValue="1") String pg) {
+		System.out.println(pg);
+		List<EventDTO> list = eventService.getEventList2(pg);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);

@@ -8,7 +8,7 @@ import product.bean.ProductPaging;
 
 public interface ProductService {
 
-	public List<ProductDTO> getproductList(String pg);
+	public List<ProductDTO> getProductList(String pg);
 
 	public ProductPaging productPaging(String pg);
 

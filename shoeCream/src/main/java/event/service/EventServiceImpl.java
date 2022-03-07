@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import event.bean.EventPaging;
 import event.bean.EventDTO;
-import event.bean.EventPaging;
 import event.dao.EventDAO;
 
 @Service
@@ -36,12 +35,13 @@ public class EventServiceImpl implements EventService{
 	}
 	
 	@Override
-	public List<EventDTO> getEventList(String pg) {
+	public List<EventDTO> getEventList2(String pg) {
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("endNum", Integer.parseInt(pg) * 5);
 		map.put("startNum", (Integer.parseInt(pg) * 5) - 4);
+		map.put("option", "going");
 		
-		List<EventDTO> list = eventDAO.getEventList(map);
+		List<EventDTO> list = eventDAO.getEventList2(map);
 		return list;
 	}
 
