@@ -19,7 +19,7 @@ public class ProductDAOMybatis implements ProductDAO {
 	
 	// 상품목록
 	@Override
-	public List<ProductDTO> getproductList(Map<String, Integer> map) {
+	public List<ProductDTO> getProductList(Map<String, Integer> map) {
 		return sqlSession.selectList("productSQL.getProductList", map);
 	}
 

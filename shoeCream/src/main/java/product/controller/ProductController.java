@@ -2,11 +2,9 @@ package product.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,12 +27,10 @@ import product.service.ProductService;
 
 @Controller
 @Component
-@RequestMapping(value="/adminViews/product")
+@RequestMapping(value="/*/product")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private ProductDTO productDTO;
 	
 	// 상품목록 기본 폼
 	@GetMapping(value = "productList")
@@ -45,13 +41,13 @@ public class ProductController {
 	}
 	
 	// 상품목록 리스트
-	@PostMapping(value = "getproductList")
+	@PostMapping(value = "getProductList")
 	@ResponseBody
-	public Map<String, Object> getproductList(@RequestParam(required = false, defaultValue = "1") String pg) {
+	public Map<String, Object> getProductList(@RequestParam(required = false, defaultValue = "1") String pg) {
 		Map<String, Object> map = new HashedMap<String, Object>();		
 		
 		// 리스트 뽑아오기
-		List<ProductDTO> list = productService.getproductList(pg);
+		List<ProductDTO> list = productService.getProductList(pg);
 		// 페이징 처리하기
 		ProductPaging productPaging = productService.productPaging(pg);
 

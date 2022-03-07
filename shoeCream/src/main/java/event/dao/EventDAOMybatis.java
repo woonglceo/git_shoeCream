@@ -22,6 +22,11 @@ public class EventDAOMybatis implements EventDAO {
 		System.out.println("option" + map);
 		return sqlSession.selectList("eventSQL.getEventList",map);
 	}
+	
+	@Override
+	public List<EventDTO> getEventList2(Map<String, Object> map) {
+		return sqlSession.selectList("eventSQL.getEventList",map);
+	}
 
 	// 이벤트 페이징
 	@Override
