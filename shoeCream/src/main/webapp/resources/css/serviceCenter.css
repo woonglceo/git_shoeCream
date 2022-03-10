@@ -232,10 +232,14 @@ th, td {
     border: 1px solid rgba(255, 90, 90, 1);
 }
 
-.note-toolbar, 
+
 .note-editing-area, 
 .note-statusbar {
 	z-index: 1; /* 모달창은 상위에 떠야 하므로 각각 적용 */
+}
+
+.note-toolbar {
+	z-index: 5;
 }
 
 @media screen and (max-width: 768px) {

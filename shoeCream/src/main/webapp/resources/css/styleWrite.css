@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.styleContents {
+	display: block;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.contentsTextArea {
+	width: 100%; 
+	height: 100px;
+	resize: none;
+}
+
+.write-modal-content {
+	margin: 0 100px;
+}
+
+.write-modal-content h4 {
+	margin: 10px 0 5px 0;
+	text-align: left;
+}
+
+.write-modal-content p {
+	margin: 5px 0;
+	text-align: left;
+}
+
+.style-file {
+	margin: 10px 0;
+}
+
+.searchProudct {
+	width: 90%;
+	height: 25px;
+	/* background-color: #d3d3d3; */ 
+	border-color: #d3d3d3;
+	border-radius: 5px;
+	border: 1;
+}
+
+.inputDiv {
+	position: relative;
+}
+
+.inputDiv .searchProudct {
+	padding-left: 25px;	
+}
+
+.inputDiv i{
+    position: absolute;
+    left: 12px;
+    top: 7px;
+    color: #d3d3d3;
+}
