@@ -33,7 +33,7 @@ href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&fami
 					<a href="/shoeCream/index.jsp"><img alt="logo" src="/shoeCream/resources/images/KREAM_logo.png"></a>
 				</div> -->
 		        <div class="kream-header__title">
-		        	<span><a href="/shoeCream/index.jsp">Shoe-KREAM</a></span>
+		        	<span><a href="/shoeCream/index.jsp">ShoeCREAM</a></span>
 		        </div>
 				
 				<ul class="navbar__menu">

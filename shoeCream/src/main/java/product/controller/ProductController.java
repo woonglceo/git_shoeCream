@@ -99,7 +99,8 @@ public class ProductController {
 	
 	// 재고량 확인 기본 폼
 	@GetMapping(value = "stockView")
-	public String stockView(Model model, @RequestParam(required = false, defaultValue = "1") String pg, @ModelAttribute ProductDTO productDTO) {
+	public String stockView(@RequestParam(required = false, defaultValue = "1") String pg, 
+							@ModelAttribute ProductDTO productDTO, Model model) {
 		model.addAttribute("modelId", productDTO.getModelId());
 		model.addAttribute("pg", pg);
 		model.addAttribute("display", "/WEB-INF/adminViews/product/stockView.jsp");

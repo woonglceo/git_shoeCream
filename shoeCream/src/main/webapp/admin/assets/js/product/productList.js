@@ -2,7 +2,7 @@
 $(function(){	 
 	 $.ajax({
 		 type: 'post',
-		 url: '/shoeCream/adminViews/product/getproductList',
+		 url: '/shoeCream/adminViews/product/getProductList',
 		 data: 'pg='+$('#pg').val(),
 		 dataType: 'JSON',
 		 success: function(data){ 

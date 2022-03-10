@@ -1,4 +1,5 @@
 $(function(){
+	var dealIdA;
 	$.ajax({
 		type: 'POST',
 		url: '/shoeCream/adminViews/order/getDealList',
@@ -7,10 +8,13 @@ $(function(){
 		success: function(data){
 			console.log('data', data);
 			
+
 			//gt(0)는 0보다 큰 애를 뜻한다(Greater Than)
 			//즉, th말고 다른줄들은 싹 다 지운다
 			$('#dealListTable tr:gt(0)').remove(); 
 			
+			
+
 			$.each(data.list, function(index, items){
 				var ds = '배송전';
 				if(items.deliveryStatus == 1) {
@@ -25,11 +29,17 @@ $(function(){
 					cs = '검수완료';
 				}
 				
-				$('<tr/>').append($('<td/>')
+				$('<tr/>', {
+					//onclick: () =>
+      				//		urlFunction('/shoeCream/adminViews/order/dealView?dealId=', items.dealId),
+					class: 'dataTr',
+					style: 'cursor: pointer'				
+
+					}).append($('<td/>')
 						.append($('<a/>', {// 거래번호
 							href: '/shoeCream/adminViews/order/dealView?dealId='+items.dealId,
 							text: items.dealId,
-							class: 'deal_' + items.dealId  //'subjectA subjectA_' + items.seq    
+							class: 'deal' //'subjectA subjectA_' + items.seq    
 						}))
 					).append($('<td/>', { // 상품이름
 						text: items.productName
@@ -46,9 +56,23 @@ $(function(){
 					})).append($('<td/>', {	// 판매마감기한
 						text: items.salesDueDate
 					})).appendTo($('#dealListTable #tableBody'));	
-
+			/*
+				document.querySelector('.dataTr').addEventListener("click", () =>
+				      urlFunction('/shoeCream/adminViews/order/dealView?dealId=', items.dealId)
+				);
+			*/
+				//$('tr').click( () => dealIdA.splice(0, dealIdA.length));
+				
+				//$('tr').click( () => location.href='/shoeCream/adminViews/order/dealView?dealId='+dealIdA[0] );
 			});//end each
-			
+				dealIdA.splice(0, dealIdA.length)
+/*				
+				document.querySelector('.dataTr').addEventListener("click", () =>
+				      console.log( this ) //.children('.deal')
+				);
+*/				
+				$('tr').click( () => dealIdA = this.dealId );
+				$('tr').click( () => console.log(dealIdA) );
 			// 페이징 처리
 			$('#dealPagingDiv').html(data.dealPaging.pagingHTML);
 		},
@@ -135,6 +159,8 @@ $('#searchBtn').click(function(){
 });//end click
 
 
-//function urlFunction(url, id){
-//	location.href='/shoeCream/adminViews/order/dealView?dealId='+id;
-// }
+function urlFunction(url, id){
+	location.href=url+id;
+}
+
+

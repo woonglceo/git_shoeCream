@@ -4,6 +4,7 @@
 
 
 <link rel="stylesheet" type="text/css" media="screen" href="/shoeCream/resources/css/index/notice.css" />
+
 <!-- <script src="main.js" defer></script> -->
 
 <!--공지-->
@@ -13,15 +14,7 @@
 </div>
 <!--공지--> <!--끊어가기-->
 <div class="banner_item">
-	<div class="banner_item-content">
-		<ul class="banner_item-list">
-			<li><button>test</button></li>
-			<li><button>d</button></li>
-			<li><button>a</button></li>
-			<li><button>l11</button></li>
-			<li><button>d</button></li>
-		</ul>
-	</div>
+	<jsp:include page="/WEB-INF/views/style/slickBanner.jsp"></jsp:include>
 </div>
 <!--끊어가기-->
 
@@ -30,23 +23,23 @@
 	<div class="items_wrap">
 		<div class="item_list">
 			<div class="itme_list-img"></div>
-			<p>럭셔리 백</p>
+			<p>나이키</p>
 		</div>
 		<div class="item_list">
 			<div class="itme_list-img"></div>
-			<p>간절기 아우터</p>
+			<p>아디다스</p>
 		</div>
 		<div class="item_list">
 			<div class="itme_list-img"></div>
-			<p>#데일리룩</p>
+			<p>조던</p>
 		</div>
 		<div class="item_list">
 			<div class="itme_list-img"></div>
-			<p>럭키 드로우ㅇㅇ</p>
+			<p>뉴발란스</p>
 		</div>
 		<div class="item_list">
 			<div class="itme_list-img"></div>
-			<p>빠른배송</p>
+			<p>무야호~</p>
 		</div>
 	</div>
 	<!--상품-->
@@ -119,8 +112,11 @@
 		<span>#데일리룩</span>
 	</div>
 
-	<div class="style_wrap">
-
+<div class="containter">
+	<%-- 
+	<jsp:include page="/WEB-INF/views/style/styleSlick.jsp"></jsp:include>
+	 --%>
+<!-- 
 		<div class="style_wrap-imgbox">
 			<div class="style_wrap-img">test</div>
 			<p>@seorim_fighting</p>
@@ -145,8 +141,8 @@
 			<div class="style_wrap-img">test</div>
 			<p>@seorim_fighting</p>
 		</div>
-
-	</div>
+ -->
+</div>
 
 	<!--인스타피드-->
 
