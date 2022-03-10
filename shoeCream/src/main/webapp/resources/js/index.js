@@ -1,4 +1,28 @@
 $(function(){
+	//slickF;
+
+	$('.banner_item-slide').slick({    
+		prevArrow : ".slick-prev", // 이전 화살표 모양 설정
+		nextArrow : ".slick-next",
+		infinite: true,      // 무한반복
+	    slidesToShow: 1,     // 보여지는 슬라이드 개수
+	    slidesToScroll: 1,   // 넘어가는 슬라이드 개수
+	    dots: true,           // 점 네비게이션 표시
+		arrows: true
+	});
+	
+	/*
+	//style 슬릭 슬라이드
+	$(".style_wrap").slick({
+		infinite : true,
+		slidesToShow : 4,
+		slidesToScroll : 1,
+
+		prevArrow : ".prev", // 이전 화살표 모양 설정
+		nextArrow : ".next", // 다음 화살표 모양 설정
+	});
+	$(".style_wrap").slick("init");
+	*/
 
 	//getEventList
 	$.ajax({
@@ -49,3 +73,18 @@ $(function(){
 	});//end ajax
 
 });//end onload
+
+/*
+function slickF() {
+	$('.banner_item-slide').slick({    
+		//slidesToShow: 1,
+		//centerMode: true,
+		prevArrow : ".slick-prev", // 이전 화살표 모양 설정
+		nextArrow : ".slick-next",
+		infinite: true,      // 무한반복
+	    slidesToShow: 1,     // 보여지는 슬라이드 개수
+	    slidesToScroll: 1,   // 넘어가는 슬라이드 개수
+	    dots: true           // 점 네비게이션 표시
+	});
+}
+*/
