@@ -38,19 +38,6 @@
 		</div>
 	</div>
 	
-	<div class="modal" id="check_phone">
-    	<div class="modal-window">
-        	<div class="modal-title">
-                <h4>인증번호 입력</h4>
-            </div>
-            <div class="modal-content">
-                <p>인증번호: </p><input type="text" id="input_authPhone" name="input_authPhone"><input type="button" value="확인" id="check_btn_phone" name="check_btn_phone">
-            	<br>
-            	<br>
-            </div>
-        </div>
-    </div>
-	
 	<div class="join_terms">
 		<div class="check_main">
 			<div class="checkbox_item">

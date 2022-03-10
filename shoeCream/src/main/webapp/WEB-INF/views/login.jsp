@@ -11,7 +11,7 @@
 <jsp:include page="top.jsp"></jsp:include>
 <form id="login_form">
 <div class="login">
-	<div class="login_title"><a herf="/shoeCream/index.jsp">SHOE-CREAM</a></div>
+	<div class="login_title"><a herf="/shoeCream/index.jsp">SHOECREAM</a></div>
 	
 	<div class="input_box">
 		<div class="username_box">
