@@ -74,7 +74,7 @@ span {
     margin: 3px;
 }
 
-.btn {
+.find_btn {
 	margin-top: 40px;
 	outline: none;
 	border: none;
@@ -90,10 +90,10 @@ span {
     color: #fff;
 }
 
-.btn_disabled {
+.find_btn_disabled {
     background-color: #ebebeb;
 }
 
-.btn_able {
+.find_btn_able {
     background-color: #222222;
 }

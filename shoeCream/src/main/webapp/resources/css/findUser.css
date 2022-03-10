@@ -65,7 +65,7 @@ span {
 	color: transparent;
 }
 
-.btn {
+.find_btn {
 	outline: none;
 	border: none;
 	width: 100%;
@@ -80,10 +80,10 @@ span {
     color: #fff;
 }
 
-.btn_disabled {
+.find_btn_disabled {
     background-color: #ebebeb;
 }
 
-.btn_able {
+.find_btn_able {
     background-color: #222222;
 }

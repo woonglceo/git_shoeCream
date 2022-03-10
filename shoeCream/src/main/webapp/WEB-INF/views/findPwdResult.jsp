@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
-<link rel="stylesheet" href="/shoeCream/resources/css/find_password_result.css">
+<link rel="stylesheet" href="/shoeCream/resources/css/findPwdResult.css">
 </head>
 <body>
 <jsp:include page="top.jsp"></jsp:include>
@@ -17,7 +17,8 @@
 		 전송받은 임시 비밀번호로 로그인해주세요.
 		</p>
 	</div>
-	<input type="button" class="btn login_btn" value="로그인">
+	<a href="/shoeCream/user/login" class="login_btn">로그인</a>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

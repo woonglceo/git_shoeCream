@@ -10,13 +10,30 @@ public interface UserDAO {
 	public List<UserDTO> getUserForm(Map<String, Integer> map);
 
 	public UserDTO getUserId(String userId);
+	
+	public UserDTO chkUsername(String username);
 
-	public UserDTO getUser(String email);
+	public UserDTO chkNickname(String nickname);
+	
+	public UserDTO chkEmail(String email);
 
-	public void signUp(UserDTO userDTO);
+	public void joinOk(UserDTO userDTO);
 
-	public String findEmailOk(String phoneNum);
+	public String findUserOk(String phoneNum);
 
-	public UserDTO signIn(Map<String, String> map);
+	public UserDTO chkUserPwd(Map<String, String> map);
+	
+	public void loginOk(String email);
+	
+	public UserDTO findPwdOk(Map<String, String> map);
+
+	public void updatePwd(Map<String, String> map);
+
+	public UserDTO chkAccessToken(String access_Token);
+
+	public void joinSocialOk(UserDTO userDTO);
+
+	public void kakaoLoginOk(String email);
+
 	
 }

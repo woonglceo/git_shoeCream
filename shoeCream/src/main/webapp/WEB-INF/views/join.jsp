@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>join</title>
-<link rel="stylesheet" href="resources/css/top.css">
 <link rel="stylesheet" href="/shoeCream/resources/css/join.css">
 <script src="https://kit.fontawesome.com/c32a0a7a55.js" crossorigin="anonymous"></script>
 </head>
@@ -17,10 +15,10 @@
 	<h2 class="join_title">회원가입</h2>
 	
 	<div class="input_box">
-		<div class="email_box">
-			<h3 class="input_title">이메일 주소*</h3>
-			<input type="text" class="input_txt" id="input_email" placeholder="예) shoe@kream.co.kr" autocomplete="off">
-			<p class="input_err" id="input_err_email"></p>
+		<div class="username_box">
+			<h3 class="input_title">아이디*</h3>
+			<input type="text" class="input_txt" id="input_username" placeholder="예) 영문, 숫자 5~15자" autocomplete="off">
+			<p class="input_err" id="input_err_username"></p>
 		</div>
 	</div>
 	
@@ -33,10 +31,44 @@
 	</div>
 	
 	<div class="input_box">
-		<div class="nickname_box">
+		<div class="fullName_box">
 			<h3 class="input_title">이름*</h3>
-			<input type="text" class="input_txt" id="input_nickname" autocomplete="off">
+			<input type="text" class="input_txt" id="input_fullName" placeholder="고객님의 이름" autocomplete="off">
+			<p class="input_err" id="input_err_fullName"></p>
+		</div>
+	</div>
+	
+	<div class="input_box">
+		<div class="nickname_box">
+			<h3 class="input_title">닉네임*</h3>
+			<input type="text" class="input_txt" id="input_nickname" placeholder="나만의 프로필 이름" autocomplete="off">
 			<p class="input_err" id="input_err_nickname"></p>
+		</div>
+	</div>
+	
+	<div class="input_box">
+		<div class="email_box">
+			<h3 class="input_title">이메일 주소*</h3>
+			<input type="text" class="input_txt" id="input_email" placeholder="예) shoe@kream.co.kr" autocomplete="off">
+			<input type="button" class="auth_btn" value="인증하기">
+			<p class="input_err" id="input_err_email"></p>
+		</div>
+	</div>
+	
+	<div class="input_box">
+		<div class="check_email">
+			<h3 class="input_title">인증번호*</h3>
+			<input type="text" class="input_txt" id="input_authEmail" placeholder="인증번호 입력" autocomplete="off">
+			<input type="button" class="check_btn" id="check_btn_email" value="확인">
+			<p class="input_msg" id="input_msg"></p>
+		</div>
+	</div>
+	
+	<div class="input_box">
+		<div class="phoneNum_box">
+			<h3 class="input_title">휴대폰 번호*</h3>
+			<input type="text" class="input_txt" id="input_phoneNum" placeholder="" autocomplete="off">
+			<p class="input_err" id="input_err_phoneNum"></p>
 		</div>
 	</div>
 	
@@ -96,23 +128,30 @@
 				</label>
 			</div>
 		</div>
+		<p class="input_err" id="input_err_checkbox"></p>
 	</div>
+	
 	<input type="button" class="join_btn" value="가입하기">
+	<input type="hidden" id="chkUsername">
+	<input type="hidden" id="chkNickname">
+	<input type="hidden" id="chkEmail">
+	<input type="hidden" id="authEmail">
 </div>
 </form>
+<jsp:include page="footer.jsp"></jsp:include>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 $(function(){
 	const group1 = $('#group_1');
 	const group2 = $('#group_2');
 	const group1List = [$('#allow_agreement'), $('#allow_privacy')];
 	const group2List = [$('#allow_app'), $('#allow_sms'), $('#allow_email')];
-	const essentialList = [$('#input_email'), $('#input_pwd'), $('#input_nickname'), $('#group_1'), $('#allow_agreement'), $('#allow_privacy')];
 	
 	<!-- 토글버튼 -->
 	$('.btn').click(function(){
 		$(this).children('i').toggleClass('fa-solid fa-minus fa-solid fa-plus');
-
+	
 		if($(this).hasClass('essential')){
 			$('#check_sub_essential').toggle();
 		}else if($(this).hasClass('option')){
@@ -120,26 +159,7 @@ $(function(){
 		}
 	});
 	
-	<!-- 전체선택 -->
-	function checkAll(list){
-		list.forEach(function(item){
-			$(item).prop('checked', true);
-			$(item).attr('validation', true);
-			//console.log($(item).attr('validation'));
-		});
-	}
-	
-	<!-- 전체해제 -->
-	function resetAll(list){
-		list.forEach(function(item){
-			$(item).prop('checked', false);
-			$(item).attr('validation', false);
-			//console.log($(item).attr('validation'));
-		});
-	}
-	
  	$('#group_1').click(function(){
- 		$('#group_1').attr('validation', true);
 		const checked = $('#group_1').is(':checked');
 		
 		if(checked){
@@ -150,7 +170,6 @@ $(function(){
 	});
 	
 	$('#group_2').click(function(){
-		$('#group_2').attr('validation', true);
 		const checked = $('#group_2').is(':checked');
 		
 		if(checked){
@@ -159,19 +178,6 @@ $(function(){
 			resetAll(group2List);
 		}
 	});
-	
-	<!-- 서브 체크박스가 모두 체크되면 그룹 체크박스 체크/하나라도 체크가 해제되면 그룹 체크박스 언체크 -->
-	function setCheckbox(size, count, group){
-		if(size==count){
-			$(group).prop('checked', true);
-			$(group).attr('validation', true);
-			//console.log($(group).attr('validation'));
-		}else{
-			$(group).prop('checked', false);
-			$(group).attr('validation', false);
-			//console.log($(group).attr('validation'));
-		}
-	}
 	
 	$('input:checkbox[name="check_essential"]').click(function(){
 		const listSize = $('input:checkbox[name="check_essential"]').length;
@@ -187,131 +193,431 @@ $(function(){
 		setCheckbox(listSize, checkCount, group2);
 	});
 	
-	<!-- 체크박스 유효성 검사 -->
- 	group1List.forEach(function(item){
-		$(item).click(function(){
-			if($(item).is(':checked')){
-				$(item).attr('validation', true);
-				//console.log($(item).attr('validation'));
-			}else{
-				$(item).attr('validation', false);
-				//console.log($(item).attr('validation'));
-			}
-		});
+	$('#input_username').on('input change keyup keydown', function(){
+		isUsername();
+		chkUsername();
 	});
-
-	<!-- 이메일 유효성 검사 -->
-	$('#input_email').on('input', function(){
-	    const email = $(this).val();
-	    const reg = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-	    
-	    if(!reg.test(email)){
-	    	$('#input_err_email').text('이메일 주소를 정확히 입력해 주세요.');
-	    	$('.email_box').css('color', '#d5624f');
-	    	$('#input_email').attr('validation', false);
-	    	
-	    }else{
-	    	<!-- 이메일 중복 체크 -->
-	    	$.ajax({
-				type:'post',
-				url:'/shoeCream/user/checkEmail',
-				data:'email='+email,
-				dataType:'text',
-				success:function(data){
-					if(data=='exist'){
-						$('#input_err_email').text('이미 사용 중인 이메일입니다.');
-				    	$('.email_box').css('color', '#d5624f');
-				    	$('#input_email').attr('validation', false);
-					}else if(data=='not_exist'){
-						console.log(data);
-						$('#input_err_email').text('');
-						$('.email_box').css('color', 'black');
-				    	$('#input_email').attr('validation', true);
-					}
-				},
-				error:function(err){
-					alert("Error:이메일중복체크");
-				}
-			}); // end ajax
-	    	
-	    }
-	});
-		
-	<!-- 비밀번호 유효성 검사 -->
+	
 	$('#input_pwd').on('input', function(){
-		const pwd = $(this).val();
-		const reg = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
-		
-	    if(!reg.test(pwd)){
-		    $('#input_err_pwd').text('영문, 숫자, 특수문자를 조합하여 입력해주세요. (8-16자)');
-		    $('.pwd_box').css('color', '#d5624f');
-		    $('#input_pwd').attr('validation', false);
-		    //console.log($('#input_pwd').attr('validation'));
-		    
-	    }else{
-	    	$('#input_err_pwd').text('');
-	    	$('.pwd_box').css('color', 'black');
-	    	$('#input_pwd').attr('validation', true);
-	    	//console.log($('#input_pwd').attr('validation'));
-	    }	
+		isPwd();
 	});
 	
+	$('#input_fullName').on('input', function(){
+		isFullName();
+	});
 	
-	<!-- 이름 유효성 검사 -->
 	$('#input_nickname').on('input', function(){
-			if($(this).val()==''){
-				$('#input_err_nickname').text('필수 정보입니다.');
-				$('.nickname_box').css('color', '#d5624f');
-				$('#input_nickname').attr('validation', false);
-			}else{
-				$('#input_err_nickname').text('');
-		    	$('.nickname_box').css('color', 'black');
-				$('#input_nickname').attr('validation', true);
-			}
-				
+		isNickname();
+		chkNickname();
+	});
+	
+	$('#input_email').on('input change keyup keydown', function(){
+		isEmail();
+		chkEmail();
+		
+		$('#authEmail').val('');
+		$('#input_authEmail').val('');
+		$('#input_authEmail').removeClass('input_txt_readonly');
+		$('#input_authEmail').prop('readonly', false);
+		$('#input_authEmail').attr('validation', 'false');
+		$('.check_btn').removeClass('check_btn_able');
+		$('.input_msg').text('');
 	});
 
-	<!-- 회원가입 -->
-	$('.join_btn').click(function(){
-		if($(this).hasClass('join_btn_able')){
+	$('#input_phoneNum').on('input', function(){
+		<!-- 숫자만 입력 -->
+		$(this).val($(this).val().replace(/[^0-9]/g,""));
+		isPhoneNum();
+	});
+	
+	$('#group_1, #allow_agreement, #allow_privacy').click(function(){
+		isCheckbox();
+	});
+	
+	<!-- 이메일 인증하기 -->
+	$('.auth_btn').click(function(){
+		if($('#input_email').attr('validation')=='true'&&$('#chkEmail').attr('validation')=='true'){
 			$.ajax({
 				type:'post',
-				url:'/shoeCream/user/signUp',
-				data:{
-					'email':$('#input_email').val(),
-					'pwd':$('#input_pwd').val(),
-					'nickname':$('#input_nickname').val()
-					//'phoneNum':$('#input_phoneNum').val()
-				},
-				success:function(){
-					alert('회원가입 성공');	
+				url:'/shoeCream/user/authEmail',
+				data:'email='+$('#input_email').val(),
+				dataType:'text',
+				success:function(data){
+					$('.input_msg').text('인증 이메일이 발송되었습니다.');					
+					$('#authEmail').val(data); // 인증번호
+					$('#input_authEmail').focus();
+					$('.check_btn').addClass('check_btn_able');
 				},
 				error:function(){
-					alert('Error:회원가입실패');
+					alert('Error: 이메일 인증');
 				}
-			});			
+			}); // end ajax			
+		}else{
+			isEmail();
+			chkEmail();
 		}
 	});
 	
-	<!-- 회원가입 버튼 활성화 -->
-	essentialList.forEach(function(item){
-		$(item).on('input', function(){
-			if($('#input_email').attr('validation')&&$('#input_pwd').attr('validation')&&$('#input_nickname').attr('validation')&&$('#group_1').attr('validation')&&$('#allow_agreement').attr('validation')&&$('#allow_privacy').attr('validation')){
-				$('.join_btn').addClass('join_btn_able');
-				$('.join_btn').removeClass('join_btn_disabled');
+	<!-- 이메일 인증번호 확인 -->
+	$('.check_btn').click(function(){
+		if($(this).hasClass('check_btn_able')){
+			if($('#input_authEmail').val()==''){
+				$('.input_msg').text('인증번호를 정확히 입력해주세요.');
 			}else{
-				$('.join_btn').addClass('join_btn_disabled');
-			}
-		});
+				if($('#input_authEmail').val()==$('#authEmail').val()){
+					$('#input_authEmail').addClass('input_txt_readonly');
+					$('#input_authEmail').prop('readonly', true);
+					$('#input_authEmail').attr('validation', 'true');
+					$('.check_btn').removeClass('check_btn_able');
+					$('.input_msg').text('');
+				}			
+			}			
+		}
 	});
 	
-	<!-- 약관 내용보기 -->
-	$('#btn_agreement').click(function(){
+	<!-- 회원가입 -->
+	$('.join_btn').click(function(){		
+		<!-- 유효성 검사 -->
+		isUsername();
+		chkUsername();
+		isPwd();
+		isFullName();
+		isNickname();
+		chkNickname();
+		isEmail();
+		chkEmail();
+		isAuth();
+		isPhoneNum();
+		isCheckbox();
+
+		const username = $('#input_username').attr('validation');
+		const validUsername = $('#chkUsername').attr('validation');
+		const pwd = $('#input_pwd').attr('validation');
+		const fullName = $('#input_fullName').attr('validation');
+		const nickname = $('#input_nickname').attr('validation');
+		const validNickname = $('#chkNickname').attr('validation');
+		const email = $('#input_email').attr('validation');
+		const validEmail = $('#chkEmail').attr('validation');
+		const authEmail = $('#input_authEmail').attr('validation');
+		const phoneNum = $('#input_phoneNum').attr('validation');
+		const checkbox = $('#group_1').attr('validation');
 		
+		if(username=='true'&&validUsername=='true'&&pwd=='true'&&fullName=='true'&&nickname=='true'&&
+				validNickname=='true'&&email=='true'&&validEmail=='true'&&authEmail=='true'&&phoneNum=='true'&&checkbox=='true'){
+			<!-- 휴대폰 본인인증 -->
+	    	$.ajax({
+	        	type:'post',
+	            url:'/shoeCream/user/authPhoneNum',
+	            data:{
+	            	'phoneNum':$('#input_phoneNum').val()
+	            },
+	            success:function(data){
+	            	if(data.result=='success'){
+	            		(async () => {
+	            			const { value: number } = await Swal.fire({
+	            			title: '인증번호를 입력해 주세요.',
+	            			inputPlaceholder: '인증번호 입력',
+	            			input: 'number'
+	            			})
+	            		
+    					if(number==data.randomNumber){
+    						$.ajax({
+    				        	type:'post',
+    				            url:'/shoeCream/user/joinOk',
+    				            data:{
+    				            	'username':$('#input_username').val(),
+    				                'pwd':$('#input_pwd').val(),
+    				                'fullName':$('#input_fullName').val(),
+    				                'nickname':$('#input_nickname').val(),
+    				                'email':$('#input_email').val(),
+    				                'phoneNum':$('#input_phoneNum').val()
+    							},
+    				            success:function(){
+    				            	Swal.fire({
+    				                	title:'회원가입이 완료되었습니다.',
+    				                	text:'로그인 후 이용해주세요.',
+    				                	icon:'success'
+    				              	}).then((result) => {
+    				                	location.href='/shoeCream/index.jsp';
+    				            	});
+    				            },
+    				            error:function(){
+    				            	alert('Error: 회원가입');
+    				        	}
+    				    	}); // end ajax(회원가입)	    					
+    					}else{
+    						alert('인증번호가 일치하지 않습니다.');
+    					}
+	            		})() // end async	
+	            	}              
+	            },
+	            error:function(){
+	            	alert('Error: 휴대폰 본인인증');
+	        	}
+	    	}); // end ajax(본인인증)
+		}
 	});
+	
+	<!-- 아이디 유효성 검사 -->
+	function isUsername(){
+		const username = $('#input_username').val();
+		const reg = RegExp(/^[a-zA-Z0-9]{4,16}$/g);
+		
+		if($('#input_username').val()==''){
+			$('#input_err_username').text('필수 정보입니다.');
+			$('#input_username').attr('validation', 'false');
+			return;
+		}
+		
+		if(!reg.test(username)){
+			$('#input_err_username').text('영문 소문자와 숫자를 입력해주세요. (4~16자)');
+		    $('.username_box').css('color', '#d5624f');
+		    $('#input_username').attr('validation', 'false');
+	    }else{
+	    	$('#input_err_username').text('');
+	    	$('.username_box').css('color', 'black');
+	    	$('#input_username').attr('validation', 'true');
+	    }	
+	}
+	
+	<!-- 아이디 중복체크 -->
+	function chkUsername(){
+		const username = $('#input_username').val();
+		
+		if($('#input_username').attr('validation')=='true'){
+			$.ajax({
+				type:'post',
+				url:'/shoeCream/user/chkUsername',
+				data:'username='+username,
+				dataType:'text',
+				success:function(data){
+					if(data=='exist'){
+						$('#input_err_username').text('이미 사용 중인 아이디입니다.');
+				    	$('.username_box').css('color', '#d5624f');
+				    	$('#chkUsername').attr('validation', 'false');
+					}else if(data=='not_exist'){
+						$('#input_err_username').text('');
+						$('.username_box').css('color', 'black');
+				    	$('#chkUsername').attr('validation', 'true');
+					}
+				},
+				error:function(err){
+					alert("Error: 아이디 중복체크");
+				}
+			}); // end ajax
+		}
+	}
+	
+	<!-- 비밀번호 유효성 검사 -->
+	function isPwd(){
+		const pwd = $('#input_pwd').val();
+		const reg = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/);
+		
+		if($('#input_pwd').val()==''){
+			$('#input_err_pwd').text('필수 정보입니다.');
+			$('#input_pwd').attr('validation', 'false');
+			return;
+		}
+		
+		if(!reg.test(pwd)){
+		    $('#input_err_pwd').text('영문, 숫자, 특수문자를 조합하여 입력해주세요. (8-16자)');
+		    $('.pwd_box').css('color', '#d5624f');
+		    $('#input_pwd').attr('validation', 'false');
+	    }else{
+	    	$('#input_err_pwd').text('');
+	    	$('.pwd_box').css('color', 'black');
+	    	$('#input_pwd').attr('validation', 'true');
+	    }	
+	}
+	
+	<!-- 이름 유효성 검사 -->
+	function isFullName(){
+		const fullName = $('#input_fullName').val();
+		const reg = RegExp(/^[가-힣]{2,4}$/);
+		
+		if($('#input_fullName').val()==''){
+			$('#input_err_fullName').text('필수 정보입니다.');
+			$('#input_fullName').attr('validation', 'false');
+			return;
+		}
+		
+		if(!reg.test(fullName)){
+			$('#input_err_fullName').text('한글 이름을 입력해주세요. (2-4자)');
+			$('.fullName_box').css('color', '#d5624f');
+			$('#input_fullName').attr('validation', 'false');
+		}else{
+			$('#input_err_fullName').text('');
+	    	$('.fullName_box').css('color', 'black');
+	    	$('#input_fullName').attr('validation', 'true');
+		}
+	}
+	
+	<!-- 닉네임 유효성 검사 -->
+	function isNickname(){
+		const len = $('#input_nickname').val().length;
+		
+		if($('#input_nickname').val()==''){
+			$('#input_err_nickname').text('필수 정보입니다.');
+			$('#input_nickname').attr('validation', 'false');
+			return;
+		}
+		
+		if(len<2){
+			$('#input_err_nickname').text('올바른 닉네임을 입력해주세요. (2-50자)');
+			$('.nickname_box').css('color', '#d5624f');
+			$('#input_nickname').attr('validation', 'false');
+		}else{
+			$('#input_err_nickname').text('');
+	    	$('.nickname_box').css('color', 'black');
+	    	$('#input_nickname').attr('validation', 'true');
+		}
+	}
+	
+	<!-- 닉네임 중복체크 -->
+	function chkNickname(){
+		const nickname = $('#input_nickname').val();
+		
+		if($('#input_nickname').attr('validation')=='true'){
+			$.ajax({
+				type:'post',
+				url:'/shoeCream/user/chkNickname',
+				data:'nickname='+nickname,
+				dataType:'text',
+				success:function(data){
+					if(data=='exist'){
+						$('#input_err_nickname').text('이미 사용 중인 닉네임입니다.');
+				    	$('.nickname_box').css('color', '#d5624f');
+				    	$('#chkNickname').attr('validation', 'false');
+					}else if(data=='not_exist'){
+						$('#input_err_nickname').text('');
+						$('.nickname_box').css('color', 'black');
+				    	$('#chkNickname').attr('validation', 'true');
+					}
+				},
+				error:function(err){
+					alert("Error: 닉네임 중복체크");
+				}
+			}); // end ajax
+		}
+	}
+	
+	<!-- 이메일 유효성 검사 -->
+	function isEmail(){
+		const email = $('#input_email').val();
+		const reg = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		
+		if($('#input_email').val()==''){
+			$('#input_err_email').text('필수 정보입니다.');
+			$('#input_email').attr('validation', 'false');
+			return;
+		}
+		
+		if(!reg.test(email)){
+			$('#input_err_email').text('이메일 주소를 정확히 입력해주세요.');
+	    	$('.email_box').css('color', '#d5624f');
+	    	$('#input_email').attr('validation', 'false');
+		}else{
+	    	$('#input_err_email').text('');
+			$('.email_box').css('color', 'black');
+			$('#input_email').attr('validation', 'true');
+	    }
+	}
+	
+	<!-- 이메일 중복체크 -->
+	function chkEmail(){
+		const email = $('#input_email').val();
+		
+		if($('#input_email').attr('validation')=='true'){
+			$.ajax({
+				type:'post',
+				url:'/shoeCream/user/chkEmail',
+				data:'email='+email,
+				dataType:'text',
+				success:function(data){
+					console.log($('#chkEmail').attr('validation'));
+					if(data=='exist'){
+						$('#input_err_email').text('이미 사용 중인 이메일입니다.');
+				    	$('.email_box').css('color', '#d5624f');
+				    	$('#chkEmail').attr('validation', 'false');
+					}else if(data=='not_exist'){
+						$('#input_err_email').text('');
+						$('.email_box').css('color', 'black');
+				    	$('#chkEmail').attr('validation', 'true');
+					}
+				},
+				error:function(err){
+					alert("Error: 이메일 중복체크");
+				}
+			}); // end ajax
+		}
+	}
+	
+	<!-- 이메일 인증 유효성 검사 -->
+	function isAuth(){
+		if($('#input_authEmail').attr('validation')!='true'){
+			$('.input_msg').text('이메일 인증을 완료해주세요.');
+			$('#input_authEmail').attr('validation', 'false');
+		}
+	}
+	
+	<!-- 휴대폰 번호 유효성 검사 -->
+	function isPhoneNum(){
+		const phoneNum = $('#input_phoneNum').val();
+		const reg = RegExp(/^(?:(010\d{4})|(01[1|6|7|8|9]\d{3,4}))(\d{4})$/);
+		
+		if($('#input_phoneNum').val()==''){
+			$('#input_err_phoneNum').text('필수 정보입니다.');
+			$('#input_phoneNum').attr('validation', 'false');
+			return;
+		}
+		
+		if (!reg.test(phoneNum)){
+			$('#input_err_phoneNum').text('휴대폰 번호를 정확히 입력해주세요.');
+			$('.phoneNum_box').css('color', '#d5624f');
+			$('#input_phoneNum').attr('validation', 'false');
+		}else{
+			$('#input_err_phoneNum').text('');
+	    	$('.phoneNum_box').css('color', 'black');
+	    	$('#input_phoneNum').attr('validation', 'true');
+			
+		}
+	}
+	
+	<!-- 체크박스 유효성 검사 -->
+	function isCheckbox(){
+		if(!$('#group_1').prop('checked')){
+			$('#input_err_checkbox').text('슈크림 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.');
+			$('#group_1').attr('validation', 'false');
+		}else{
+			$('#input_err_checkbox').text('');
+			$('#group_1').attr('validation', 'true');
+		}
+	}
+	
+	<!-- 전체선택 -->
+	function checkAll(list){
+		list.forEach(function(item){
+			$(item).prop('checked', true);
+		});
+	}
+	
+	<!-- 전체해제 -->
+	function resetAll(list){
+		list.forEach(function(item){
+			$(item).prop('checked', false);
+		});
+	}
+	
+	<!-- 서브 체크박스가 모두 체크되면 그룹 체크박스 체크/하나라도 체크가 해제되면 그룹 체크박스 언체크 -->
+	function setCheckbox(size, count, group){
+		if(size==count){
+			$(group).prop('checked', true);
+		}else{
+			$(group).prop('checked', false);
+		}
+	}
 
 });
-
 </script>
 </body>
 </html>

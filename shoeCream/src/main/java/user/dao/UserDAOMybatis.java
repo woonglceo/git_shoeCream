@@ -13,10 +13,9 @@ import user.bean.UserDTO;
 @Repository
 @Transactional
 public class UserDAOMybatis implements UserDAO {
-
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public List<UserDTO> getUserForm(Map<String, Integer> map) {
 		return sqlSession.selectList("userSQL.getUserForm", map);
@@ -24,26 +23,67 @@ public class UserDAOMybatis implements UserDAO {
 
 	@Override
 	public UserDTO getUserId(String userId) {
-		return sqlSession.selectOne("userSQL.getUserId",userId);
+		return sqlSession.selectOne("userSQL.getUserId", userId);
 	}
 
 	@Override
-	public UserDTO getUser(String email) {
-		return sqlSession.selectOne("userSQL.getUser", email);
+	public UserDTO chkUsername(String username) {
+		return sqlSession.selectOne("userSQL.chkUsername", username);
 	}
 
 	@Override
-	public void signUp(UserDTO userDTO) {
-		sqlSession.insert("userSQL.signUp", userDTO);
+	public UserDTO chkNickname(String nickname) {
+		return sqlSession.selectOne("userSQL.chkNickname", nickname);
 	}
 
 	@Override
-	public String findEmailOk(String phoneNum) {
-		return sqlSession.selectOne("userSQL.findEmailOk", phoneNum);
+	public UserDTO chkEmail(String email) {
+		return sqlSession.selectOne("userSQL.chkEmail", email);
 	}
 
 	@Override
-	public UserDTO signIn(Map<String, String> map) {
-		return sqlSession.selectOne("userSQL.signIn", map);
+	public void joinOk(UserDTO userDTO) {
+		sqlSession.insert("userSQL.joinOk", userDTO);
 	}
+
+	@Override
+	public UserDTO chkUserPwd(Map<String, String> map) {
+		return sqlSession.selectOne("userSQL.chkUserPwd", map);
+	}
+
+	@Override
+	public void loginOk(String email) {
+		sqlSession.update("userSQL.loginOk", email);
+	}
+
+	@Override
+	public String findUserOk(String phoneNum) {
+		return sqlSession.selectOne("userSQL.findUserOk", phoneNum);
+	}
+
+	@Override
+	public UserDTO findPwdOk(Map<String, String> map) {
+		return sqlSession.selectOne("userSQL.findPwdOk", map);
+	}
+
+	@Override
+	public void updatePwd(Map<String, String> map) {
+		sqlSession.update("userSQL.updatePwd", map);
+	}
+
+	@Override
+	public UserDTO chkAccessToken(String access_Token) {
+		return sqlSession.selectOne("userSQL.chkAccessToken", access_Token);
+	}
+
+	@Override
+	public void joinSocialOk(UserDTO userDTO) {
+		sqlSession.insert("userSQL.joinSocialOk", userDTO);
+	}
+
+	@Override
+	public void kakaoLoginOk(String email) {
+		sqlSession.update("userSQL.kakaoLoginOk", email);
+	}
+
 }

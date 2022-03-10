@@ -24,7 +24,12 @@ href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&fami
 				<li><a href=#>관심상품</a></li>
 				<li><a href=#>마이페이지</a></li>
 				<li><a href="/shoeCream/admin/adminIndex.jsp">관리자페이지</a></li>
-				<li><a href="/shoeCream/user/login">로그인</a></li>
+				<c:if test="${ssUser==null}">
+					<li><a href="/shoeCream/user/login">로그인</a></li>
+				</c:if>
+				<c:if test="${ssUser!=null}">
+					<li><a href="/shoeCream/user/logout">로그아웃</a></li>
+				</c:if>
 			</ul>
 			<hr>
 		
