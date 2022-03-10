@@ -1,9 +1,11 @@
 package style.dao;
 
 import java.util.List;
-import java.util.Map;
 
+import product.bean.ProductDTO;
 import style.bean.StyleBoardDTO;
+import style.bean.StyleReplyDTO;
+import user.bean.UserDTO;
 
 public interface StyleDAO {
 
@@ -11,10 +13,18 @@ public interface StyleDAO {
 
 	public int totalComment(int styleId);
 
-	public Map<String, String> getUserData(int userId);
+	public UserDTO getUserByUserId(int userId);
 
-	public String getProductNameByProductId(int productId);
+	public ProductDTO getProductByProductId(int productId);
 
 	public Integer getLowestPriceByProductId(int productId);
+
+	public List<StyleBoardDTO> getListOrderByRecentDate();
+
+	public int totalMyStyle(int userId);
+
+	public List<StyleBoardDTO> getMyList(int userId);
+
+	public List<StyleReplyDTO> getReplyList(int styleId);
 
 }
