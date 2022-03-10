@@ -3,34 +3,70 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userSQL">
-	<!-- 회원가입 -->
-	<insert id="signUp" parameterType="user">
-		insert into user_table(userId, email, pwd, nickname, phoneNum, lastDate, regDate)
-						values(seq_user_table.nextval, #{email}, #{pwd}, #{nickname}, '010010010', sysdate, sysdate)
-	</insert>
-	
-	<!-- 회원정보 불러오기 -->
-	<select id="getUser" parameterType="String" resultType="user">
-		select * from user_table where email=#{email}
-	</select>
-	
-	<!-- 이메일 찾기 -->
-	<select id="findEmailOk" parameterType="String" resultType="String">
-		select email from user_table where phoneNum=#{phoneNum}
-	</select>
-	
-	<!-- 로그인 -->
-	<select id="signIn" parameterType="java.util.Map" resultType="user">
-		select * from user_table where email=#{email} and pwd=#{pwd}
-	</select>
-	
 	<!-- 전체 목록 -->
 	<select id="getUserForm" parameterType="java.util.Map" resultType="user">
 		SELECT * FROM user_table ORDER BY userId DESC
 	</select>
 	
 	<select id="getUserId" parameterType="String" resultType="user">
-		SELECT * FROM user_table WHERE userId = #{userId}
+		SELECT * FROM user_table WHERE userId=#{userId}
 	</select>
+
+	<!-- 회원가입 -->
+	<insert id="joinOk" parameterType="user">
+		INSERT INTO user_table(userId, username, pwd, fullName, nickname, email, phoneNum, lastDate, regDate)
+						VALUES(seq_user_table.nextval, #{username}, #{pwd}, #{fullName}, #{nickname}, #{email}, #{phoneNum}, sysdate, sysdate)
+	</insert>
+	
+	<!-- 소셜 회원가입 -->
+	<insert id="joinSocialOk" parameterType="user">
+		INSERT INTO user_table(userId, email, nickname, phoneNum, img, accessToken, platformType, lastDate, regDate)
+						VALUES(seq_user_table.nextval, #{email}, #{nickname}, #{phoneNum}, #{img}, #{accessToken}, '카카오', sysdate, sysdate)
+	</insert>
+	
+	<!-- 아이디, 비밀번호 확인 -->
+	<select id="chkUserPwd" parameterType="java.util.Map" resultType="user">
+		SELECT * FROM user_table WHERE username=#{username} and pwd=#{pwd}
+	</select>
+	
+	<!-- 로그인 -->
+	<update id="loginOk" parameterType="String">
+		UPDATE user_table SET lastDate=sysdate WHERE email=#{email}
+	</update>
+	
+	<!-- 소셜 로그인 -->
+	<update id="kakaoLoginOk" parameterType="String">
+		UPDATE user_table SET lastDate=sysdate WHERE email=#{email}
+	</update>
+	
+	<!-- 아이디 확인 -->
+	<select id="chkUsername" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE username=#{username}
+	</select>
+	
+	<!-- 닉네임 확인 -->
+	<select id="chkNickname" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE nickname=#{nickname}
+	</select>
+	
+	<!-- 이메일 확인 -->
+	<select id="chkEmail" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE email=#{email}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUserOk" parameterType="String" resultType="String">
+		SELECT username FROM user_table WHERE phoneNum=#{phoneNum}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwdOk" parameterType="java.util.Map" resultType="user">
+		SELECT * FROM user_table WHERE phoneNum=#{phoneNum} and username=#{username}
+	</select>
+
+	<!-- 임시 비밀번호로 수정 -->
+	<update id="updatePwd" parameterType="java.util.Map">
+		UPDATE user_table SET pwd=#{tempPwd} WHERE username=#{username}
+	</update>
 	
 </mapper> 

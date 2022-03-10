@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-div	{
-	display: block;
-}
-
-
 span {
 	font-size: 14px;
 }
@@ -72,6 +67,19 @@ label {
 	color: transparent;
 }
 
+#input_email {
+	position: relative;
+}
+
+#input_authNum{
+	position: relative;
+}
+
+.input_txt_readonly {
+	border-bottom: 1px solid grey;
+	color: #bcbcbc;
+}
+
 .input_err {
 	display: block;
     position: absolute;
@@ -81,15 +89,19 @@ label {
     margin: 3px;
 }
 
+.input_msg {
+	display: block;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    margin: 3px;
+    color: #f15746;
+}
+
 .check_main {
 	padding-bottom: 8px;
 	display: block;
 }
-
-/* .checkbox_item a{
-	display: inline-flex;
-	align-items: right;
-} */
 
 .check_sub > .checkbox_item {
 	padding-bottom: 5px;
@@ -133,23 +145,57 @@ label {
 	width: 100%;
     height: 52px;
     font-size: 16px;
-    letter-spacing: -.16px;
     font-weight: 700;
+    letter-spacing: -.16px;
     line-height: 50px;
     border-radius: 12px;
     outline: none;
-    font-weight: 600;
     color: #fff;
-}
-
-.join_btn_disabled {
-    background-color: #ebebeb;
-}
-
-.join_btn_able {
     background-color: #222222;
 }
 
+.auth_btn {
+	outline: none;
+	border: none;
+	width: 70px;
+    height: 25px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: -.16px;
+    border-radius: 12px;
+    outline: none;
+    color: #fff;
+    position: absolute;
+    top: 48px;
+ 	left: 335px;
+ 	bottom: 23px;
+ 	right: 0;
+ 	background-color: #222222;
+}
+
+.check_btn {
+	outline: none;
+	border: none;
+	width: 70px;
+    height: 25px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: -.16px;
+    border-radius: 12px;
+    outline: none;
+    color: #fff;
+    background-color: #ebebeb;
+    position: absolute;
+    top: 48px;
+ 	left: 335px;
+ 	bottom: 23px;
+ 	right: 0;
+}
+
+.check_btn_able {
+	background-color: #222222;
+}
+ 
 /* 체크박스 */
 input[type="checkbox"] {
     -webkit-appearance: none;
@@ -186,4 +232,54 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::before {
     border-radius: 2px;
     transform: scale(1) translate(-50%, -50%)
+}
+
+/* 모달 */
+.modal {
+	position: absolute;
+	z-index: 1100; 
+	top: 0; 
+	left: 0; 
+	width: 100%;
+	height: 100%; 
+	display: none;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	background-color: rgba(34,34,34,.5);
+}
+
+.modal-window {
+	background-color: #fff;
+	border-radius: 10px;
+    position: relative;
+    text-align: center;
+	/* 모달창 사이즈는 각자 필요에 따라 클래스 추가해서 사용 */
+	/* width: 400px;
+    height: 500px; */
+}
+
+.modal-window-styleWrite { /* 별도 추가한 클래스 예시 */
+	width: 600px;
+    height: 700px;
+}
+
+.modal-title {
+	padding: 15px 20px;
+}
+
+.modal-title h2 {
+	display: inline;
+}
+
+.close-area {
+	display: inline;
+	float: right;	
+}
+
+.modal-content {
+	max-height: 87%;
+	overflow-x: hidden;
+    overflow-y: auto;
+    
 }

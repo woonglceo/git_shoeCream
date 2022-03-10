@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
-div	{
+/* div	{
 	display: block;
-}
-
+} */
 
 span {
 	font-size: 14px;
@@ -16,9 +15,15 @@ span {
 }
 
 .login_title {
-	content: "";
-    background-size: 250px 56px;
-    text-align: center;
+	display: block;
+    padding-bottom: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+    font-family: "Bangers", cursive;
+    font-weight: bold;
+    text-align:center;
+    cursor: pointer;
 }
 
 .login_logo {
@@ -91,7 +96,7 @@ span {
     font-weight: 600;
     color: #fff;
 }
-
+ 
 .login_btn_disabled {
     background-color: #ebebeb;
 }
@@ -127,7 +132,7 @@ span {
 	margin-top: 40px;
 }
 
-.btn_kakao_login {
+.kakao_login_btn {
 	display: flex;
 	outline: 0;
 	border: none;
@@ -138,9 +143,10 @@ span {
     width: 100%;
     background-color: transparent;
     align-items: center;
+    cursor: pointer;
 }
 
-.kakao_logo {
+.kakao_login {
 	width: 40px;
     height: 40px;
 }
@@ -148,3 +154,17 @@ span {
 .txt{
 	padding-left: 100px;
 }
+
+/* .social_login {
+	margin-top: 40px;
+    display: block;
+}
+
+.kakao_login {
+    cursor: pointer;
+}
+
+.kakao_login_logo {
+	width: 100%;
+    height: 50px;
+} */

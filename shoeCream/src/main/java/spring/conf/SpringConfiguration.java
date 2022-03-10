@@ -1,5 +1,7 @@
 package spring.conf;
 
+import java.util.Properties;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,6 +16,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -72,6 +76,33 @@ public class SpringConfiguration {
 	@Bean
 	public DataSourceTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
+	}
+	
+	/* 메일 인증 관련 */
+	@Configuration
+	public class MailAuthConfiguration {
+		@Bean(name="mailSender")
+		public JavaMailSender getJavaMailSender() {
+			Properties properties = new Properties(); 
+			properties.put("mail.smtp.auth", true);
+			properties.put("mail.transport.protocol", "smtp");
+			properties.put("mail.debug", true);
+			properties.put("mail.smtp.starttls.enable", true);
+			properties.put("mail.smtp.starttls.trust", true);
+			properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			
+			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+			mailSender.setHost("smtp.gmail.com");
+			mailSender.setPort(587);
+			mailSender.setUsername("xxhyeeun@gmail.com"); /* 관리자 이메일 */
+			mailSender.setPassword("mint1111*"); /* 관리자 비밀번호 */
+			mailSender.setDefaultEncoding("utf-8");
+			mailSender.setJavaMailProperties(properties);
+			
+			return mailSender;
+			
+		}
+		
 	}
 }
 
