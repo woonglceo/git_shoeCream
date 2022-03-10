@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-/* div	{
-	display: block;
-} */
-
-span {
-	font-size: 14px;
-}
-
 .login {
 	margin: 0 auto;
     padding: 58px 0 160px;
