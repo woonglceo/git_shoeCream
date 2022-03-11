@@ -67,6 +67,11 @@
     <select id="getProductInfo" parameterType="String" resultType="product">
     	select * from product_table where modelId=#{modelId}
     </select>
+    
+    <!-- 상품id로 상품의 한 개 뽑기 -->
+    <select id="getProductById" parameterType="Integer" resultType="product">
+    	select * from product_table where productId=#{productId}
+    </select>
  </mapper>
 
  

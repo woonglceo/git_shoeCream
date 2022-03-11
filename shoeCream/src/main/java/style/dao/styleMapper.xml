@@ -18,14 +18,14 @@
 		select * from style_board where userId=#{userId} order by regdate desc
 	</select>
 	
-	<!-- 특정 게시물 댓글 갯수 -->
+	<!-- 특정 게시물 갯수 -->
 	<select id="totalMyStyle" parameterType="Integer" resultType="Integer">
 		select count(*) from style_board where styleId=#{styleId}
 	</select>
 	
-	<!-- 특정 회원 게시글 갯수 -->
+	<!-- 특정 회원 댓글 갯수 -->
 	<select id="totalComment" parameterType="Integer" resultType="Integer">
-		select count(*) from style_board where userId=#{userId}
+		select count(*) from style_reply where userId=#{userId}
 	</select>
 	
 	<!-- 특정 게시물을 작성한 유저 정보 -->

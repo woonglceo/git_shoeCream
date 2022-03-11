@@ -18,5 +18,7 @@
 		<typeAlias type="style.bean.StyleReplyDTO" alias="StyleReplyDTO"/>
 		
 		<typeAlias type="user.bean.UserDTO" alias="user"/>
+		
+		<typeAlias type="mypage.bean.WishListDTO" alias="WishListDTO"/>
 	</typeAliases>
 </configuration>

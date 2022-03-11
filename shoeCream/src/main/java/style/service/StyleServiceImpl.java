@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import style.bean.StyleBoardDTO;
 import style.bean.StyleCardDTO;
+import style.bean.StyleReplyDTO;
 import style.dao.StyleDAO;
 
 @Service
@@ -73,23 +74,46 @@ public class StyleServiceImpl implements StyleService {
 			//회원 테이블 데이터
 			styleCardDTO.setUsername(styleDAO.getUserByUserId(userId).getUsername()); //회원 아이디
 			styleCardDTO.setUserImg(styleDAO.getUserByUserId(userId).getImg()); //회원 프로필사진 src
-			styleCardDTO.setIntroMsg(styleDAO.getUserByUserId(userId).getIntroMsg()); //소개메세지
+			styleCardDTO.setUserIntroMsg(styleDAO.getUserByUserId(userId).getIntroMsg()); //소개메세지
 			
 			//상품 테이블 데이터
 			styleCardDTO.setProductName(styleDAO.getProductByProductId(productId).getProductName()); //게시물에 태그된 상품명
-			styleCardDTO.setImg1(styleDAO.getProductByProductId(productId).getImg1());
+			styleCardDTO.setProductImg(styleDAO.getProductByProductId(productId).getImg1());
 			
 			//판매 테이블 데이터
 			Integer price = styleDAO.getLowestPriceByProductId(productId); //판매 테이블에서 최저 가격 1개 추출 (조건)상품번호, 판매상태=0, 가격 오름차순
 			if (price == null) styleCardDTO.setPrice(0);
 			else styleCardDTO.setPrice(price);
 			
-			//댓글 테이블 데이터
-			styleCardDTO.setStyleReplyList(styleDAO.getReplyList(styleId));
+			//댓글 리스트
+			styleCardDTO.setStyleReplyList(this.makeStyleReplyList(styleId)); 
 			
 			//styleCardDTO 객체 list에 담기
 			list.add(styleCardDTO);
 		}
 		return list;
+	}
+	
+	// 댓글 작성자 프로필 사진을 포함한 댓글 리스트 리턴
+	private List<Map<String, Object>> makeStyleReplyList(int styleId){
+		List<Map<String, Object>> styleReplyList = new ArrayList<Map<String,Object>>(); //리턴할 댓글정보 list
+		
+		List<StyleReplyDTO> list = styleDAO.getReplyList(styleId); //게시글에 달린 댓글 list
+		Map<String, Object> reply; //댓글DTO+프로필사진 담을 MAP
+		
+		for(StyleReplyDTO styleReplyDTO : list) {
+			reply = new HashMap<String, Object>();
+			reply.put("styleReplyId", styleReplyDTO.getStyleReplyId());
+			int userId = styleReplyDTO.getUserId();
+			reply.put("userId", userId);
+			reply.put("replyUserImg", styleDAO.getUserByUserId(userId).getImg());
+			reply.put("contents", styleReplyDTO.getContents());
+			reply.put("reportCount", styleReplyDTO.getReportCount());
+			reply.put("regDate", styleReplyDTO.getRegDate());
+			
+			styleReplyList.add(reply);
+		}
+		
+		return styleReplyList;
 	}
 }

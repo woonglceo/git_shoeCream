@@ -21,7 +21,7 @@ href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bangers&fami
 		<div class="header">
 			<ul class="list_menu">
 				<li><a href="/shoeCream/serviceCenter/announcement">고객센터</a></li>
-				<li><a href=#>관심상품</a></li>
+				<li><a href="/shoeCream/my/wish">관심상품</a></li>
 				<li><a href=#>마이페이지</a></li>
 				<li><a href="/shoeCream/admin/adminIndex.jsp">관리자페이지</a></li>
 				<c:if test="${ssUser==null}">
