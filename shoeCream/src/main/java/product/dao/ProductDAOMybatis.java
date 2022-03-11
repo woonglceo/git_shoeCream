@@ -97,5 +97,9 @@ public class ProductDAOMybatis implements ProductDAO {
 	public List<ProductDTO> getProductInfo(String modelId) {
 		return sqlSession.selectList("productSQL.getProductInfo", modelId);
 	}
-
+	
+	@Override
+	public ProductDTO getProductById(int productId) {
+		return sqlSession.selectOne("productSQL.getProductInfo", productId);
+	}
 }

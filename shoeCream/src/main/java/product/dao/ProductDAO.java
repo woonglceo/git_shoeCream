@@ -23,4 +23,6 @@ public interface ProductDAO {
 
 	public List<ProductDTO> getProductInfo(String modelId);
 
+	public ProductDTO getProductById(int productId);
+
 }
