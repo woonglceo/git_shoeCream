@@ -100,6 +100,6 @@ public class ProductDAOMybatis implements ProductDAO {
 	
 	@Override
 	public ProductDTO getProductById(int productId) {
-		return sqlSession.selectOne("productSQL.getProductInfo", productId);
+		return sqlSession.selectOne("productSQL.getProductById", productId);
 	}
 }
