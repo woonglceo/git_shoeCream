@@ -329,11 +329,10 @@ public class ProductController {
 		model.addAttribute("display", "/WEB-INF/adminViews/product/productList.jsp");
 		return "/admin/adminIndex";
 	}
-	
-	// 상품목록 리스트
-	@PostMapping(value = "getProductListForIndex")
-	@ResponseBody
-	public List<ProductDTO> getProductListForIndex(@RequestParam(required = false, defaultValue = "1") String pg) {
-		return productService.getProductListForIndex(pg);
-	}
+
+		@PostMapping(value = "getProductListForIndex")
+		@ResponseBody
+		public List<ProductDTO> getProductListForIndex(@RequestParam(required = false, defaultValue = "1") String pg) {
+			return productService.getProductListForIndex(pg);
+		}
 }

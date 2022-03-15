@@ -21,7 +21,7 @@ $(function(){
 	//getProductList
 	$.ajax({
 		type: 'POST',
-		url: '/shoeCream/get/product/getproductList',
+		url: '/shoeCream/get/product/getProductListForIndex',
 		data: 'pg='+1,	
 		//dataType: 'JSON',
 		success: function(data){

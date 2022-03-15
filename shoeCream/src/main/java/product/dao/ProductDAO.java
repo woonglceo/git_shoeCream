@@ -31,4 +31,6 @@ public interface ProductDAO {
 	
 	public List<ProductDTO> getProductListForIndex(Map<String, Integer> map);
 
+	public List<ProductDTO> getProductListForIndex(Map<String, Integer> map);
+
 }

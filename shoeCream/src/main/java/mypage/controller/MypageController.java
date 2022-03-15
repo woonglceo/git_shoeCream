@@ -151,9 +151,13 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="myAddress")
-	public String myAddress(Model model) {
+	public String myAddress(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
 		if(session.getAttribute("ssUserId") == null) return "/WEB-INF/views/login";
 		else {
+			int userId = (int) session.getAttribute("ssUserId");
+			model.addAttribute("addressList", mypageService.getAddressList(pg, userId));
+			model.addAttribute("pg", pg);
+			model.addAttribute("paging", mypageService.paging(pg, "address_table", userId)); 
 			model.addAttribute("pageName", "myAddress");
 			model.addAttribute("display", "/WEB-INF/views/myAddress.jsp");
 			return "/WEB-INF/views/mypage";
@@ -192,6 +196,12 @@ public class MypageController {
 		}
 	}
 	
+	@RequestMapping(value="updateUsername")
+	@ResponseBody
+	public void updateUsername(@RequestParam String username) {
+		mypageService.updateUsername(username);
+	}
+	
 	@RequestMapping(value="updateEmail")
 	@ResponseBody
 	public void updateEmail(@RequestParam String email) {
@@ -216,12 +226,17 @@ public class MypageController {
 		mypageService.updatePhoneNum(phoneNum);
 		
 	}
+
+	@RequestMapping(value="registerAccount")
+	@ResponseBody
+	public void registerAccount(@ModelAttribute AccountDTO accountDTO) {
+		mypageService.registerAccount(accountDTO);
+	}
 	
 	@RequestMapping(value="updateAccount")
 	@ResponseBody
 	public void updateAccount(@ModelAttribute AccountDTO accountDTO) {
 		mypageService.updateAccount(accountDTO);
 	}
-	
 	
 }

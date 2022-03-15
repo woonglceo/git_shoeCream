@@ -32,7 +32,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDAO.getproductList(map);
 	}
-
+	
+	
 	// 상품목록 페이징
 	@Override
 	public ProductPaging productPaging(String pg) {

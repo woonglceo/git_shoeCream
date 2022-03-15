@@ -29,4 +29,5 @@ public interface ProductService {
 	public void productUpdate(Map<String, Object> map);
 
 	public List<ProductDTO> getProductListForIndex(String pg);
+
 }

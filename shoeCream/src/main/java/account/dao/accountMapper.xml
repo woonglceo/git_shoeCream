@@ -8,6 +8,10 @@
 		SELECT * FROM account_table WHERE userId=#{userId}
 	</select>
 	
+	<insert id="registerAccount" parameterType="account">
+		INSERT INTO account_table VALUES(seq_account_table.nextval, #{userId}, #{bank}, #{accountNum}, #{accountHolder})
+	</insert>
+	
 	<update id="updateAccount" parameterType="account">
 		UPDATE account_table SET bank=#{bank}, accountNum=#{accountNum}, accountHolder=#{accountHolder} WHERE userId=#{userId}
 	</update>

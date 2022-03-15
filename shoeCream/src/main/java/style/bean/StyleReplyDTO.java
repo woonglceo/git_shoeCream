@@ -10,12 +10,11 @@ import lombok.Data;
 
 @Component
 @Data
-public class StyleReplyDTO {
+public class StyleReplyDTO { //조인 테이블
 	private int styleReplyId;
-	private int styleId;
-	private int userId;
+	private String img;
+	private String username;
 	private String contents;
-	private int reportCount;
 	@JsonFormat(pattern = "M월d일H시", timezone = "Asia/Seoul")
 	private Date regDate;
 }
