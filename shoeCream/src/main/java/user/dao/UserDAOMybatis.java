@@ -82,6 +82,11 @@ public class UserDAOMybatis implements UserDAO {
 	}
 
 	@Override
+	public void updateUsername(UserDTO userDTO) {
+		sqlSession.update("userSQL.updateUsername", userDTO);
+	}
+	
+	@Override
 	public void updateEmail(UserDTO userDTO) {
 		sqlSession.update("userSQL.updateEmail", userDTO);
 	}
@@ -95,4 +100,5 @@ public class UserDAOMybatis implements UserDAO {
 	public void updatePhoneNum(UserDTO userDTO) {
 		sqlSession.update("userSQL.updatePhoneNum", userDTO);
 	}
+
 }
