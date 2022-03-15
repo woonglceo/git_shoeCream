@@ -115,53 +115,143 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	//구매내역 불러오기
-	@Override
-	public List<Map<String, Object>> getBuyList(String pg, int userId) {
-		Map<String, Integer> map = this.getPageRange(pg);
-		map.put("userId", userId);
-		List<PurchaseDTO> list = mypageDAO.getBuyList(map);
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		@Override
+		public List<Map<String, Object>> getBuyList(String pg, int userId) {
+			Map<String, Integer> map = this.getPageRange(pg);
+			map.put("userId", userId);
+			List<PurchaseDTO> list = mypageDAO.getBuyList(map);
+			Calendar cal = Calendar.getInstance();
+			Calendar cal2 = Calendar.getInstance();
+			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+			
+			if(list == null) return null;
+			else {
+				//페이지에 뿌릴 데이터 담기
+				List<Map<String, Object>> buyList = new ArrayList<Map<String,Object>>();
+				Map<String, Object> buyProduct;
+					for(PurchaseDTO purchase : list) {
+						buyProduct = new HashMap<String, Object>();
+						int productId = purchase.getProductId();
+						productDTO = productDAO.getProductById(productId);
+						// 상품정보
+						buyProduct.put("img", productDTO.getImg1());
+						buyProduct.put("productName", productDTO.getProductName());
+						// 구매가
+						salesDTO = mypageDAO.getPrice(productId);
+						buyProduct.put("productPrice", salesDTO.getPrice());
+						buyProduct.put("productSize", purchase.getProductSize());
+						cal.setTime(purchase.getRegDate());
+						cal.add(Calendar.MONTH, 1);
+							if(cal.compareTo(cal2) == -1) {
+								buyProduct.put("dueDate", "기한만료");
+							}else {
+								buyProduct.put("dueDate", df.format(cal.getTime()));
+							}
+						buyList.add(buyProduct);
+					}
+				return buyList;
+			}
+		}
 		
-		if(list == null) return null;
-		else {
-			//페이지에 뿌릴 데이터 담기
+		@Override
+		public int getTotalBuying(int userId) {
+			return mypageDAO.getTotalBuying(userId);
+		}
+		
+		@Override
+		public List<Map<String, Object>> getIngBuyingList(String pg, int userId) {
+			// 사진, 상품명, 사이즈, 상태
+			Map<String, Integer> map = this.getPageRange(pg);
+			map.put("userId", userId);
+			List<PurchaseDTO> list = mypageDAO.getIngBuyingList(map);
+			
+			if(list == null) return null;
+			else {
+				//페이지에 뿌릴 데이터 담기
+				List<Map<String, Object>> buyList = new ArrayList<Map<String,Object>>();
+				Map<String, Object> buyProduct;
+					for(PurchaseDTO purchase : list) {
+							if(purchase.getStatus() == 0) {
+								buyProduct = new HashMap<String, Object>();
+								int productId = purchase.getProductId();
+								productDTO = productDAO.getProductById(productId);
+								// 상품정보
+								buyProduct.put("img", productDTO.getImg1());
+								buyProduct.put("productName", productDTO.getProductName());
+								buyProduct.put("productSize", purchase.getProductSize());
+								// 구매가
+								salesDTO = mypageDAO.getPrice(productId);
+								buyProduct.put("productPrice", salesDTO.getPrice());
+								
+								buyList.add(buyProduct);
+								}
+						}			
+				return buyList;
+			}
+		}
+		
+		// 구매내역 페이징
+		@Override
+		public MypagePaging ingPaging(String pg, int userId) {
+					
+			int totalA = this.getTotalIngBuying(userId);
+			mypagePaging.setCurrentPage(Integer.parseInt(pg)); //현재 페이지
+			mypagePaging.setPageBlock(5);
+			mypagePaging.setPageSize(5);
+			mypagePaging.setTotalA(totalA);
+			mypagePaging.makePagingHTML();
+					
+			return mypagePaging;
+		}
+				
+		@Override
+		public int getTotalIngBuying(int userId) {
+			return mypageDAO.getTotalIngBuying(userId);
+		}
+			
+		@Override
+		public List<Map<String, Object>>  getEndBuyingList(String pg, int userId) {
+			Map<String, Integer> map = this.getPageRange(pg);
+			map.put("userId", userId);
+			
+			List<PurchaseDTO> list = mypageDAO.getEndBuyingList(map);
+
 			List<Map<String, Object>> buyList = new ArrayList<Map<String,Object>>();
 			Map<String, Object> buyProduct;
 				for(PurchaseDTO purchase : list) {
-					buyProduct = new HashMap<String, Object>();
-					int productId = purchase.getProductId();
-					productDTO = productDAO.getProductById(productId);
-					// 상품정보
-					buyProduct.put("img", productDTO.getImg1());
-					buyProduct.put("productName", productDTO.getProductName());
-					// 구매가
-					salesDTO = mypageDAO.getPrice(productId);
-					buyProduct.put("price", salesDTO.getPrice());
-					cal.setTime(purchase.getRegDate());
-					cal.add(Calendar.MONTH, 1);
-					buyProduct.put("dueDate", df.format(cal.getTime()));
-					buyList.add(buyProduct);
-				}
+						if(purchase.getStatus() == 1) {
+							buyProduct = new HashMap<String, Object>();
+							// 상품정보
+							buyProduct.put("img", purchase.getImg1());
+							buyProduct.put("productName", purchase.getProductName());
+							buyProduct.put("productSize", purchase.getProductSize());						
+							buyProduct.put("productPrice", purchase.getProductPrice());
+							buyProduct.put("tradeDate", purchase.getTradeDate());
+							
+							buyList.add(buyProduct);
+						}
+					}			
 			return buyList;
 		}
-	}
-	
-	@Override
-	public int getTotalBuying(int userId) {
-		return mypageDAO.getTotalBuying(userId);
-	}
-	
-	@Override
-	public int getIngBuying(int userId) {
-		return mypageDAO.getIngBuying(userId);
-	}
-	
-	@Override
-	public int getEndBuying(int userId) {
-		return mypageDAO.getEndBuying(userId);
-	}
-	
+		
+		@Override
+		public MypagePaging endPaging(String pg, int userId) {
+			int totalA = this.getEndBuying(userId);
+			
+			mypagePaging.setCurrentPage(Integer.parseInt(pg)); //현재 페이지
+			mypagePaging.setPageBlock(5);
+			mypagePaging.setPageSize(5);
+			mypagePaging.setTotalA(totalA);
+			mypagePaging.makePagingHTML();
+					
+			return mypagePaging;
+		}
+		
+		@Override
+		public int getEndBuying(int userId) {
+			return mypageDAO.getEndBuying(userId);
+		}	
+
 	/* 마이페이지 내 정보 */
 	// 회원 정보 불러오기
 	@Override

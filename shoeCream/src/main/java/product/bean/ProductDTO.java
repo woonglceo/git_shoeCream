@@ -25,4 +25,5 @@ public class ProductDTO {
 	private Date releaseDate;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date regDate;
+    private int todaysPrice;
 }

@@ -21,10 +21,10 @@
 	 					<strong>쇼핑 정보</strong>
 	 				</li>
 	 				<li id="buying" class="nav-item">
-	 					<a href="#" class="nav-link">구매 내역</a>
+	 					<a href="/shoeCream/my/buying" class="nav-link">구매 내역</a>
 	 				</li>
 	 				<li id="selling" class="nav-item">
-	 					<a href="#" class="nav-link">판매 내역</a>
+	 					<a href="/shoeCream/my/selling" class="nav-link">판매 내역</a>
 	 				</li>
 	 				<li id="wish" class="nav-item">
 	 					<a href="#" class="nav-link">관심 상품</a>

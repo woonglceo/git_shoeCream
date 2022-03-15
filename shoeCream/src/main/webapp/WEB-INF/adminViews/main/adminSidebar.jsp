@@ -62,7 +62,7 @@
     </a>
   </li>
   <li>
-    <a href="/shoeCream/adminViews/question/questionList">
+    <a href="/shoeCream/adminViews/question/qnaList">
       <i class="nc-icon nc-send"></i>
       <p>문의 관리</p>
     </a>

@@ -45,7 +45,7 @@
     
     <!-- 상품등록 -->
    <insert id="getProductWrite" parameterType="java.util.Map">
-      insert into product_table values (seq_product_table.nextval, #{productName}, #{modelId}, #{releasePrice}, #{img1}, #{img2}, #{img3}, #{brandName}, #{productSize}, #{productCollection}, #{releaseDate}, sysdate)
+      insert into product_table values (seq_product_table.nextval, #{productName}, #{productNameKor}, #{modelId}, #{releasePrice}, #{img1}, #{img2}, #{img3}, #{brandName}, #{productCollection}, #{releaseDate}, sysdate)
    </insert>
     
     
@@ -85,6 +85,10 @@
     
     <select id="getProductById" parameterType="int" resultType="product">
     	select * from product_table where productId=#{productId}
+    </select>
+    
+    <select resultType="product" parameterType="java.util.Map" id="getProductListForIndex">
+    	SELECT a.* FROM(SELECT p.*,a.price AS todaysPrice,ROWNUM AS rnFROM product_table p,(SELECT productId, price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD'))aWHERE p.productId = a.productId )aWHERE rn BETWEEN #{startNum} AND #{endNum}
     </select>
  </mapper>
 

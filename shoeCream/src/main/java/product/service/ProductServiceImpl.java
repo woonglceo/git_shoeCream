@@ -1,6 +1,5 @@
 package product.service;
 
-import java.util.Date;
 import java.util.List;
 
 import java.util.Map;
@@ -20,8 +19,6 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
 	@Autowired
 	private ProductPaging productPaging;
-	@Autowired
-	private ProductDTO productDTO;
 
 	// 상품목록
 	@Override
@@ -106,6 +103,16 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.productUpdate(map);
 	}
 	
-
+	@Override
+	public List<ProductDTO> getProductListForIndex(String pg) {
+		int endNum = Integer.parseInt(pg) * 4;
+		int startNum = endNum - 3;
+		
+		Map<String, Integer> map = new HashedMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
+		return productDAO.getProductListForIndex(map);
+	}
 		
 }
