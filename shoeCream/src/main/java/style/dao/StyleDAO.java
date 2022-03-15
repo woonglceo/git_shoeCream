@@ -5,31 +5,31 @@ import java.util.Map;
 
 import product.bean.ProductDTO;
 import style.bean.StyleBoardDTO;
+import style.bean.StyleCardDTO;
+import style.bean.StyleLikeDTO;
 import style.bean.StyleReplyDTO;
 import user.bean.UserDTO;
 
 public interface StyleDAO {
 
-	public List<StyleBoardDTO> getListOrderByPopularity();
+	public List<StyleCardDTO> getListOrderByPopularity();
 
 	public int totalComment(int styleId);
+	
+	public int totalLike(int styleId);
 
 	public UserDTO getUserByUserId(int userId);
-
-	public ProductDTO getProductByProductId(int productId);
+	
+	public UserDTO getUserByUsername(String username);
 
 	public Integer getLowestPriceByProductId(int productId);
 
-	public List<StyleBoardDTO> getListOrderByRecentDate();
+	public List<StyleCardDTO> getListOrderByRecentDate();
 
-	public int totalMyStyle(int userId);
-
-	public List<StyleBoardDTO> getMyList(int userId);
+	public int totalStyleCount(int userId);
 
 	public List<StyleReplyDTO> getReplyList(int styleId);
 
-	public int getUserIdByUsername(String username);
-	
 	// 관리자
 	public List<StyleBoardDTO> getStyleList(Map<String, Object> map);
 
@@ -40,5 +40,15 @@ public interface StyleDAO {
 	public int getTotalSearchStyle(Map<String, Object> map);
 
 	public void deleteStyle(String styleId);
+
+	public StyleLikeDTO getLikeOnOff(Map<String, Integer> map);
+
+	public List<StyleCardDTO> getUserFeed(String username);
+
+	public void plusLike(Map<String, Integer> map);
+
+	public void minusLike(Map<String, Integer> map);
+
+	public StyleCardDTO getOneStyleCardDTO(int styleId);
 
 }

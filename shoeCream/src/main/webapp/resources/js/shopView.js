@@ -62,21 +62,78 @@ showBox.forEach((item) => {
   });
 });
 
-// 모달 오픈(판매)
-$(".shopDetail-cell-link").click(function () {
-  $(".modal").css("display", "flex");
-  $("body").css("overflow", "hidden"); //모달창 켜졌을때 스크롤 금지
-
-  $(".modal-title-text").text("판매하기");
-}); //end click
-
 // 모달 오픈(구매)
-$(".shopDetail-buy-link").click(function () {
-  $(".modal").css("display", "flex");
-  $("body").css("overflow", "hidden"); //모달창 켜졌을때 스크롤 금지
+$('.shopDetail-buy-link').click(function(){	
+	$('.modal-title-text').empty();
+	$('.modal-content').empty();
+	$('.modal-footer').empty();
+	$('#modal-content-warning-div').empty();
+	
+	$('.modal').css('display', 'flex');
+	$('body').css('overflow', 'hidden'); //모달창 켜졌을때 스크롤 금지
+	
+	$('.modal-title-text').text('구매하기');	// 슈크림과 거래시: 1000원, 회원과 거래시: 500원.
+	$('.modal-content').append($('<div/>', {text:'오늘의 시세는: '+$('.produxt-price-detail').text()+' 원', class:'modal-content-price-div'}));
+	//$('.modal-content').append($('<div/>', {text:'판매가를 입력하세요:'}));
+	$('.modal-content').append(
+		$('<div/>', {class:'modal-content-input-div'}).append(
+			$('<select>', {class:'modal-content-input-select'}).append(
+				$('<option/>', {value:'-1', text:'사이즈 선택'})
+			  , $('<option/>', {value:'225', text:'225'})	
+			  , $('<option/>', {value:'230', text:'230'})	
+			  , $('<option/>', {value:'235', text:'235'})	
+			  , $('<option/>', {value:'240', text:'240'})	
+			  , $('<option/>', {value:'245', text:'245'})	
+			  , $('<option/>', {value:'250', text:'250'})	
+			  , $('<option/>', {value:'255', text:'255'})	
+			  , $('<option/>', {value:'260', text:'260'})	
+			  , $('<option/>', {value:'265', text:'265'})	
+			  , $('<option/>', {value:'270', text:'270'})
+			  , $('<option/>', {value:'275', text:'275'})	
+			  , $('<option/>', {value:'280', text:'280'})	
+			  , $('<option/>', {value:'285', text:'285'})	
+			  , $('<option/>', {value:'290', text:'290'})
+	)));
+	$('.modal-content').append($('<div/>', {id:'modal-content-warning-div', text:'잘못된 값 입니다.'}));
+	$('.modal-footer').append($('<input>', {type:'button', value:'상품 구매', class:'modal-content-btn purchase', id:'purchaseBtn'}));
+});//end click
 
-  $(".modal-title-text").text("구매하기");
-}); //end click
+// 모달 오픈(판매)
+$('.shopDetail-cell-link').click(function(){
+	$('.modal-title-text').empty();
+	$('.modal-content').empty();
+	$('.modal-footer').empty();
+	$('#modal-content-warning-div').empty();
+	
+	$('.modal').css('display', 'flex');
+	$('body').css('overflow', 'hidden'); //모달창 켜졌을때 스크롤 금지
+	
+	$('.modal-title-text').text('판매하기');
+	$('.modal-content').append($('<div/>', {text:'오늘의 시세는: '+$('.produxt-price-detail').text()+' 원', class:'modal-content-price-div'}));
+	//$('.modal-content').append($('<div/>', {text:'판매가를 입력하세요:'}));
+	$('.modal-content').append(
+		$('<div/>', {class:'modal-content-input-div'}).append(
+			$('<input>', {type:'text', placeholder:'판매가 입력', class:'modal-content-input-price'})
+		  , $('<select>', {class:'modal-content-input-select'}).append(
+				$('<option/>', {value:'-1', text:'사이즈 선택'})
+			  , $('<option/>', {value:'225', text:'225'})	
+			  , $('<option/>', {value:'230', text:'230'})	
+			  , $('<option/>', {value:'235', text:'235'})	
+			  , $('<option/>', {value:'240', text:'240'})	
+			  , $('<option/>', {value:'245', text:'245'})	
+			  , $('<option/>', {value:'250', text:'250'})	
+			  , $('<option/>', {value:'255', text:'255'})	
+			  , $('<option/>', {value:'260', text:'260'})	
+			  , $('<option/>', {value:'265', text:'265'})	
+			  , $('<option/>', {value:'270', text:'270'})
+			  , $('<option/>', {value:'275', text:'275'})	
+			  , $('<option/>', {value:'280', text:'280'})	
+			  , $('<option/>', {value:'285', text:'285'})	
+			  , $('<option/>', {value:'290', text:'290'})
+	)));
+	$('.modal-content').append($('<div/>', {id:'modal-content-warning-div', text:'잘못된 값 입니다.'}));
+	$('.modal-footer').append($('<input>', {type:'button', value:'상품 판매', class:'modal-content-btn sell', id:'sellBtn'}));
+});//end click
 
 // 모달 클로즈 (x버튼 클릭)
 $(".close-area").click(function () {
@@ -84,6 +141,21 @@ $(".close-area").click(function () {
   $("body").css("overflow", "auto");
 });
 
+$(document).on("click", "#purchaseBtn", function(){
+	//alert('구매 버튼 클릭 ' + $('.modal-content-input-select').val());
+	alert( $('.modal-content-input-select').val());
+	if($('.modal-content-input-select').val() == -1){
+		$('#modal-content-warning-div').text('잘못된 값 입니다.');
+	}
+});
+
+$(document).on("click", "#sellBtn", function(){
+	//alert('판매 버튼 클릭 ' + $('.modal-content-input-price').val() + $('.modal-content-input-select').val());
+	alert( $('.modal-content-input-select').val());
+	if($('.modal-content-input-select').val() == -1){
+		$('#modal-content-warning-div').text('잘못된 값 입니다.');
+	}
+});
 /*	
 // 모달 클로즈 (어두운 배경 클릭) 
 $('.modal').click(function(){

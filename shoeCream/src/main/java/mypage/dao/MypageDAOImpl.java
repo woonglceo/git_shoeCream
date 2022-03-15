@@ -43,15 +43,25 @@ public class MypageDAOImpl implements MypageDAO {
 	public SalesDTO getPrice(int productId) {
 		return sqlSession.selectOne("mypageSQL.getPrice", productId);
 	}
-	
+		
 	@Override
 	public int getTotalBuying(int userId) {
 		return sqlSession.selectOne("mypageSQL.getTotalBuying", userId);
 	}
 	
 	@Override
-	public int getIngBuying(int userId) {
-		return sqlSession.selectOne("mypageSQL.getIngBuying", userId);
+	public List<PurchaseDTO> getIngBuyingList(Map<String, Integer> map) {		
+		return sqlSession.selectList("mypageSQL.getIngBuyingList", map);
+	}
+	
+	@Override
+	public int getTotalIngBuying(int userId) {
+		return sqlSession.selectOne("mypageSQL.getTotalIngBuying", userId);
+	}
+	
+	@Override
+	public List<PurchaseDTO> getEndBuyingList(Map<String, Integer> map) {		
+		return sqlSession.selectList("mypageSQL.getEndBuyingList", map);
 	}
 	
 	@Override

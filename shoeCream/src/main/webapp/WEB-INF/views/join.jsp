@@ -39,14 +39,6 @@
 	</div>
 	
 	<div class="input_box">
-		<div class="nickname_box">
-			<h3 class="input_title">닉네임*</h3>
-			<input type="text" class="input_txt" id="input_nickname" placeholder="나만의 프로필 이름" autocomplete="off">
-			<p class="input_err" id="input_err_nickname"></p>
-		</div>
-	</div>
-	
-	<div class="input_box">
 		<div class="email_box">
 			<h3 class="input_title">이메일 주소*</h3>
 			<input type="text" class="input_txt" id="input_email" placeholder="예) shoe@cream.co.kr" autocomplete="off">
@@ -133,7 +125,6 @@
 	
 	<input type="button" class="join_btn" value="가입하기">
 	<input type="hidden" id="chkUsername">
-	<input type="hidden" id="chkNickname">
 	<input type="hidden" id="chkEmail">
 	<input type="hidden" id="authEmail">
 </div>
@@ -255,11 +246,6 @@ $(function(){
 		isFullName();
 	});
 	
-	$('#input_nickname').on('input', function(){
-		isNickname();
-		chkNickname();
-	});
-	
 	$('#input_email').on('input change keyup keydown', function(){
 		isEmail();
 		chkEmail();
@@ -331,8 +317,6 @@ $(function(){
 		chkUsername();
 		isPwd();
 		isFullName();
-		isNickname();
-		chkNickname();
 		isEmail();
 		chkEmail();
 		isAuth();
@@ -343,16 +327,13 @@ $(function(){
 		const validUsername = $('#chkUsername').attr('validation');
 		const pwd = $('#input_pwd').attr('validation');
 		const fullName = $('#input_fullName').attr('validation');
-		const nickname = $('#input_nickname').attr('validation');
-		const validNickname = $('#chkNickname').attr('validation');
 		const email = $('#input_email').attr('validation');
 		const validEmail = $('#chkEmail').attr('validation');
 		const authEmail = $('#input_authEmail').attr('validation');
 		const phoneNum = $('#input_phoneNum').attr('validation');
 		const checkbox = $('#group_1').attr('validation');
 		
-		if(username=='true'&&validUsername=='true'&&pwd=='true'&&fullName=='true'&&nickname=='true'&&
-				validNickname=='true'&&email=='true'&&validEmail=='true'&&authEmail=='true'&&phoneNum=='true'&&checkbox=='true'){
+		if(username=='true'&&validUsername=='true'&&pwd=='true'&&fullName=='true'&&email=='true'&&validEmail=='true'&&authEmail=='true'&&phoneNum=='true'&&checkbox=='true'){
 			<!-- 휴대폰 본인인증 -->
 	    	$.ajax({
 	        	type:'post',
@@ -377,7 +358,6 @@ $(function(){
     				            	'username':$('#input_username').val(),
     				                'pwd':$('#input_pwd').val(),
     				                'fullName':$('#input_fullName').val(),
-    				                'nickname':$('#input_nickname').val(),
     				                'email':$('#input_email').val(),
     				                'phoneNum':$('#input_phoneNum').val()
     							},
@@ -509,55 +489,6 @@ $(function(){
 			$('#input_err_fullName').text('');
 	    	$('.fullName_box').css('color', 'black');
 	    	$('#input_fullName').attr('validation', 'true');
-		}
-	}
-	
-	<!-- 닉네임 유효성 검사 -->
-	function isNickname(){
-		const len = $('#input_nickname').val().length;
-		
-		if($('#input_nickname').val()==''){
-			$('#input_err_nickname').text('필수 정보입니다.');
-			$('#input_nickname').attr('validation', 'false');
-			return;
-		}
-		
-		if(len<2){
-			$('#input_err_nickname').text('올바른 닉네임을 입력해주세요. (2-50자)');
-			$('.nickname_box').css('color', '#d5624f');
-			$('#input_nickname').attr('validation', 'false');
-		}else{
-			$('#input_err_nickname').text('');
-	    	$('.nickname_box').css('color', 'black');
-	    	$('#input_nickname').attr('validation', 'true');
-		}
-	}
-	
-	<!-- 닉네임 중복체크 -->
-	function chkNickname(){
-		const nickname = $('#input_nickname').val();
-		
-		if($('#input_nickname').attr('validation')=='true'){
-			$.ajax({
-				type:'post',
-				url:'/shoeCream/user/chkNickname',
-				data:'nickname='+nickname,
-				dataType:'text',
-				success:function(data){
-					if(data=='exist'){
-						$('#input_err_nickname').text('이미 사용 중인 닉네임입니다.');
-				    	$('.nickname_box').css('color', '#d5624f');
-				    	$('#chkNickname').attr('validation', 'false');
-					}else if(data=='not_exist'){
-						$('#input_err_nickname').text('');
-						$('.nickname_box').css('color', 'black');
-				    	$('#chkNickname').attr('validation', 'true');
-					}
-				},
-				error:function(err){
-					alert("Error: 닉네임 중복체크");
-				}
-			}); // end ajax
 		}
 	}
 	

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import product.bean.ProductDTO;
 import style.bean.StyleBoardDTO;
+import style.bean.StyleCardDTO;
+import style.bean.StyleLikeDTO;
 import style.bean.StyleReplyDTO;
 import user.bean.UserDTO;
 
@@ -18,18 +20,23 @@ public class StyleDAOImpl implements StyleDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<StyleBoardDTO> getListOrderByPopularity() {
+	public List<StyleCardDTO> getListOrderByPopularity() {
 		return sqlSession.selectList("styleSQL.getListOrderByPopularity");
 	}
 	
 	@Override
-	public List<StyleBoardDTO> getListOrderByRecentDate() {
+	public List<StyleCardDTO> getListOrderByRecentDate() {
 		return sqlSession.selectList("styleSQL.getListOrderByRecentDate");
 	}
 	
 	@Override
-	public List<StyleBoardDTO> getMyList(int userId) {
-		return sqlSession.selectList("styleSQL.getMyList", userId);
+	public List<StyleCardDTO> getUserFeed(String username) {
+		return sqlSession.selectList("styleSQL.getUserFeed", username);
+	}
+	
+	@Override
+	public StyleCardDTO getOneStyleCardDTO(int styleId) {
+		return sqlSession.selectOne("styleSQL.getOneStyleCardDTO", styleId);
 	}
 	
 	@Override
@@ -38,8 +45,30 @@ public class StyleDAOImpl implements StyleDAO {
 	}
 	
 	@Override
-	public int totalMyStyle(int userId) {
-		return sqlSession.selectOne("styleSQL.totalMyStyle", userId);
+	public int totalLike(int styleId) {
+		return sqlSession.selectOne("styleSQL.totalLike", styleId);
+	}
+	
+	@Override
+	public StyleLikeDTO getLikeOnOff(Map<String, Integer> map) {
+		return sqlSession.selectOne("styleSQL.getLikeOnOff", map);
+	}
+	
+	@Override
+	public void plusLike(Map<String, Integer> map) {
+		sqlSession.insert("styleSQL.plusLike1", map);
+		sqlSession.update("styleSQL.plusLike2", map.get("styleId"));
+	}
+	
+	@Override
+	public void minusLike(Map<String, Integer> map) {
+		sqlSession.delete("styleSQL.minusLike1", map);
+		sqlSession.update("styleSQL.minusLike2", map.get("styleId"));
+	}
+	
+	@Override
+	public int totalStyleCount(int userId) {
+		return sqlSession.selectOne("styleSQL.totalStyleCount", userId);
 	}
 	
 	@Override
@@ -48,13 +77,8 @@ public class StyleDAOImpl implements StyleDAO {
 	}
 	
 	@Override
-	public int getUserIdByUsername(String username) {
-		return sqlSession.selectOne("styleSQL.getUserIdByUsername", username);
-	}
-	
-	@Override
-	public ProductDTO getProductByProductId(int productId) {
-		return sqlSession.selectOne("styleSQL.getProductByProductId", productId);
+	public UserDTO getUserByUsername(String username) {
+		return sqlSession.selectOne("styleSQL.getUserByUsername", username);
 	}
 	
 	@Override
@@ -66,7 +90,10 @@ public class StyleDAOImpl implements StyleDAO {
 	public List<StyleReplyDTO> getReplyList(int styleId) {
 		return sqlSession.selectList("styleSQL.getReplyList", styleId);
 	}
+	
 
+	
+	
 	// 관리자
 	@Override
 	public List<StyleBoardDTO> getStyleList(Map<String, Object> map) {

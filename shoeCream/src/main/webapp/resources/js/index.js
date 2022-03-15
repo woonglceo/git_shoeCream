@@ -2,6 +2,24 @@ console.log("10");
 
 const productWrap = document.querySelector(".product_wrap");
 const addBtn = document.querySelector(".add_btn");
+	
+/*
+	//getProductList
+	$.ajax({
+		type: 'POST',
+		url: '/shoeCream/get/product/getProductListForIndex',
+		data: 'pg='+1,	
+		//dataType: 'JSON',
+		success: function(data){
+			console.log(data);
+			
+		},
+		error: function(err){
+			alert('상품 에러났습니다');
+			console.log(err);
+		}
+	});//end ajax
+	*/
 
 //스타일
 

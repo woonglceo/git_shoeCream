@@ -8,8 +8,10 @@
 <body>
 <div class="myAccount">
 	<div class="content_title">
-		<h3 id="title_name">정산 계좌 변경</h3>
+		<h3 id="title_name">정산 계좌 등록</h3>
 	</div>
+	
+	<c:if test="${accountDTO!=''}">
 	<div class="registered_account_box">
 		<h4 class="box_title">등록된 계좌 정보</h4>
 		<p class="box_account_info">
@@ -18,11 +20,13 @@
 			<span class="name">${accountDTO.accountHolder}</span>
 		</p>
 	</div>
+	</c:if>
+	
 	<div class="account_registeration">
 		<div class="input_companies input_box">
 			<h4 class="input_title">은행명</h4>
 			<input type="text" class="input_txt" id="input_bank" placeholder="선택하세요" readonly="readonly" autocomplete="off">
-			<button type="button" class="btn dropdown_btn"><i class="fa-solid fa-circle-chevron-down"></i></button>
+			<button type="button" class="dropdown_btn"><i class="fa-solid fa-circle-chevron-down"></i></button>
 			<div class="layer_dropdown layer">
 				<div class="layer_container">
 					<div class="layer_content">
@@ -81,7 +85,7 @@
 		</div>
 	</div>
 	<div class="registeration_btn_box">
-		<a href=javascript:; class="btn save_btn"> 변경하기 </a>
+		<a href=javascript:; class="btn save_btn"> 저장하기 </a>
 	</div>
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -89,7 +93,10 @@
 $(function(){
 	<!-- 등록된 계좌 확인 -->
 	if('${accountDTO}'!=''){
-		$('.registered_account_box').show();
+		$('.save_btn').attr('class','btn modify_btn');
+		$('.modify_btn').text(' 변경하기 ');
+		$('#title_name').text('정산 계좌 변경');
+		
 		$('.account').text('${accountDTO.bank}'+maskingAccountNum('${accountDTO.accountNum}'));
 		$('.name').text(maskingAccountHolder('${accountDTO.accountHolder}'));
 	}
@@ -118,13 +125,31 @@ $(function(){
 		setBtn();
 	});
 	
+	<!-- 정산 계좌 등록 -->
 	$('.save_btn').click(function(){
-		if($(this).hasClass('save_btn_able')){
-			/* $('.account').text($('#input_bank').val()+$('#input_accountNum').val().replace(/(?<=.{4})./gi, '*'));
-			$('.name').text($('#input_accountHolder').val().replace(/(?<=.{1})./gi, '*'));
-			
-			$('.registered_account_box').show();
-			$('.input_txt').val(''); */
+		if($(this).hasClass('btn_able')){
+			$.ajax({
+				type:'post',
+				url:'/shoeCream/my/registerAccount',
+				data:{
+					'bank':$('#input_bank').val(),
+					'accountNum':$('#input_accountNum').val(),
+					'accountHolder':$('#input_accountHolder').val()
+				},
+				success:function(){
+					alert('성공');
+					location.reload();
+				},
+				error:function(){
+					alert('Error: 계좌 변경');
+				}
+			});
+		}
+	})
+	
+	<!-- 정산 계좌 변경 -->
+	$('.modify_btn').click(function(){
+		if($(this).hasClass('btn_able')){
 			$.ajax({
 				type:'post',
 				url:'/shoeCream/my/updateAccount',
@@ -135,6 +160,7 @@ $(function(){
 				},
 				success:function(){
 					alert('성공');
+					location.reload();
 				},
 				error:function(){
 					alert('Error: 계좌 변경');
@@ -159,9 +185,9 @@ $(function(){
 	<!-- 버튼 활성화 -->
 	function setBtn(){
 		if($('#input_bank').attr('validation')=='true'&&$('#input_accountNum').attr('validation')=='true'&&$('#input_accountHolder').attr('validation')=='true'){
-			$('.save_btn').addClass('save_btn_able');
+			$('.btn').addClass('btn_able');
 		}else{
-			$('.save_btn').removeClass('save_btn_able');
+			$('.btn').removeClass('btn_able');
 		}
 	}
 	
@@ -216,6 +242,7 @@ $(function(){
 	function maskingAccountHolder(accountHolder){
 		return accountHolder.replace(/(?<=.{1})./gi, '*');
 	}
+	
 });
 
 </script>

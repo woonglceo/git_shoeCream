@@ -27,6 +27,7 @@ $(function() {
 		    dataType: 'JSON',
 			success: function (data) {
 					$('#productName').val(data.productDTO.productName);
+					$('#productNameKor').val(data.productDTO.productNameKor);
 					$('#modelId').val(data.productDTO.modelId);
 					$('#brandName').val(data.productDTO.brandName).prop("selected", true);
 					$('#productCollection').val(data.productDTO.productCollection);
@@ -135,21 +136,26 @@ function delImg(_this){
 $('#writeBtn').click(function() {
 
 	$('#productNameDiv').empty();
+	$('#productNameKorDiv').empty();
+	$('#modelIdDiv').empty();
 	$('#brandDiv').empty();
 	$('#realesePriceDiv').empty();
 	$('#datepickerDiv').empty();
-	
 
 	if($('#productName').val() == ''){
-		$('#productNameDiv').text('상품명을 입력해주세요.');
-	}else if($('#brandName').val() == '브랜드 선택'){
+		$('#productNameDiv').text('상품명(영어)을 입력해주세요.');
+	}else if($('#productNameKor').val() == ''){
+		$('#productNameKorDiv').text('상품명(한글)을 입력해주세요.');
+	}else if($('#modelId').val() == ''){
+		$('#modelIdDiv').text('모델번호를 입력해주세요.');
+	}else if($('#brandId').val() == '브랜드 선택'){
 		$('#brandDiv').text('브랜드를 선택해주세요.');
-	}else if($('#releasePrice').val() == ''){
+	}else if($('#relesePrice').val() == ''){
 		$('#relesePricePriceDiv').text('발매가를 입력해주세요.');
 	}else if($('#releaseDate').val() == ''){
 		$('#datepickerDiv').text('발매일을 입력해주세요.');
 	}else{		
-		var formData = new FormData($('#productWrite')[0]);	
+		var formData = new FormData($('#productUpdate')[0]);	
 		$.ajax({
 			type: 'post',
 			url: '/shoeCream/adminViews/product/productUpdate',

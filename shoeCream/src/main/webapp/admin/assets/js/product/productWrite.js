@@ -104,25 +104,25 @@ function delImg(ths){
 $('#writeBtn').click(function() {
 	
 	$('#productNameDiv').empty();
+	$('#productNameKorDiv').empty();
 	$('#modelIdDiv').empty();
 	$('#brandDiv').empty();
 	$('#realesePriceDiv').empty();
 	$('#datepickerDiv').empty();
-	$('#sizeDiv').empty();
 	
 
 	if($('#productName').val() == ''){
-		$('#productNameDiv').text('상품명을 입력해주세요.');
+		$('#productNameDiv').text('상품명(영어)을 입력해주세요.');
+	}else if($('#productNameKor').val() == ''){
+		$('#productNameKorDiv').text('상품명(한글)을 입력해주세요.');
 	}else if($('#modelId').val() == ''){
 		$('#modelIdDiv').text('모델번호를 입력해주세요.');
 	}else if($('#brandId').val() == '브랜드 선택'){
 		$('#brandDiv').text('브랜드를 선택해주세요.');
 	}else if($('#relesePrice').val() == ''){
 		$('#relesePricePriceDiv').text('발매가를 입력해주세요.');
-	}else if($('#datepicker').val() == ''){
+	}else if($('#releaseDate').val() == ''){
 		$('#datepickerDiv').text('발매일을 입력해주세요.');
-	}else if($('#productSize').val() == '사이즈 선택'){
-		$('#sizeDiv').text('사이즈를 선택해주세요.');
 	}else{
 	
 		var formData = new FormData($('#productWrite')[0]);

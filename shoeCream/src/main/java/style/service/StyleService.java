@@ -13,8 +13,6 @@ public interface StyleService {
 
 	public List<StyleCardDTO> getRecentList();
 
-	public Map<String, Object> getUserFeed(int userId);
-
 	public Map<String, Object> getUserFeed(String username);
 	
 	public List<StyleBoardDTO> getStyleList(String pg, String option);
@@ -28,6 +26,8 @@ public interface StyleService {
 	public void deleteStyle(String styleId);
 
 	public void deletStyleList(String[] checkBoxArr);
-	
-	
+
+	public String switchLike(int styleId);
+
+	public StyleCardDTO getDeatilsReplyList(int styleId);
 }

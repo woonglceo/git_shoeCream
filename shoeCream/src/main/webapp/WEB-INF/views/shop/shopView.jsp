@@ -14,7 +14,6 @@
 <!--  닫힘버튼(x) 아이콘 이미지 cdn  -->
 <script src="https://kit.fontawesome.com/c32a0a7a55.js" crossorigin="anonymous"></script>
 
-<input type="hidden" id="productIdHidden" value="${param.productId}">
 <div class="shopDetail-box">
 	<!--전체를 감싸는 박스-->
 
@@ -289,23 +288,9 @@
         </div>
         <div class="modal-content">
             <p>모달 안에 넣을 내용</p>
-            <select>
-            	<option>사이즈 선택</option>
-            	<option value="225">225</option>
-            	<option value="230">230</option>
-            	<option value="235">235</option>
-            	<option value="240">240</option>
-            	<option value="245">245</option>
-            	<option value="250">250</option>
-            	<option value="255">255</option>
-            	<option value="260">260</option>
-            	<option value="265">265</option>
-            	<option value="270">270</option>
-            	<option value="275">275</option>
-            	<option value="280">280</option>
-            	<option value="285">285</option>
-            	<option value="290">290</option>
-            </select>
+        </div>
+        <div class="modal-footer">
+            <p>모달 풋터</p>
         </div>
     </div>
 </div><!-- modal-sell -->

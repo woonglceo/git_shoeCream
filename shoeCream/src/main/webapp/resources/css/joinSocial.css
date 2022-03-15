@@ -28,6 +28,7 @@
 }
 
 .input_txt {
+	padding-bottom: 10px;
 	padding: 8px 0;
 	width: 100%;
 	border-top: none;
@@ -41,6 +42,11 @@
 	border-top: none;
 	border-right: none;
 	border-left: none;
+	border-bottom: 2px solid black;
+}
+
+.input_txt:focus::placeholder {
+	color: transparent;
 }
 
 .input_err {
