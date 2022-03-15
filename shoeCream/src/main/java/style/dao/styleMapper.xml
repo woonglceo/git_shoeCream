@@ -4,13 +4,49 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="styleSQL">
 	<!-- StyleBoardDTO List가져오기 (인기도 순) -->
-	<select id="getListOrderByPopularity" resultType="StyleBoardDTO">
-		select * from style_board order by regdate desc
+	<select id="getListOrderByPopularity" resultType="StyleCardDTO">
+		select style_board.*, user_table.username, user_table.img, user_table.introMsg, product_table.productName, product_table.img1 
+		from style_board 
+			left join user_table
+				on style_board.userId = user_table.userid
+			left join product_table
+				on style_board.productId = product_table.productid
+		order by style_board.likeCount desc, style_board.replycount desc, style_board.styleId desc
 	</select>
 	
 	<!-- StyleBoardDTO List가져오기 (최신 순) -->
-	<select id="getListOrderByRecentDate" resultType="StyleBoardDTO">
-		select * from style_board order by regdate desc
+	<select id="getListOrderByRecentDate" resultType="StyleCardDTO">
+		select * 
+		from style_board 
+			left join user_table
+				on style_board.userId = user_table.userid
+			left join product_table
+				on style_board.productId = product_table.productid
+		order by style_board.styleId desc
+	</select>
+	
+	<!-- 유저 피드 StyleBoardDTO List가져오기 (최신 순) -->
+	<select id="getUserFeed" parameterType="String" resultType="StyleCardDTO">
+		select * 
+		from (select * 
+			from style_board 
+				left join user_table
+					on style_board.userId = user_table.userid
+				left join product_table
+					on style_board.productId = product_table.productid
+			order by style_board.styleId desc) total_table
+		where total_table.username = #{username}
+	</select>
+	
+	<!-- 특정게시글 StyleBoardDTO 가져오기 (한 개) -->
+	<select id="getOneStyleCardDTO" parameterType="Integer" resultType="StyleCardDTO">
+		select * 
+		from style_board 
+			left join user_table
+				on style_board.userId = user_table.userid
+			left join product_table
+				on style_board.productId = product_table.productid
+		where style_board.styleId = #{styleId}
 	</select>
 	
 	<!-- StyleBoardDTO List가져오기 (특정 회원) -->
@@ -18,19 +54,50 @@
 		select * from style_board where userId=#{userId} order by regdate desc
 	</select>
 	
-	<!-- 특정 게시물 갯수 -->
-	<select id="totalMyStyle" parameterType="Integer" resultType="Integer">
-		select count(*) from style_board where styleId=#{styleId}
+	<!-- 특정 회원의 게시물 갯수 -->
+	<select id="totalStyleCount" parameterType="Integer" resultType="Integer">
+		select count(*) from style_board where userId=#{userId}
 	</select>
 	
-	<!-- 특정 회원 댓글 갯수 -->
+	<!-- 특정 게시물 공감 갯수 -->
+	<select id="totalLike" parameterType="Integer" resultType="Integer">
+		select count(*) from style_like where "styleId"=#{styleId}
+	</select>
+	
+	<!-- 특정 게시물 공감 여부 -->
+	<select id="getLikeOnOff" parameterType="java.util.Map" resultType="StyleLikeDTO">
+		select * from style_like where "styleId"=#{styleId} and "userId"=#{userId}
+	</select>
+	
+	<!-- 특정 게시물 공감 추가 -->
+	<insert id="plusLike1" parameterType="java.util.Map">
+		insert into style_like("likeId", "userId", "styleId") values(SEQ_STYLE_LIKE.nextval, #{userId}, #{styleId})
+	</insert>
+	<update id="plusLike2" parameterType="Integer">
+		update style_board set likecount = likecount+1 where styleId=#{styleId}
+	</update>
+	
+	<!-- 특정 게시물 공감 취소 -->
+	<delete id="minusLike1" parameterType="java.util.Map">
+		delete from style_like where userId=#{userId} and styleId=#{styleId})
+	</delete>
+	<update id="minusLike2" parameterType="Integer">
+		update style_board set likecount = likecount-1 where styleId=#{styleId}
+	</update>
+	
+	<!-- 특정 게시물 댓글 갯수 -->
 	<select id="totalComment" parameterType="Integer" resultType="Integer">
-		select count(*) from style_reply where userId=#{userId}
+		select count(*) from style_reply where styleId=#{styleId}
 	</select>
 	
 	<!-- 특정 게시물을 작성한 유저 정보 -->
 	<select id="getUserByUserId" parameterType="Integer" resultType="user">
 		select * from user_table where userId=#{userId}
+	</select>
+	
+	<!-- 특정 게시물을 작성한 유저 정보 -->
+	<select id="getUserByUsername" parameterType="String" resultType="user">
+		select * from user_table where username=#{username}
 	</select>
 	
 	<!-- 특정 게시물을 작성한 유저 정보 -->
@@ -50,7 +117,12 @@
 	
 	<!-- 게시물의 댓글 리스트 -->
 	<select id="getReplyList" parameterType="Integer" resultType="StyleReplyDTO">
-		select * from style_reply where styleId=#{styleId}
+		select style_reply.stylereplyid, user_table.img, user_table.username, style_reply.contents, style_reply.regDate
+		from style_reply   
+			left join user_table
+			on style_reply.userId = user_table.userId
+		where style_reply.styleId = #{styleId}
+		order by style_reply.stylereplyid desc
 	</select>
 	
 	<!-- 관리자 페이지 스타일 게시글 리스트 -->
