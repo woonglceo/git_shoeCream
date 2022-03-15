@@ -16,6 +16,19 @@
 			<div class="unit">
 				<h5 class="title">아이디</h5>
 				<p class="desc username">${userDTO.username}</p>
+				<button type="button" class="btn modify_btn"> 변경 </button>
+			</div>
+			<div class="modify">
+				<h5 class="input_title">아이디 변경</h5>
+				<div class="input_box">
+					<h5 class="input_title">새로운 아이디</h5>
+					<input type="text" class="input_txt" id="input_username" autocomplete="off" placeholder="예) 영문, 숫자 5~15자">
+					<p class="input_err">영문 소문자와 숫자를 입력해주세요. (4~16자)</p>
+				</div>
+			</div>
+			<div class="modify_btn_box">
+				<button type="button" class="btn cancel_btn"> 취소 </button>
+				<button type="button" class="btn save_btn" id="save_username"> 저장 </button>
 			</div>
 			
 			<div class="unit">
@@ -113,6 +126,7 @@
 		</div>
 		<a href="/shoeCream/my/myWithdrawal" class="withdrawal_btn"> 회원 탈퇴 </a>
 	</div>
+	<input type="hidden" id="chkUsername">
 	<input type="hidden" id="chkEmail">
 	<input type="hidden" id="authEmail">
 	<input type="hidden" id="authPhoneNum">
@@ -123,9 +137,6 @@
 $(function(){
 	$('.email').text(maskingEmail('${userDTO.email}'));
 	$('.phoneNum').text(maskingPhoneNum('${userDTO.phoneNum}'));
-	
- 	$('.modify').hide();
-	$('.modify_btn_box').hide();
 	
 	$('.modify_btn').click(function(){
 		<!-- 변경은 unit 하나씩만 -->
@@ -146,6 +157,11 @@ $(function(){
 		$(this).parent('div').hide();
 		$(this).parent('div').prevUntil('.unit').hide();
 		$(this).parent('div').siblings('.unit').show();
+	});
+	
+	$('#input_username').on('input', function(){
+		isUsername();
+		chkUsername();
 	});
 	
 	$('#input_email').on('input', function(){
@@ -171,6 +187,29 @@ $(function(){
 		<!-- 숫자만 입력 -->
 		$(this).val($(this).val().replace(/[^0-9]/g,""));
 		isPhoneNum();
+	});
+	
+	<!-- 아이디 변경 -->
+	$('#save_username').click(function(){
+		isUsername();
+		chkUsername();
+		console.log($('#input_username').attr('validation'));
+		console.log($('#chkUsername').attr('validation'))
+		
+		if($('#input_username').attr('validation')=='true'&&$('#chkUsername').attr('validation')=='true'){
+			$.ajax({
+				type:'get',
+				url:'/shoeCream/my/updateUsername',
+				data:'username='+$('#input_username').val(),
+				success:function(){
+					alert('성공');
+					location.reload();
+				},
+				error:function(){
+					alert('Error: 이메일 주소 변경')
+				}
+			}); // end ajax
+		}
 	});
 	
 	<!-- 이메일 주소 인증 -->
@@ -335,6 +374,52 @@ $(function(){
 	    	$(id).parent('div').css('color', 'black');
 	    	$(id).attr('validation', 'true');
 		}	
+	}
+	
+	<!-- 아이디 유효성 검사 -->
+	function isUsername(){
+		const username = $('#input_username').val();
+		const reg = RegExp(/^[a-zA-Z0-9]{4,16}$/g);
+		
+		if($('#input_username').val()==''){
+			$('.input_err').text('영문 소문자와 숫자를 입력해주세요. (4~16자)');
+			setErr(false, '#input_username');
+			return;
+		}
+		
+		if(!reg.test(username)){
+			$('.input_err').text('영문 소문자와 숫자를 입력해주세요. (4~16자)');
+			setErr(false, '#input_username');
+	    }else{
+	    	setErr(true, '#input_username');
+	    }	
+	}
+	
+	<!-- 아이디 중복체크 -->
+	function chkUsername(){
+		const username = $('#input_username').val();
+		
+		if($('#input_username').attr('validation')=='true'){
+			$.ajax({
+				type:'post',
+				url:'/shoeCream/user/chkUsername',
+				data:'username='+username,
+				dataType:'text',
+				success:function(data){
+					if(data=='exist'){
+						$('.input_err').text('이미 사용 중인 아이디입니다.');
+						setErr(false, '#input_username');
+						$('#chkUsername').attr('validation', 'false');
+					}else if(data=='not_exist'){
+						setErr(true, '#input_username');
+						$('#chkUsername').attr('validation', 'true');
+					}
+				},
+				error:function(err){
+					alert("Error: 아이디 중복체크");
+				}
+			}); // end ajax
+		}
 	}
 	
 	<!-- 이메일 주소 유효성 검사 -->

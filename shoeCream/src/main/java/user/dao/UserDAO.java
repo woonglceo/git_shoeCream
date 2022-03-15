@@ -32,12 +32,13 @@ public interface UserDAO {
 	public void joinSocialOk(UserDTO userDTO);
 
 	public void kakaoLoginOk(String email);
+	
+	public void updateUsername(UserDTO userDTO);
 
 	public void updateEmail(UserDTO userDTO);
 
 	public void updateFullName(UserDTO userDTO);
 
 	public void updatePhoneNum(UserDTO userDTO);
-
 	
 }

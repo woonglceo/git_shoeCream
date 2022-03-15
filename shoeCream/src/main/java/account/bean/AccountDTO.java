@@ -9,7 +9,6 @@ import lombok.Data;
 public class AccountDTO {
 	private int accountId;
 	private int userId;
-	private int productId;
 	private String bank;
 	private String accountNum;
 	private String accountHolder;

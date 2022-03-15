@@ -18,7 +18,13 @@ public class AccountDAOMybatis implements AccountDAO {
 	}
 
 	@Override
+	public void registerAccount(AccountDTO accountDTO) {
+		sqlSession.insert("accountSQL.registerAccount", accountDTO);
+	}
+	
+	@Override
 	public void updateAccount(AccountDTO accountDTO) {
 		sqlSession.update("accountSQL.updateAccount", accountDTO);
 	}
+
 }
