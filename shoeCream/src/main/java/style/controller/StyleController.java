@@ -58,15 +58,23 @@ public class StyleController {
 		model.addAttribute("display", "/WEB-INF/views/style/styleView.jsp");
 		return "/index";
 	}
+
+	// Data) 선택 글, 댓글 리스트
+	@RequestMapping(value="/getDeatilsReplyList")
+	@ResponseBody
+	public StyleCardDTO getDeatilsReplyList(@RequestParam int styleId) {
+		return styleService.getDeatilsReplyList(styleId);
+	}
 	
-	// 페이지) 개인피드
+	
+	// 페이지) 회원 피드
 	@RequestMapping(value="/user")
 	public String userFeed(Model model) {
 		model.addAttribute("display", "/WEB-INF/views/style/styleMyList.jsp");
 		return "/index";
 	}
 	
-	// Data) 개인피드
+	// Data) 회원 피드
 	@RequestMapping(value="/getUserFeed")
 	@ResponseBody
 	public Map<String, Object> getUserFeed(@RequestParam(required=false) String username) { 
@@ -76,8 +84,11 @@ public class StyleController {
 		return styleService.getUserFeed(username);
 	}
 	
-	//좋아요(공감) 클릭 반영/취소
-	//@RequestMapping(value="/clickLike")
-	
+	//좋아요(공감) 클릭 반영/취소 
+	@ResponseBody
+	@RequestMapping(value="/switchLike")
+	public String switchLike(int StyleId) {
+		return styleService.switchLike(StyleId);
+	}
 	
 }

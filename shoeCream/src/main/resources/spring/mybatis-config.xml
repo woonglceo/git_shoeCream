@@ -24,8 +24,12 @@
 		<typeAlias type="serviceCenter.bean.QnaTableDTO" alias="QnaTableDTO"/>
 		
 		<typeAlias type="style.bean.StyleBoardDTO" alias="StyleBoardDTO"/>
+		<typeAlias type="style.bean.StyleCardDTO" alias="StyleCardDTO"/>
 		<typeAlias type="style.bean.StyleReplyDTO" alias="StyleReplyDTO"/>
+		<typeAlias type="style.bean.StyleLikeDTO" alias="StyleLikeDTO"/>
+		
 		<typeAlias type="account.bean.AccountDTO" alias="account"/>
+		<typeAlias type="address.bean.AddressDTO" alias="address"/>
 		<typeAlias type="user.bean.UserDTO" alias="user"/>
 		<typeAlias type="shop.bean.ShopDTO" alias="shop"/>
 		

@@ -83,6 +83,11 @@ public class UserDAOMybatis implements UserDAO {
 	}
 
 	@Override
+	public void updateUsername(UserDTO userDTO) {
+		sqlSession.update("userSQL.updateUsername", userDTO);
+	}
+	
+	@Override
 	public void updateEmail(UserDTO userDTO) {
 		sqlSession.update("userSQL.updateEmail", userDTO);
 	}
@@ -118,4 +123,3 @@ public class UserDAOMybatis implements UserDAO {
 	public UserDTO getAdminUserId(String userId) {
 		return sqlSession.selectOne("userSQL.getAdminUserId",userId);
 	}
-}

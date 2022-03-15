@@ -58,6 +58,7 @@ public class SpringConfiguration {
 				, new ClassPathResource("user/dao/userMapper.xml")
 				, new ClassPathResource("event/dao/eventMapper.xml")
 				, new ClassPathResource("account/dao/accountMapper.xml")
+				, new ClassPathResource("address/dao/addressMapper.xml")
 				, new ClassPathResource("shop/dao/shopMapper.xml")
 				, new ClassPathResource("mypage/dao/mypageMapper.xml")
 				, new ClassPathResource("question/dao/questionMapper.xml")

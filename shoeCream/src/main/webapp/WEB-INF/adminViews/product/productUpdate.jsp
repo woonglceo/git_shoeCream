@@ -16,26 +16,41 @@
             </div>
               
             <div class="card-body">
-                <form id="productWrite">
+                <form id="productUpdate">
                
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>상품명</label> <span id="productNameDiv"></span> 
+                        <label>상품명(영어)</label> <span id="productNameDiv"></span> 
                         <input type="text" class="form-control" placeholder="상품명" id="productName" name="productName">                       
                       </div>
                     </div>
-                    <div class="col-md-6 pl-1">
+                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label>모델번호</label> <span id="modelIdDiv"></span>
-                        <input type="text" class="form-control" placeholder="ex. SX7167_010" id="modelId" name="modelId" readonly>                       
+                        <label>상품명(한글)</label> <span id="productNameKorDiv"></span> 
+                        <input type="text" class="form-control" placeholder="상품명" id="productNameKor" name="productNameKor">                       
                       </div>
                     </div>
                   </div>
                  
                  
                   <div class="row">
-                    <div class="col-md-4 pr-1">
+                  <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>모델번호</label> <span id="modelIdDiv"></span>
+                        <input type="text" class="form-control" placeholder="ex. SX7167_010" id="modelId" name="modelId">                       
+                      </div>
+                    </div>                 
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>collection</label>
+                        <input type="text" class="form-control" placeholder="ex. 나이키 에어포스" id="productCollection" name="productCollection">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                   <div class="col-md-4 pr-1">
                       <div class="form-group">
                         <label>브랜드</label> <span id="brandDiv"></span>       
 	                        <select name="brandName" class="form-control" id="brandName">
@@ -53,17 +68,8 @@
 									<option value="yasuhiro" >yasuhiro</option>
 							</select>
                       </div>
-                    </div>                   
-                    <div class="col-md-8 pl-1">
-                      <div class="form-group">
-                        <label>collection</label>
-                        <input type="text" class="form-control" placeholder="ex. 나이키 에어포스" id="productCollection" name="productCollection">
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-md-4 pr-1">
+                    </div>  
+                    <div class="col-md-4 px-1">
                       <div class="form-group">
                         <label>발매가</label> <span id="relesePriceDiv"></span>
                         <input type="text" class="form-control" placeholder="발매가" id="releasePrice" name="releasePrice">
@@ -75,28 +81,6 @@
 	                      <input type="text" class="form-control" id="releaseDate" name="releaseDate">
                       </div>
                     </div>                
-                    <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                         <label>사이즈</label> <span id="sizeDiv"></span>
-                        	<select name="productSize" class="form-control" id="productSize" disabled>
-                        		<option value="사이즈 선택" selected>사이즈 선택</option>
-                        		<option value="225" >225</option>
-								<option value="230" >230</option>
-								<option value="235" >235</option>
-								<option value="240" >240</option>
-								<option value="245" >245</option>
-								<option value="250" >250</option>
-								<option value="256" >255</option>
-								<option value="260" >260</option>
-								<option value="265" >265</option>
-								<option value="270" >270</option>
-								<option value="275" >275</option>
-								<option value="280" >280</option>
-								<option value="285" >285</option>
-								<option value="290" >290</option>
-							</select>
-                      </div>
-                    </div>
                   </div>
                    
                   <label>파일 업로드</label>
@@ -104,9 +88,9 @@
 	                   <div class="filebox clearfix">
 					    <div class="inputFile"></div> 
 					        <label for="AddImgs" class="addImgBtn">+</label>
-					        <input type="file" name="img[]" id="AddImgs" class="upload-hidden" accept=".jpg, .png, .gif" multiple style="display:none;">				        
+					        <input type="file" name="img[]" id="AddImgs" class="upload-hidden" accept=".jpg, .png, .gif" multiple style="display:none;">					        
 					    </div>
-					    <ul id="Preview"></ul>	 
+					    <ul id="Preview"></ul>					  
 				   </div> 
                    
 				 <br><br>

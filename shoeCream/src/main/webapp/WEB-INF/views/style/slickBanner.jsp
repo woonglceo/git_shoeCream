@@ -29,16 +29,16 @@
 
 	<div class="banner_item-slide" >
 		<div class="banner_item-content">
-			<img src="/shoeCream/resources/images/logo/1.png" class="responsive" style="text-align:center">
+			<img src="/shoeCream/resources/images/logo/Untitled-1.jpg" class="responsive" style="text-align:center">
 		</div>
 		<div class="banner_item-content">
-			<img src="/shoeCream/resources/images/logo/2.jpg" class="responsive">
+			<img src="/shoeCream/resources/images/logo/Untitled-2.jpg" class="responsive">
 		</div>
 		<div class="banner_item-content">
-			<img src="/shoeCream/resources/images/logo/3.jpg" class="responsive">
+			<img src="/shoeCream/resources/images/logo/Untitled-3.jpg" class="responsive">
 		</div>
 		<div class="banner_item-content">
-			<img src="/shoeCream/resources/images/logo/4.jpg" class="responsive">
+			<img src="/shoeCream/resources/images/logo/Untitled-4.jpg" class="responsive">
 		</div>
 	</div>
 <!-- 

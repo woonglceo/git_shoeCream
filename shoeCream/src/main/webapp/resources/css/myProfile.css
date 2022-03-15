@@ -93,10 +93,6 @@ h6, h5, p {
     text-decoration: underline;
 }
 
-.desc.username {
-    color: rgba(34,34,34,.5);
-}
-
 .modify {
 	padding-top: 23px;
 }

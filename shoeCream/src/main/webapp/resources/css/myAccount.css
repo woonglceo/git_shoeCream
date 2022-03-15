@@ -35,7 +35,6 @@ button {
 }
 
 .registered_account_box {
-	display: none;
 	overflow: hidden;
     margin-top: 21px;
     padding: 15px 15px 16px;
@@ -122,8 +121,8 @@ button {
     justify-content: center;
 }
 
-.save_btn {
-    width: 100px;
+.btn {
+	width: 100px;
     height: 42px;
     font-size: 14px;
     letter-spacing: -.14px;
@@ -136,7 +135,7 @@ button {
     cursor: default;
 }
 
-.save_btn_able {
+.btn_able {
 	cursor: pointer;
 	background-color: #222222;
 }
@@ -173,7 +172,7 @@ button {
     border: 1px solid #ebebeb;
 }
 
-.btn.dropdown_btn {
+.dropdown_btn {
 	position: absolute;
 	width: 24px;
     height: 24px;
