@@ -139,36 +139,6 @@
 	</div>
 	<!--shop-content-box-->
 	
-	
-<div id="modal-sell" class="modal">
-    <div class="modal-window">
-        <div class="modal-title">
-            <h2 class="modal-title-text">모달제목</h2>
-        	<a href="#" class="close-area"><i class="fa-solid fa-xmark fa-lg"></i></a>
-        </div>
-        <div class="modal-content">
-            <p>모달 안에 넣을 내용</p>
-            <select>
-            	<option>사이즈 선택</option>
-            	<option value="225">225</option>
-            	<option value="230">230</option>
-            	<option value="235">235</option>
-            	<option value="240">240</option>
-            	<option value="245">245</option>
-            	<option value="250">250</option>
-            	<option value="255">255</option>
-            	<option value="260">260</option>
-            	<option value="265">265</option>
-            	<option value="270">270</option>
-            	<option value="275">275</option>
-            	<option value="280">280</option>
-            	<option value="285">285</option>
-            	<option value="290">290</option>
-            </select>
-        </div>
-    </div>
-</div><!-- modal-sell -->
-
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
