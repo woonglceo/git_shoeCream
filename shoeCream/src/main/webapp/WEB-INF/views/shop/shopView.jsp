@@ -209,7 +209,7 @@
 					<i class="fa-solid fa-angle-down"></i>
 				</div>
 
-				<div class="drop-down-content" id="ans-2">하나</div>
+				<div class="drop-down-content chang-style" id="ans-2">하나</div>
 
 
 
@@ -218,7 +218,7 @@
 					<i class="fa-solid fa-angle-down"></i>
 				</div>
 
-				<div class="drop-down-content">둘</div>
+				<div class="drop-down-content chang-style">둘</div>
 
 
 
@@ -227,7 +227,7 @@
 					<i class="fa-solid fa-angle-down"></i>
 				</div>
 
-				<div class="drop-down-content">셋</div>
+				<div class="drop-down-content chang-style">셋</div>
 
 			</div>
 			<!--confirm-wrap-->

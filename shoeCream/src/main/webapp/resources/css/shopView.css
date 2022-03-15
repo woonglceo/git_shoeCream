@@ -466,6 +466,18 @@ span {
     overflow-y: auto;
 }
 
+.chang-style {
+  box-sizing: border-box;
+  padding-bottom: 3vh;
+  margin: 3vh 0px;
+  border-bottom: 1px solid rgba(151, 151, 151, 0.3);
+}
+
+.add-bold {
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 .modal-footer{
 	/* background-color: salmon; */
 	position: absolute;
