@@ -123,3 +123,4 @@ public class UserDAOMybatis implements UserDAO {
 	public UserDTO getAdminUserId(String userId) {
 		return sqlSession.selectOne("userSQL.getAdminUserId",userId);
 	}
+}

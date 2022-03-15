@@ -239,4 +239,6 @@ public class MypageController {
 		mypageService.updateAccount(accountDTO);
 	}
 	
+	
+	
 }

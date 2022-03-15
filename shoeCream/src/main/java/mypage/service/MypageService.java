@@ -52,5 +52,7 @@ public interface MypageService {
 
 	public List<AddressDTO> getAddressList(String pg, int userId);
 
+	public int getIngBuying(int userId);
+
 
 }

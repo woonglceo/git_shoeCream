@@ -29,4 +29,6 @@ public interface MypageDAO {
 
 	public int getEndBuying(int userId);
 
+	public int getIngBuying(int userId);
+
 }

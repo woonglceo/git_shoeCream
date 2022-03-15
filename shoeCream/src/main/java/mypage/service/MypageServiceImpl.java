@@ -326,4 +326,9 @@ public class MypageServiceImpl implements MypageService {
 		List<AddressDTO> list = addressDAO.getAddressList(map);
 		return list;
 	}
+
+	@Override
+	public int getTotalIngBuying(int userId) {
+		return mypageDAO.getTotalIngBuying(userId);
+	}
 }

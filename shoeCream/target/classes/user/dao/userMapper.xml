@@ -26,8 +26,8 @@
 	
 	<!-- 소셜 회원가입 -->
 	<insert id="joinSocialOk" parameterType="user">
-		INSERT INTO user_table(userId, email, username, phoneNum, img, accessToken, platformType, lastDate, regDate)
-						VALUES(seq_user_table.nextval, #{email}, #{username}, #{phoneNum}, #{img}, #{accessToken}, '카카오', sysdate, sysdate)
+		INSERT INTO user_table(userId, email, username, phoneNum, fullName, img, accessToken, platformType, lastDate, regDate)
+						VALUES(seq_user_table.nextval, #{email}, #{username}, #{phoneNum}, #{fullName}, #{img}, #{accessToken}, '카카오', sysdate, sysdate)
 	</insert>
 	
 	<!-- 아이디, 비밀번호 확인 -->
@@ -50,11 +50,6 @@
 		SELECT * FROM user_table WHERE username=#{username}
 	</select>
 	
-	<!-- 닉네임 확인 -->
-	<select id="chkNickname" parameterType="String" resultType="user">
-		SELECT * FROM user_table WHERE nickname=#{nickname}
-	</select>
-	
 	<!-- 이메일 확인 -->
 	<select id="chkEmail" parameterType="String" resultType="user">
 		SELECT * FROM user_table WHERE email=#{email}
@@ -73,6 +68,11 @@
 	<!-- 비밀번호 수정 -->
 	<update id="updatePwd" parameterType="java.util.Map">
 		UPDATE user_table SET pwd=#{pwd} WHERE username=#{username}
+	</update>
+	
+	<!-- 아이디 변경 -->
+	<update id="updateUsername" parameterType="user">
+		UPDATE user_table SET username=#{username} WHERE userId=#{userId}
 	</update>
 	
 	<!-- 이메일 주소 변경 -->

@@ -68,4 +68,10 @@ public class MypageDAOImpl implements MypageDAO {
 	public int getEndBuying(int userId) {
 		return sqlSession.selectOne("mypageSQL.getEndBuying", userId);
 	}
+
+	@Override
+	public int getIngBuying(int userId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
