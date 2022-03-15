@@ -8,8 +8,14 @@
 		SELECT * FROM user_table ORDER BY userId DESC
 	</select>
 	
+	<!-- 관리자 사용자 조회 -->
+	<select id="getAdminUserId" parameterType="String" resultType="user">
+		SELECT * FROM user_table WHERE userId = #{userId}
+	</select>
+
+	<!-- 사용자 -->
 	<select id="getUserId" parameterType="int" resultType="user">
-		SELECT * FROM user_table WHERE userId=#{userId}
+		SELECT * FROM user_table WHERE userId = #{userId}
 	</select>
 
 	<!-- 회원가입 -->
@@ -83,5 +89,43 @@
 	<update id="updatePhoneNum" parameterType="user">
 		UPDATE user_table SET phoneNum=#{phoneNum} WHERE userId=#{userId}
 	</update>
+	
+	<!--관리자 등급 변경-->
+	<update id="ratingChange" parameterType="java.util.Map">
+		UPDATE user_table SET auth = #{ratings} WHERE userId=#{userId}
+	</update>
+	
+	<!-- 사용자 거래내역 조회-->
+	<select id="getTradeForm" parameterType="java.util.Map" resultType="user2">
+	
+		SELECT * FROM
+          (SELECT ROWNUM rn, o.* FROM
+            
+              (select o.orderId, o.stockId, o.orderDate, 
+                s.productId AS stockProductId,
+                p1.price AS pricePrice,  
+                p.productId AS purchaseProductId, p2.purchaseId, p2.status AS purchaseStatus, p.regDate+30 AS purchaseDueDate,
+                p.productName,                       
+                s1.salesId, s.productId AS salesProductId, s1.status AS salesStatus, s1.price AS salesPrice, s1.regDate+30 AS salesDueDate,
+                p.productName AS productProductName  
+                  
+              from order_table o,
+                   stock_table s,
+                   product_table p,
+                   price_table p1,                              
+                   purchase_table p2,
+                   sales_table s1        
+					
+       
+              where o.stockId = s.stockId
+                and s.productId = p.productId
+                and P.productId = p1.productId
+                and p2.productId= p.productId                
+         	    and s1.productId= p.productId
+         		                 
+              ORDER BY orderId desc)o)
+	      WHERE rn BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
 	
 </mapper> 

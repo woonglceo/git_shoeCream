@@ -15,6 +15,10 @@
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
 		<typeAlias type="product.bean.ProductDTO" alias="product"/>
 		<typeAlias type="question.bean.QuestionDTO" alias="question"/>
+		<typeAlias type="check.bean.CheckDTO" alias="check"/>
+		<typeAlias type="user.bean.UserDTO2" alias="user2"/>
+		
+		
 		
 		<typeAlias type="serviceCenter.bean.AnnouncementBoardDTO" alias="AnnouncementBoardDTO"/>
 		<typeAlias type="serviceCenter.bean.QnaTableDTO" alias="QnaTableDTO"/>

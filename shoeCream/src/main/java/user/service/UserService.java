@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import user.bean.UserDTO;
+import user.bean.UserDTO2;
 
 public interface UserService {
 
 	public List<UserDTO> getUserForm(String pg);
 
-	public UserDTO getUserId(int userId);
+	public UserDTO getAdminUserId(String userId);
 	
 	public String chkUsername(String username);
 	
@@ -44,6 +45,11 @@ public interface UserService {
 
 	public Map<String, String> authPhonNum(String phoneNum);
 
+	public List<UserDTO2> getTradeForm(String pg);
+
+	public UserDTO getUserId(int userId);
+
+	public void ratingChange( Map<String, Object> map);
 	
 
 }

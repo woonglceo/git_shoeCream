@@ -1,7 +1,9 @@
 package user.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import order.bean.OrderDTO;
 import user.bean.UserDTO;
+import user.bean.UserDTO2;
 import user.service.UserService;
 
 
@@ -36,24 +40,24 @@ public class AdminUserController {
 		return "/admin/adminIndex";
 	}
 	
-	// 문의사항
-	@GetMapping(value = "releaseList")
-	public String releaseList(Model model) {
-		model.addAttribute("display", "/WEB-INF/adminViews/user/releaseList.jsp");
+	// 크림하고 즉시거래
+	@GetMapping(value = "purchaseForm")
+	public String purchaseForm(Model model) {
+		model.addAttribute("display", "/WEB-INF/adminViews/user/purchaseForm.jsp");
 		return "/admin/adminIndex";
 	}
 	
-	// 구매내역
-	@GetMapping(value = "purchaseHistory")
-	public String purchaseHistory(Model model) {
-		model.addAttribute("display", "/WEB-INF/adminViews/user/purchaseHistory.jsp");
+	// 회원으로부터의 입찰구매
+	@GetMapping(value = "bidPurchaseForm")
+	public String bidPurchaseForm(Model model) {
+		model.addAttribute("display", "/WEB-INF/adminViews/user/bidPurchaseForm.jsp");
 		return "/admin/adminIndex";
 	}
 	
 	// 판매내역
-	@GetMapping(value = "sellHistory")
-	public String sellHistory(Model model) {
-		model.addAttribute("display", "/WEB-INF/adminViews/user/sellHistory.jsp");
+	@GetMapping(value = "sellForm")
+	public String sellForm(Model model) {
+		model.addAttribute("display", "/WEB-INF/adminViews/user/sellForm.jsp");
 		return "/admin/adminIndex";
 	}
 	
@@ -78,18 +82,41 @@ public class AdminUserController {
 	
 	
 	// ajax에서 getUserId값 넘겨주기 위해 사용
-	@PostMapping(value="getUserId")
+	@PostMapping(value="getAdminUserId")
 	@ResponseBody
-	public UserDTO getUserId(@RequestParam int userId) {
-		return userService.getUserId(userId);
+	public UserDTO getAdminUserId(@RequestParam String userId) {
+		return userService.getAdminUserId(userId);
 	}
 	
 
 	
+	@PostMapping(value="getTradeForm")
+	@ResponseBody
+	public List<UserDTO2> getTradeForm(@RequestParam(required=false, defaultValue="1") String pg) {
+		System.out.println("pg: "+pg);
+		List<UserDTO2> list = userService.getTradeForm(pg);
+		System.out.println("list: "+list);
+		
+		return list;
+	}
 	
 	
+	/*@PostMapping(value="ratingChange")
+	@ResponseBody
+	public UserDTO ratingChange(@RequestParam String userId, @RequestParam int ratings) {
+		System.out.println(ratings);
+		return userService.ratingChange(userId,ratings);
+	}*/
 	
 	
+	@PostMapping(value="ratingChange")
+	@ResponseBody
+	public void ratingChange(@RequestParam Map<String, Object> map) {
+		
+
+		 userService.ratingChange(map);
+		
 	
+	}	
 	
 }

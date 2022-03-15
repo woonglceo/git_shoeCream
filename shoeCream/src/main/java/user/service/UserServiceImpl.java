@@ -25,6 +25,7 @@ import com.google.gson.JsonParser;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import user.bean.UserDTO;
+import user.bean.UserDTO2;
 import user.dao.UserDAO;
 
 @Service
@@ -46,10 +47,10 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
+	/*@Override
 	public UserDTO getUserId(int userId) {
 		return userDAO.getUserId(userId);
-	}
+	} */
 
 	@Override
 	public String chkUsername(String username) {
@@ -398,4 +399,32 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public UserDTO getUserId(int userId) {
+		return userDAO.getUserId(userId);
+	}
+
+
+	@Override
+	public List<UserDTO2> getTradeForm(String pg) {
+		Map<String, Integer> map = new HashMap<String, Integer>(); 
+		map.put("endNum", Integer.parseInt(pg) * 5);
+		map.put("startNum", (Integer.parseInt(pg) * 5) - 4);
+		
+		List<UserDTO2> list = userDAO.getTradeForm(map);
+		System.out.println("userService list: "+list);
+		System.out.println("map"+map);
+		return list;
+	}
+
+
+	@Override
+	public UserDTO getAdminUserId(String userId) {
+		return userDAO.getAdminUserId(userId);
+	}
+
+	@Override
+	public void ratingChange( Map<String, Object> map) {
+		userDAO.ratingChange(map);
+	}
 }
