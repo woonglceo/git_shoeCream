@@ -109,6 +109,9 @@ public class ProductDAOMybatis implements ProductDAO {
 		return sqlSession.selectOne("productSQL.getProductById", productId);
 	}
 	
-	
+	@Override
+	public List<ProductDTO> getProductListForIndex(Map<String, Integer> map) {
+		return sqlSession.selectList("productSQL.getProductListForIndex", map);
+	}
 
 }

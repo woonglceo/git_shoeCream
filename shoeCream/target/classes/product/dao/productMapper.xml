@@ -11,7 +11,7 @@
 		select * from
 		(select rownum rn, tt.* from
 		(select * from(
-					select productId, productName, img1, modelId, row_number() over (partition by modelId order by productName) as kk from product_table
+					select productId, brandName, productName, img1, modelId, row_number() over (partition by modelId order by productName) as kk from product_table
 					)where kk=1
    			order by productId desc)tt
 												)where rn>=#{startNum} and rn<=#{endNum}
@@ -85,6 +85,17 @@
     
     <select id="getProductById" parameterType="int" resultType="product">
     	select * from product_table where productId=#{productId}
+    </select>
+    
+    <select id="getProductListForIndex" parameterType="java.util.Map" resultType="product">
+		SELECT a.* FROM
+		    (SELECT p.*, 
+		            a.price AS todaysPrice,
+		            ROWNUM AS rn
+		    FROM product_table p,
+		        (SELECT productId, price FROM price_table WHERE TO_CHAR(regDate, 'YYYYMMDD') = TO_CHAR(sysdate, 'YYYYMMDD'))a
+		    WHERE p.productId = a.productId )a
+		WHERE rn BETWEEN #{startNum} AND #{endNum}
     </select>
  </mapper>
 

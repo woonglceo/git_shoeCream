@@ -31,8 +31,8 @@
 .responsive {
    /*  width: 100%;
     height: 480px; */
-    width: auto;
-    height: 300px;
+    width: 100%;
+    height: auto;
   } 
 
 .banner_item-slide img{

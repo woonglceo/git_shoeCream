@@ -35,7 +35,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDAO.getproductList(map);
 	}
-
+	
+	
 	// 상품목록 페이징
 	@Override
 	public ProductPaging productPaging(String pg) {
@@ -106,6 +107,16 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.productUpdate(map);
 	}
 	
-
+	@Override
+	public List<ProductDTO> getProductListForIndex(String pg) {
+		int endNum = Integer.parseInt(pg) * 4;
+		int startNum = endNum - 3;
+		
+		Map<String, Integer> map = new HashedMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
+		return productDAO.getProductListForIndex(map);
+	}
 		
 }
