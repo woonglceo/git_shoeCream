@@ -2,4 +2,8 @@
 *.jar
 *.properties
 MANIFEST.MF
+.project
+.classpath
+.settings
+*/target/*
 .idea/
