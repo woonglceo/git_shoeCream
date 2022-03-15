@@ -1,4 +1,4 @@
-console.log("3");
+console.log("7");
 
 const styleEntireBox = document.querySelector(".style-want-center");
 const stylePerLink = "/shoeCream/style/styleView";
@@ -14,10 +14,6 @@ function getData() {
   fetch("/shoeCream/style/getPopularList").then((res) =>
     res.json().then((data) => {
       const styleData = data;
-
-      styleData.sort(function (a, b) {
-        return b.like - a.like;
-      });
       console.log(styleData);
 
       makeStyleList(styleData);

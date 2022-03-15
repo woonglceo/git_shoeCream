@@ -66,7 +66,7 @@
 	<!--프로덕트-->
 
 	<div class="product_wrap">
-		<div class="product_list">
+		<!-- <div class="product_list">
 			<div class="product_list-img"></div>
 			<div class="product_list-infobox">
 				<div class="brand-text">브랜드명d근데길어지면어케될까더더더더더더ㅓ더</div>
@@ -109,7 +109,7 @@
 					<em class="num">1000</em><span class="won">원</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="btn">
