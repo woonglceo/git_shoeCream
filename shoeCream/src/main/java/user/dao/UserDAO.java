@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import user.bean.UserDTO;
+import user.bean.UserDTO2;
 
 public interface UserDAO {
 
@@ -38,6 +39,12 @@ public interface UserDAO {
 	public void updateFullName(UserDTO userDTO);
 
 	public void updatePhoneNum(UserDTO userDTO);
+
+	public void ratingChange( Map<String, Object> map);
+
+	public List<UserDTO2> getTradeForm(Map<String, Integer> map);
+
+	public UserDTO getAdminUserId(String userId);
 
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import user.bean.UserDTO;
+import user.bean.UserDTO2;
 
 @Repository
 @Transactional
@@ -21,10 +22,10 @@ public class UserDAOMybatis implements UserDAO {
 		return sqlSession.selectList("userSQL.getUserForm", map);
 	}
 
-	@Override
-	public UserDTO getUserId(int userId) {
+	/*@Override
+	public UserDTO getUserId(String userId) {
 		return sqlSession.selectOne("userSQL.getUserId", userId);
-	}
+	}*/
 
 	@Override
 	public UserDTO chkUsername(String username) {
@@ -94,5 +95,27 @@ public class UserDAOMybatis implements UserDAO {
 	@Override
 	public void updatePhoneNum(UserDTO userDTO) {
 		sqlSession.update("userSQL.updatePhoneNum", userDTO);
+	}
+
+	@Override
+	public UserDTO getUserId(int userId) {
+		return sqlSession.selectOne("userSQL.getUserId", userId);
+
+	}
+
+	@Override
+	public void ratingChange( Map<String, Object> map) {
+		 sqlSession.selectOne("userSQL.ratingChange", map);
+	}
+
+	@Override
+	public List<UserDTO2> getTradeForm(Map<String, Integer> map) {
+		System.out.println(map+"map");
+		return sqlSession.selectList("userSQL.getTradeForm", map);
+	}
+
+	@Override
+	public UserDTO getAdminUserId(String userId) {
+		return sqlSession.selectOne("userSQL.getAdminUserId",userId);
 	}
 }

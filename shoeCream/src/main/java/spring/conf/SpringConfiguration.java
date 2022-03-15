@@ -61,6 +61,8 @@ public class SpringConfiguration {
 				, new ClassPathResource("shop/dao/shopMapper.xml")
 				, new ClassPathResource("mypage/dao/mypageMapper.xml")
 				, new ClassPathResource("question/dao/questionMapper.xml")
+				, new ClassPathResource("check/dao/checkMapper.xml")
+
 //				new PathMatchingResourcePatternResolver().getResources("classpath:**/dao/*Mapper.xml")
 //			  , new PathMatchingResourcePatternResolver().getResources("classpath:serviceCenter/dao/serviceCenterMapper.xml")
 				

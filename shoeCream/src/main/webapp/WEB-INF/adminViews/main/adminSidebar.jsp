@@ -50,9 +50,9 @@
     </a>
   </li>
   <li>
-    <a href="/shoeCream/adminViews/stock/stockForm">
+    <a href="/shoeCream/adminViews/check/checkForm">
       <i class="nc-icon nc-diamond"></i>
-      <p>재고 및 검수 관리</p>
+      <p>검수 관리</p>
     </a>
   </li>
   <li>
