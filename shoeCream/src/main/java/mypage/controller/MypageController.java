@@ -1,5 +1,6 @@
 package mypage.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,24 +48,94 @@ public class MypageController {
 		mypageService.deleteWish(wishListId);
 	}
 	
-	// 구매내역
-	@GetMapping(value="/buying")
-	public String buying(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
-		if(session.getAttribute("ssUserId") == null) return "/WEB-INF/views/login";
-		else {
-		int userId = (int) session.getAttribute("ssUserId");
-		// 5개씩 뽑아오기
-		model.addAttribute("buyList", mypageService.getBuyList(pg, userId)); 
-		model.addAttribute("totalCount", mypageService.getTotalBuying(userId));
-		model.addAttribute("ingCount", mypageService.getIngBuying(userId));
-		model.addAttribute("endCount", mypageService.getEndBuying(userId));
-		model.addAttribute("pg", pg);
-		model.addAttribute("paging", mypageService.paging(pg, "purchase_table", userId)); 
-		model.addAttribute("pageName", "buying");
-		model.addAttribute("display", "/WEB-INF/views/buying.jsp");
-		return "/WEB-INF/views/mypage"; 
+	// 총 구매내역 폼
+		@GetMapping(value="/buying")
+		public String buying(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			model.addAttribute("totalCount", mypageService.getTotalBuying(userId));
+			model.addAttribute("ingCount", mypageService.getTotalIngBuying(userId));	
+			model.addAttribute("endCount", mypageService.getEndBuying(userId));
+			model.addAttribute("pg", pg);
+			model.addAttribute("display2", "/WEB-INF/views/buying1.jsp");
+			model.addAttribute("display", "/WEB-INF/views/buying.jsp");
+			return "/WEB-INF/views/mypage"; 
 		}
-	}
+		
+		// 총 구매내역 가져오기
+		@PostMapping(value = "getBuyingList")
+		@ResponseBody
+		public Map<String, Object> getBuyingList(@RequestParam(required=false, defaultValue = "1") String pg){
+			Map<String, Object> map = new HashMap<String, Object>();
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			map.put("buyList", mypageService.getBuyList(pg, userId)); 
+			map.put("paging", mypageService.paging(pg, "purchase_table", userId)); 
+			return map;
+		}
+		
+		// 거래중 폼
+		@GetMapping(value="/ingBuying")
+		public String ingBuying(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			model.addAttribute("totalCount", mypageService.getTotalBuying(userId));
+			model.addAttribute("ingCount", mypageService.getTotalIngBuying(userId));
+			model.addAttribute("endCount", mypageService.getEndBuying(userId));
+			model.addAttribute("pg", pg);		
+			
+			model.addAttribute("display2", "/WEB-INF/views/buying2.jsp");
+			model.addAttribute("display", "/WEB-INF/views/buying.jsp");		
+			return "/WEB-INF/views/mypage"; 
+		}
+		
+		// 거래중
+		@PostMapping(value="/getIngBuyingList")
+		@ResponseBody
+		public Map<String, Object> getIngBuyingList(@RequestParam(required=false, defaultValue = "1") String pg) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			map.put("buyList", mypageService.getIngBuyingList(pg, userId));
+			map.put("paging", mypageService.ingPaging(pg, userId)); 	
+			return map; 
+		}
+		
+		// 거래 완료 폼
+		@GetMapping(value="/endBuying")
+		public String endBuying(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			model.addAttribute("totalCount", mypageService.getTotalBuying(userId));
+			model.addAttribute("ingCount", mypageService.getTotalIngBuying(userId));
+			model.addAttribute("endCount", mypageService.getEndBuying(userId));
+			model.addAttribute("pg", pg);
+			
+			model.addAttribute("display2", "/WEB-INF/views/buying3.jsp");
+			model.addAttribute("display", "/WEB-INF/views/buying.jsp");			
+			return "/WEB-INF/views/mypage"; 
+		}
+		
+		// 거래완료
+		@PostMapping(value="/getEndBuyingList")
+		@ResponseBody
+		public Map<String, Object> getEndBuyingList(@RequestParam(required=false, defaultValue = "1") String pg) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			int userId = (int) session.getAttribute("ssUserId");
+			
+			map.put("buyList", mypageService.getEndBuyingList(pg, userId));
+			map.put("paging", mypageService.endPaging(pg, userId)); 
+			return map; 
+		}
+		
+		// 판매
+		@GetMapping(value="/selling")
+		public String selling(@RequestParam(required=false, defaultValue = "1") String pg, Model model) {
+			int userId = (int) session.getAttribute("ssUserId");
+
+			model.addAttribute("display", "/WEB-INF/views/selling.jsp");
+			return "/WEB-INF/views/mypage"; 		
+		}
 	
 	/* 마이페이지 내정보 */
 	@RequestMapping(value="myProfile")

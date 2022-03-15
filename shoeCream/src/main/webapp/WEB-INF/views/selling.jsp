@@ -1,21 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="/shoeCream/resources/css/buying.css">
+<head>
+	<link rel="stylesheet" href="/shoeCream/resources/css/selling.css">
+</head>
 </head>
 <body>
 
 <div class="my_purchase">
-	<div class="title"><div class="title"><h3>êµ¬ë§¤ ë‚´ì—­</h3></div></div>
+	<div class="title"><div class="title"><h3>ÆÇ¸Å ³»¿ª</h3></div></div>
 		<div class="purchase_list_tab detail_tab">
 			<div class="tab_item tab_on tab_item1">
 				<a href="/shoeCream/my/buying" class="tab_link">
 					<dl class="tab_box">
-						<dt class="title">êµ¬ë§¤ ì…ì°°</dt>
+						<dt class="title">ÆÇ¸Å ÀÔÂû</dt>
 						<dd class="count">
 							<c:if test = "${empty totalCount}">	
 								0
@@ -30,7 +30,7 @@
 			<div class="tab_item tab_item2">
 				<a href="/shoeCream/my/ingBuying" class="tab_link" id="ingBuying">
 					<dl class="tab_box">
-						<dt class="title">ê±°ë˜ ì¤‘</dt>
+						<dt class="title">ÁøÇà Áß</dt>
 						<dd class="count">
 							<c:if test = "${empty ingCount}">	
 								0
@@ -45,7 +45,7 @@
 			<div class="tab_item tab_item3">
 				<a href="/shoeCream/my/endBuying" class="tab_link">
 					<dl class="tab_box">
-						<dt class="title">ê±°ë˜ì™„ë£Œ</dt>
+						<dt class="title">Á¾·á</dt>
 						<dd class="count">
 							<c:if test = "${empty endCount}">	
 								0
@@ -63,13 +63,13 @@
 	<div class="period_search">
 		<div class="period_month">
 			<ul class="month_list">
-				<li class="month_item"><a href="#" class="month_link" id="Month2">ìµœê·¼ 2ê°œì›”</a></li>
-				<li class="month_item"><a href="#" class="month_link" id="Month4">4ê°œì›”</a></li>
-				<li class="month_item"><a href="#" class="month_link" id="Month6">6ê°œì›”</a></li>
-				<li class="month_item custom"><a href="#" class="month_link">ê¸°ê°„ì¡°íšŒ</a></li>
+				<li class="month_item"><a href="#" class="month_link">ÃÖ±Ù 2°³¿ù</a></li>
+				<li class="month_item"><a href="#" class="month_link">4°³¿ù</a></li>
+				<li class="month_item"><a href="#" class="month_link">6°³¿ù</a></li>
+				<li class="month_item custom"><a href="#" class="month_link">±â°£Á¶È¸</a></li>
 			</ul>
 		</div>
-		<div class="period_calendar_wrapper" today="Mon Mar 14 2022 10:47:08 GMT+0900 (í•œêµ­ í‘œì¤€ì‹œ)">
+		<div class="period_calendar_wrapper" today="Mon Mar 14 2022 10:47:08 GMT+0900 (ÇÑ±¹ Ç¥ÁØ½Ã)">
 			<div class="period_calendar">
 				<div class="calendar_wrap">
 					<span>
@@ -89,30 +89,42 @@
 					</span>
 				</div>
 			</div>
-			<div class="period_btn_box"><button class="btn_search is_active">ì¡°íšŒ</button></div>
+			<div class="period_btn_box"><button class="btn_search is_active">Á¶È¸</button></div>
 		</div>
 	</div>
 	
 	<ul class="search_info">
-		<li class="info_item"><p data-v-a54c4c26="">í•œ ë²ˆì— ì¡°íšŒ ê°€ëŠ¥í•œ ê¸°ê°„ì€ ìµœëŒ€ 6ê°œì›”ì…ë‹ˆë‹¤.</p></li>
-		<li class="info_item"><p data-v-a54c4c26="">ê¸°ê°„ë³„ ì¡°íšŒ ê²°ê³¼ëŠ” ì…ì°°ì¼ ê¸°ì¤€ìœ¼ë¡œ ë…¸ì¶œë©ë‹ˆë‹¤.</p></li>
+		<li class="info_item"><p data-v-a54c4c26="">ÇÑ ¹ø¿¡ Á¶È¸ °¡´ÉÇÑ ±â°£Àº ÃÖ´ë 6°³¿ùÀÔ´Ï´Ù.</p></li>
+		<li class="info_item"><p data-v-a54c4c26="">±â°£º° Á¶È¸ °á°ú´Â ÀÔÂûÀÏ ±âÁØÀ¸·Î ³ëÃâµË´Ï´Ù.</p></li>
 	</ul>
 	
 	<div class="purchase_list bidding bid">
 		<jsp:include page="${display2}"></jsp:include>
 	</div>
 	
-	
+	<div class="pagingDiv" id="pagingDiv">${paging.pagingHTML}</div>
+	<input type="hidden" id="pg" value="${pg}">
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
  	<script type="text/javascript">
+ 	$(function() {
+ 		$('.layer').hide();
+ 		
+ 		// ¸ğ´ŞÃ¢ ¿­±â / ²ô±â
+ 	 	$('.btn_filter').click(function(){$('.layer').show()});
+ 	    $('.btn_layer_close').click(function(){$('.layer').hide()}); 	  
+	});
  	
- 	// í˜ì´ì§€ ì´ë™í•˜ê¸°
+ 	// ÆäÀÌÁö ÀÌµ¿ÇÏ±â
  	function paging(pageValue) {	
  		console.log(pageValue);
  		location.href = '/shoeCream/my/buying?pg='+pageValue;	
  	}
+ 	
+ 	$('#ingBuying').click(function() {
+		$('.tab_item1').removeClass('tab_on');
+		$('.tab_item2').addClass('tab_on');	
+	});
  	</script>
-
 </body>
 </html>

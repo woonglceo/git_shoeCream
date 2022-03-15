@@ -33,8 +33,6 @@ import product.bean.ProductDTO;
 public class ProductController {
 	@Autowired
 	private product.service.ProductService productService;
-	@Autowired
-	private ProductDTO productDTO;
 	
 	// 상품목록 기본 폼
 	@GetMapping(value = "productList")
@@ -331,8 +329,7 @@ public class ProductController {
 		model.addAttribute("display", "/WEB-INF/adminViews/product/productList.jsp");
 		return "/admin/adminIndex";
 	}
-	
-	// 상품목록 리스트
+
 		@PostMapping(value = "getProductListForIndex")
 		@ResponseBody
 		public List<ProductDTO> getProductListForIndex(@RequestParam(required = false, defaultValue = "1") String pg) {

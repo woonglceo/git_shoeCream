@@ -1,6 +1,5 @@
 package product.service;
 
-import java.util.Date;
 import java.util.List;
 
 import java.util.Map;
@@ -20,8 +19,6 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
 	@Autowired
 	private ProductPaging productPaging;
-	@Autowired
-	private ProductDTO productDTO;
 
 	// 상품목록
 	@Override

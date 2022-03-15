@@ -30,5 +30,4 @@ public interface ProductService {
 
 	public List<ProductDTO> getProductListForIndex(String pg);
 
-
 }

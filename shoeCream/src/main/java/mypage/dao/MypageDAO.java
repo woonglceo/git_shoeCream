@@ -21,8 +21,12 @@ public interface MypageDAO {
 
 	public int getTotalBuying(int userId);
 
-	public int getEndBuying(int userId);
+	public List<PurchaseDTO> getIngBuyingList(Map<String, Integer> map);
 
-	public int getIngBuying(int userId);
+	public int getTotalIngBuying(int userId);
+
+	public  List<PurchaseDTO> getEndBuyingList(Map<String, Integer> map);
+
+	public int getEndBuying(int userId);
 
 }

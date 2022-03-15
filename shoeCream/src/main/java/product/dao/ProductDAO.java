@@ -28,6 +28,8 @@ public interface ProductDAO {
 	public void productUpdate(Map<String, Object> map);
 
 	public ProductDTO getProductById(int productId);
+	
+	public List<ProductDTO> getProductListForIndex(Map<String, Integer> map);
 
 	public List<ProductDTO> getProductListForIndex(Map<String, Integer> map);
 

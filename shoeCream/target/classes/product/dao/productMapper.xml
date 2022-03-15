@@ -45,7 +45,7 @@
     
     <!-- 상품등록 -->
    <insert id="getProductWrite" parameterType="java.util.Map">
-      insert into product_table values (seq_product_table.nextval, #{productName}, #{modelId}, #{releasePrice}, #{img1}, #{img2}, #{img3}, #{brandName}, #{productSize}, #{productCollection}, #{releaseDate}, sysdate)
+      insert into product_table values (seq_product_table.nextval, #{productName}, #{productNameKor}, #{modelId}, #{releasePrice}, #{img1}, #{img2}, #{img3}, #{brandName}, #{productCollection}, #{releaseDate}, sysdate)
    </insert>
     
     
